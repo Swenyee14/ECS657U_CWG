@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// This class stores an array of all child transforms under this GameObject
 public class Positions : MonoBehaviour
 {
     public static Transform[] positions;
