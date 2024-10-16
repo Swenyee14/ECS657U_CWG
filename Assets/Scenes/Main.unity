@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 253607265}
   m_Layer: 0
   m_Name: PathPiece (5)
-  m_TagString: Enemies
+  m_TagString: Path
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -551,7 +551,7 @@ GameObject:
   - component: {fileID: 365487563}
   m_Layer: 0
   m_Name: PathPiece (8)
-  m_TagString: Enemies
+  m_TagString: Path
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -955,7 +955,7 @@ GameObject:
   - component: {fileID: 522061313}
   m_Layer: 0
   m_Name: PathPiece (4)
-  m_TagString: Enemies
+  m_TagString: Path
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -1091,7 +1091,7 @@ GameObject:
   - component: {fileID: 589490469}
   m_Layer: 0
   m_Name: PathPiece (2)
-  m_TagString: Enemies
+  m_TagString: Path
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -1196,7 +1196,7 @@ GameObject:
   - component: {fileID: 654959698}
   m_Layer: 0
   m_Name: PathPiece (7)
-  m_TagString: Enemies
+  m_TagString: Path
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -2032,7 +2032,7 @@ GameObject:
   - component: {fileID: 1367304671}
   m_Layer: 0
   m_Name: PathPiece
-  m_TagString: Enemies
+  m_TagString: Path
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -2426,6 +2426,7 @@ MonoBehaviour:
   character1Button: {fileID: 387792662}
   character2Button: {fileID: 783821566}
   character3Button: {fileID: 2059801000}
+  towerPrefab: {fileID: 8218423688579237297, guid: 451bfcb251210264cb12039ab2c6d158, type: 3}
 --- !u!4 &1629642430
 Transform:
   m_ObjectHideFlags: 0
@@ -2561,7 +2562,7 @@ GameObject:
   - component: {fileID: 1811607378}
   m_Layer: 0
   m_Name: PathPiece (1)
-  m_TagString: Enemies
+  m_TagString: Path
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -2734,7 +2735,7 @@ GameObject:
   - component: {fileID: 1905702437}
   m_Layer: 0
   m_Name: PathPiece (3)
-  m_TagString: Enemies
+  m_TagString: Path
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -2960,7 +2961,7 @@ GameObject:
   - component: {fileID: 2097915974}
   m_Layer: 0
   m_Name: PathPiece (6)
-  m_TagString: Enemies
+  m_TagString: Path
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647

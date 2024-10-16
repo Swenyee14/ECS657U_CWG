@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Units
   - Enemies
+  - Path
   layers:
   - Default
   - TransparentFX
