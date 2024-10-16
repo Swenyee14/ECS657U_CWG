@@ -18,7 +18,7 @@ public class EnemySpawner : MonoBehaviour
 
         for (int i = 0; i < EnemyCount; i++)
         {
-            Instantiate(EnemyPrefab, new Vector3(9.38f, 0.46f, -9.06f), Quaternion.identity);
+            Instantiate(EnemyPrefab, new Vector3(-9.7f, 0.46f, 7.991f), Quaternion.identity);
             yield return new WaitForSeconds(3f);
         }
     }
