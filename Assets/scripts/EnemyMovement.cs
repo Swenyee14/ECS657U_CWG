@@ -7,14 +7,11 @@ public class EnemyMovement : MonoBehaviour
     public float speed = 6f;
     private Transform target;
     private int positionIndex = 0;
-    private Transform currentWaypoint;
-    public float rotationSpeed = 10f;
 
     void Start()
     {
         // reference to the waypoint
         target = Positions.positions[0];
-        transform.Rotate(0, 0, 0);
     }
 
     void Update()
@@ -25,11 +22,11 @@ public class EnemyMovement : MonoBehaviour
 
         if (Vector3.Distance(transform.position, target.position) <= 0.1f)
         {
-            getNextPosition();
+            GetNextPosition();
         }
     }
 
-    void getNextPosition()
+    void GetNextPosition()
     {
         if (positionIndex == Positions.positions.Length - 1)
         {
@@ -39,12 +36,5 @@ public class EnemyMovement : MonoBehaviour
 
         positionIndex++;
         target = Positions.positions[positionIndex];
-    }
-
-    private void Rotate()
-    {
-        Vector3 direction = target.position - transform.position;
-        Quaternion targetRotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed);
     }
 }
