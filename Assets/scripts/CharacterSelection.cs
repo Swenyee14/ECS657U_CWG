@@ -73,7 +73,7 @@ public class CharacterSelectionManager : MonoBehaviour
         }
     }
 
-   
+
     private void PlaceTower()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -81,14 +81,29 @@ public class CharacterSelectionManager : MonoBehaviour
 
         int pathLayerMask = LayerMask.GetMask("Path");
 
+        
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, pathLayerMask))
         {
             Debug.Log($"Cannot place tower on the path: {hit.collider.gameObject.name}, Layer: {LayerMask.LayerToName(hit.collider.gameObject.layer)}");
         }
         else if (Physics.Raycast(ray, out hit))
         {
+           
+            Collider[] hitColliders = Physics.OverlapSphere(hit.point, 0.5f);  
+
+            foreach (Collider collider in hitColliders)
+            {
+                if (collider.CompareTag("Tower")) 
+                {
+                    Debug.Log("Cannot place tower: Another tower is already placed here.");
+                    return;  
+                }
+            }
+
+           
             Debug.Log($"Tower placed at: {hit.point}");
             currentTower.transform.position = hit.point;
+            currentTower.tag = "Tower";  
             currentTower = null; 
             isPlacingTower = false; 
         }
@@ -97,4 +112,5 @@ public class CharacterSelectionManager : MonoBehaviour
             Debug.Log("Raycast didn't hit anything.");
         }
     }
+
 }
