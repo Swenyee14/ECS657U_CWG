@@ -111,8 +111,9 @@ public class CharacterSelectionManager : MonoBehaviour
         RaycastHit hit;
 
         int pathLayerMask = LayerMask.GetMask("Path");
+        int floorLayerMask = LayerMask.GetMask("Floor");
 
-       
+
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, pathLayerMask))
         {
             Debug.Log($"Cannot place tower on the path: {hit.collider.gameObject.name}, Layer: {LayerMask.LayerToName(hit.collider.gameObject.layer)}");
@@ -120,7 +121,7 @@ public class CharacterSelectionManager : MonoBehaviour
         }
 
         
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, floorLayerMask ))
         {
             
             Collider[] hitColliders = Physics.OverlapSphere(hit.point, 0.3f);  
