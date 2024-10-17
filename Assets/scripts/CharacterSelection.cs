@@ -3,88 +3,98 @@ using UnityEngine.UI;
 
 public class CharacterSelectionManager : MonoBehaviour
 {
-    public enum CharacterType { Character1, Character2, Character3 }
-    public CharacterType selectedCharacter;
+    public Button addTowerButton;           
+    public Button cancelPlacementButton;    
 
-    public Button character1Button;
-    public Button character2Button;
-    public Button character3Button;
+    public GameObject towerPrefab;         
+    private GameObject currentTower;        
 
-    public GameObject towerPrefab; 
-    private GameObject currentTower; 
-
-    private bool isPlacingTower = false; 
+    private bool isPlacingTower = false;    
 
     void Start()
     {
-        character1Button.onClick.AddListener(() => SelectCharacter(CharacterType.Character1));
-        character2Button.onClick.AddListener(() => SelectCharacter(CharacterType.Character2));
-        character3Button.onClick.AddListener(() => SelectCharacter(CharacterType.Character3));
+      
+        addTowerButton.onClick.AddListener(StartTowerPlacement);
+        cancelPlacementButton.onClick.AddListener(CancelTowerPlacement);
     }
 
-    private void SelectCharacter(CharacterType characterType)
+    
+    private void StartTowerPlacement()
     {
+        isPlacingTower = true;
+
         
-        selectedCharacter = characterType;
-        Debug.Log("Selected: " + characterType.ToString());
-
-        if (characterType == CharacterType.Character1)
+        if (currentTower == null)
         {
-            
-            isPlacingTower = true;
-
-            if (currentTower == null)
-            {
-                currentTower = Instantiate(towerPrefab); 
-                currentTower.transform.localScale = Vector3.one;
-                FollowMouse(); 
-            }
-        }
-        else
-        {
-            isPlacingTower = false;
-            if (currentTower != null)
-            {
-                Destroy(currentTower); 
-            }
+            currentTower = Instantiate(towerPrefab);
+            currentTower.transform.localScale = Vector3.one;
+            FollowMouse();
         }
     }
 
+  
+    private void CancelTowerPlacement()
+    {
+        if (currentTower != null)
+        {
+            Destroy(currentTower);  
+            currentTower = null;
+            isPlacingTower = false;
+            Debug.Log("Tower placement cancelled.");
+        }
+    }
+
+   
     void Update()
     {
-        // follows mouse
+        
         if (isPlacingTower && currentTower != null)
         {
             FollowMouse();
 
-            // Checks if the user clicks to place the tower
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0)) 
             {
                 PlaceTower();
             }
         }
     }
 
+    
     private void FollowMouse()
     {
-        
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        
         if (Physics.Raycast(ray, out hit))
         {
-           
             Vector3 newPosition = hit.point;
             newPosition.y = 0f; 
             currentTower.transform.position = newPosition;
         }
     }
 
+   
     private void PlaceTower()
     {
-        Debug.Log("Tower placed at: " + currentTower.transform.position);
-        currentTower = null;
-        isPlacingTower = false;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        int pathLayerMask = LayerMask.GetMask("Path");
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, pathLayerMask))
+        {
+            Debug.Log($"Cannot place tower on the path: {hit.collider.gameObject.name}, Layer: {LayerMask.LayerToName(hit.collider.gameObject.layer)}");
+        }
+        else if (Physics.Raycast(ray, out hit))
+        {
+            Debug.Log($"Tower placed at: {hit.point}");
+            currentTower.transform.position = hit.point;
+            currentTower = null; 
+            isPlacingTower = false; 
+        }
+        else
+        {
+            Debug.Log("Raycast didn't hit anything.");
+        }
     }
 }
