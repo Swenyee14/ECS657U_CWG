@@ -3,7 +3,11 @@ guid: 088ec0c125cad6447879386090e5947a
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - character1Button: {instanceID: 0}
+  - character2Button: {instanceID: 0}
+  - character3Button: {instanceID: 0}
+  - towerPrefab: {fileID: 8218423688579237297, guid: 451bfcb251210264cb12039ab2c6d158, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

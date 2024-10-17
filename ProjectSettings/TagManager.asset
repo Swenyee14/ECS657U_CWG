@@ -7,6 +7,8 @@ TagManager:
   - Units
   - Enemies
   - Path
+  - Tower
+  - Map
   layers:
   - Default
   - TransparentFX
@@ -14,8 +16,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Path
+  - Floor
   - 
   - 
   - 

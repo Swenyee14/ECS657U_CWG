@@ -1,90 +1,149 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems; 
 
 public class CharacterSelectionManager : MonoBehaviour
 {
-    public enum CharacterType { Character1, Character2, Character3 }
-    public CharacterType selectedCharacter;
+    public Button addTowerButton;
+    public Button cancelPlacementButton;
+    public GameObject towerPrefab;
+    private GameObject currentTower;
 
-    public Button character1Button;
-    public Button character2Button;
-    public Button character3Button;
-
-    public GameObject towerPrefab; 
-    private GameObject currentTower; 
-
-    private bool isPlacingTower = false; 
+    private bool isPlacingTower = false;
+    private bool cancelPressed = false;  
 
     void Start()
     {
-        character1Button.onClick.AddListener(() => SelectCharacter(CharacterType.Character1));
-        character2Button.onClick.AddListener(() => SelectCharacter(CharacterType.Character2));
-        character3Button.onClick.AddListener(() => SelectCharacter(CharacterType.Character3));
+        addTowerButton.onClick.AddListener(StartTowerPlacement);
+        cancelPlacementButton.onClick.AddListener(CancelTowerPlacement);
     }
 
-    private void SelectCharacter(CharacterType characterType)
+    
+    private void StartTowerPlacement()
     {
-        
-        selectedCharacter = characterType;
-        Debug.Log("Selected: " + characterType.ToString());
-
-        if (characterType == CharacterType.Character1)
+        if (isPlacingTower) 
         {
-            
-            isPlacingTower = true;
+            Debug.Log("Already placing a tower.");
+            return;
+        }
 
-            if (currentTower == null)
-            {
-                currentTower = Instantiate(towerPrefab); 
-                currentTower.transform.localScale = Vector3.one;
-                FollowMouse(); 
-            }
-        }
-        else
+        isPlacingTower = true;
+
+      
+        if (currentTower == null)
         {
-            isPlacingTower = false;
-            if (currentTower != null)
-            {
-                Destroy(currentTower); 
-            }
+            currentTower = Instantiate(towerPrefab);
+            currentTower.transform.localScale = Vector3.one;
+            FollowMouse();
         }
+    }
+
+   
+    private void CancelTowerPlacement()
+    {
+       
+        if (currentTower != null)
+        {
+            Debug.Log("Cancelling tower placement. Destroying current tower...");
+            Destroy(currentTower);  
+            currentTower = null;    
+            Debug.Log("Tower destroyed.");
+        }
+
+        isPlacingTower = false;  
+        cancelPressed = true;    
+        Debug.Log("Tower placement cancelled.");
     }
 
     void Update()
     {
-        // follows mouse
+       
+        if (cancelPressed)
+        {
+            cancelPressed = false;  
+            return; 
+        }
+
+        
         if (isPlacingTower && currentTower != null)
         {
             FollowMouse();
 
-            // Checks if the user clicks to place the tower
-            if (Input.GetMouseButtonDown(0))
+         
+            if (Input.GetMouseButtonDown(0)) 
             {
+               
+                if (EventSystem.current.IsPointerOverGameObject())
+                {
+                    Debug.Log("Click was on UI, not placing tower.");
+                    return;  
+                }
+
+                if (!isPlacingTower) 
+                {
+                    Debug.Log("Placement was cancelled, no tower will be placed.");
+                    return; 
+                }
+
                 PlaceTower();
             }
         }
     }
 
+    
     private void FollowMouse()
     {
-        
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        
         if (Physics.Raycast(ray, out hit))
         {
-           
             Vector3 newPosition = hit.point;
             newPosition.y = 0f; 
             currentTower.transform.position = newPosition;
         }
     }
 
+    
     private void PlaceTower()
     {
-        Debug.Log("Tower placed at: " + currentTower.transform.position);
-        currentTower = null;
-        isPlacingTower = false;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        int pathLayerMask = LayerMask.GetMask("Path");
+        int floorLayerMask = LayerMask.GetMask("Floor");
+
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, pathLayerMask))
+        {
+            Debug.Log($"Cannot place tower on the path: {hit.collider.gameObject.name}, Layer: {LayerMask.LayerToName(hit.collider.gameObject.layer)}");
+            return;  
+        }
+
+        
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, floorLayerMask ))
+        {
+            
+            Collider[] hitColliders = Physics.OverlapSphere(hit.point, 0.3f);  
+            foreach (Collider collider in hitColliders)
+            {
+                if (collider.CompareTag("Tower") && collider.gameObject != currentTower)
+                {
+                    Debug.Log("Cannot place tower: Another tower is already placed here.");
+                    return;  
+                }
+            }
+
+            
+            Debug.Log($"Tower placed at: {hit.point}");
+            currentTower.transform.position = hit.point;
+            currentTower.tag = "Tower";  
+            currentTower = null;  
+            isPlacingTower = false;  
+        }
+        else
+        {
+            Debug.Log("Raycast didn't hit anything.");
+        }
     }
 }
