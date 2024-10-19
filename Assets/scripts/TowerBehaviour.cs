@@ -7,8 +7,9 @@ public class TowerBehaviour : MonoBehaviour
 {
 
     public Transform enemies;
-    public float range = 7f;
+    public float range = 5f;
     public string enemyTag = "Enemies";
+    private Transform lastEnemyInRange; // Track the last detected enemy
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +28,12 @@ public class TowerBehaviour : MonoBehaviour
                 Vector3.Distance(transform.position, closest.transform.position) ? next : closest);
 
             enemies = nearestEnemy.transform;
+            // Check if a new enemy has entered range
+            if (enemies != lastEnemyInRange)
+            {
+                Debug.Log("ENEMY IN RANGE");
+                lastEnemyInRange = enemies; // Update the last detected enemy
+            }
         }
         else
         {
