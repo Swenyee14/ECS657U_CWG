@@ -9,6 +9,8 @@ TagManager:
   - Path
   - Tower
   - Map
+  - ShowEndUI
+  - Master
   layers:
   - Default
   - TransparentFX

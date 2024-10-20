@@ -5,13 +5,16 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     public float speed = 6f;
-    private Transform target;
-    private int positionIndex = 0;
+    public Transform target;
+    public int positionIndex = 0;
+    showEndUI UIScript;
+
 
     void Start()
     {
         // reference to the waypoint
         target = Positions.positions[0];
+        UIScript = GameObject.FindGameObjectWithTag("Master").GetComponent<showEndUI>();
     }
 
     void Update()
@@ -31,6 +34,7 @@ public class EnemyMovement : MonoBehaviour
         if (positionIndex == Positions.positions.Length - 1)
         {
             Destroy(gameObject);
+            UIScript.NeededMethod();
             return;
         }
 

@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class Destroy : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+
+    public GameObject gameOverUI;
+
+    public void Update()
+    {
+        //gameOverUI.SetActive(true);
+    }
+    
+    public void OnTriggerEnter(Collider other)
     {
         Destroy(gameObject);
     }
