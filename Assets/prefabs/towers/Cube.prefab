@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 44108701656661838}
   - component: {fileID: 485599307719668501}
   - component: {fileID: 4184686215893573682}
+  - component: {fileID: 968733000967616310}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Tower
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 8218423688579237297}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.57756, y: 0, z: 0.85025215}
+  m_LocalPosition: {x: 5.57756, y: 0.5, z: 0.85025215}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -105,3 +106,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &968733000967616310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8218423688579237297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2df480b01fb756f439a59c96faab5a47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemies: {fileID: 0}
+  range: 7
+  enemyTag: Enemies
