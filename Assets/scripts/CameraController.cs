@@ -1,61 +1,72 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private Transform PlayerCamera;
-    [SerializeField] private CharacterController Controller;
-    [Space]
-    [SerializeField] private float Speed = 4.0f;
-    [SerializeField] private float Sensitivity = 2.0f;
+    PlayerInput playerInput;
+    InputAction moveAction;
+    [SerializeField] float speed = 10f;
+    [SerializeField] float rotationSpeed = 100f;
 
-    private Vector3 velocity = Vector3.zero;
-    private float xRotation = 0f;
+    private Vector3 currentRotation;
+    private float vertical = 0f;
+    private void Start()
+    {
+        // Get the PlayerInput component attached to the same GameObject
+        playerInput = GetComponent<PlayerInput>();
+
+        // Find the "movement" action
+        moveAction = playerInput.actions["movement"];
+    }
 
     private void Update()
     {
-        HandleMovementInput();
-        HandleCameraRotation();
-    }
-
-    private void HandleMovementInput()
-    {
-        // Get WASD input and translate to movement
-        float moveX = Input.GetAxisRaw("Horizontal");
-        float moveZ = Input.GetAxisRaw("Vertical");
-
-        Vector3 movement = transform.right * moveX + transform.forward * moveZ;
-
-        // Handle vertical movement (space for up, shift for down)
-        velocity.y = Input.GetKey(KeyCode.Space) ? 1f : (Input.GetKey(KeyCode.LeftShift) ? -1f : 0f);
-
-        // Apply movement using the CharacterController
-        Controller.Move(movement * Speed * Time.deltaTime);
-        Controller.Move(velocity * Speed * Time.deltaTime);
-    }
-
-    private void HandleCameraRotation()
-    {
-        // Only rotate camera if right-click (Mouse1) is held down
-        if (Input.GetMouseButton(1))
+        MoveCamera();
+        if (Mouse.current.rightButton.isPressed)
         {
             RotateCamera();
         }
     }
 
-    private void RotateCamera()
+    // Method to move the camera/player
+    void MoveCamera()
     {
-        // Get mouse input
-        float mouseX = Input.GetAxis("Mouse X") * Sensitivity;
-        float mouseY = Input.GetAxis("Mouse Y") * Sensitivity;
+        // Read movement input as a Vector3
+        Vector3 inputDirection = moveAction.ReadValue<Vector3>();
 
-        // Adjust camera's vertical rotation (up/down)
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        Vector3 forward = transform.forward;  
+        Vector3 right = transform.right;
 
-        // Apply rotation to the camera and player body
-        PlayerCamera.localRotation = Quaternion.Euler(xRotation, 0f, 0f); // Vertical (up/down)
-        transform.Rotate(Vector3.up * mouseX); // Horizontal (left/right)
+        forward.y = 0f;
+        right.y = 0f;
+
+        // Normalize vectors to prevent diagonal movement from being faster
+        forward.Normalize();
+        right.Normalize();
+
+        Vector3 moveDirection = forward * inputDirection.z + right * inputDirection.x;
+
+        // Apply the movement to the camera
+        transform.position += moveDirection * speed * Time.deltaTime;
+
+        // Apply vertical movement (up/down)
+        transform.position += Vector3.up * inputDirection.y * speed * Time.deltaTime;
+    }
+
+    // Method to rotate the camera while holding the right mouse button
+    void RotateCamera()
+    {
+        Vector2 mouseDelta = Mouse.current.delta.ReadValue();
+
+        float horizontal = mouseDelta.x * rotationSpeed * Time.deltaTime;
+        currentRotation.y += horizontal;
+
+        float pitchDelta = -mouseDelta.y * rotationSpeed * Time.deltaTime; 
+        vertical = Mathf.Clamp(vertical + pitchDelta, -90f, 90f);
+
+        transform.eulerAngles = new Vector3(vertical, currentRotation.y, 0f);
     }
 }
