@@ -1,15 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using UnityEngine;
 
 public class TowerBehaviour : MonoBehaviour
 {
 
     public Transform enemies;
+
+    [Header("Tower Stats")]
+    public float attackSpeed = 1f;
+    private float reloadSpeed = 0f;
     public float range = 5f;
+
+    [Header("Unity fields")]
     public string enemyTag = "Enemies";
     private Transform lastEnemyInRange; // Track the last detected enemy
+
+    public GameObject AttackPreFab;
+    public Transform attackPoint;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,8 +57,24 @@ public class TowerBehaviour : MonoBehaviour
     {
         if (enemies == null)
             return;
+
+        if (reloadSpeed <= 0f)
+        {
+            Shoot();
+            reloadSpeed = 1f / attackSpeed;
+        }
+
+        reloadSpeed = reloadSpeed - Time.deltaTime;
     }
 
+    void Shoot()
+    {
+        GameObject attackGameObject = (GameObject)Instantiate(AttackPreFab, attackPoint.position, attackPoint.rotation);
+        AttackBehaviour attack = attackGameObject.GetComponent<AttackBehaviour>();
+
+        if (attack != null)
+            attack.Travel(enemies);
+    }
     void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(transform.position, range);
