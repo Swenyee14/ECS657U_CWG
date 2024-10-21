@@ -7,6 +7,7 @@ public class Positions : MonoBehaviour
 {
     public static Transform[] positions;
 
+    // gets all the children of the position game object
     private void Awake()
     {
         positions = new Transform[transform.childCount];

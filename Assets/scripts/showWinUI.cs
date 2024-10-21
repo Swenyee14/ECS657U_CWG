@@ -16,7 +16,7 @@ public class showWinUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (counter == 5)
+        if (counter == 15)
             gameObjectUI.SetActive(true);
     }
 

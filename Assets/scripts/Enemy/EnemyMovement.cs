@@ -19,10 +19,11 @@ public class EnemyMovement : MonoBehaviour
 
     void Update()
     {
-
+        // travel in the direction of the waypoints
         Vector3 dir = target.position - transform.position;
         transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
 
+        // get the next positions location once an enemy is close to the current one
         if (Vector3.Distance(transform.position, target.position) <= 0.1f)
         {
             GetNextPosition();
@@ -31,6 +32,7 @@ public class EnemyMovement : MonoBehaviour
 
     void GetNextPosition()
     {
+        // Destroy the enemy and end the game if it reaches the end
         if (positionIndex == Positions.positions.Length - 1)
         {
             Destroy(gameObject);
@@ -38,6 +40,7 @@ public class EnemyMovement : MonoBehaviour
             return;
         }
 
+        // get next position
         positionIndex++;
         target = Positions.positions[positionIndex];
     }
