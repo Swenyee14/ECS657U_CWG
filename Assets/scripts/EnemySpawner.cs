@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject EnemyPrefab;
+    public GameObject EnemyPrefab; 
 
     void Start()
     {
@@ -21,5 +21,7 @@ public class EnemySpawner : MonoBehaviour
             Instantiate(EnemyPrefab, new Vector3(-9.7f, 0.46f, 7.991f), Quaternion.identity);
             yield return new WaitForSeconds(3f);
         }
+
+       
     }
 }

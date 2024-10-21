@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class AttackBehaviour : MonoBehaviour
 {
-
+    showWinUI UIScript;
     private Transform enemies;
     public float speed = 20f;
     public void Travel(Transform _enemies)
     {
         enemies = _enemies;
+    }
+
+    private void Start()
+    {
+        UIScript = GameObject.FindGameObjectWithTag("Master").GetComponent<showWinUI>();
     }
 
     // Update is called once per frame
@@ -36,6 +41,7 @@ public class AttackBehaviour : MonoBehaviour
 
     void CollisionWithEnemy()
     {
+        UIScript.EnemyCounter();
         Destroy(enemies.gameObject);
         Destroy(gameObject);
     }
