@@ -34,6 +34,12 @@ public class CharacterSelectionManager : MonoBehaviour
         {
             currentTower = Instantiate(towerPrefab);
             currentTower.transform.localScale = Vector3.one;
+
+            TowerBehaviour towerbehaviour = currentTower.GetComponent<TowerBehaviour>();
+            if (towerbehaviour != null)
+            {
+                towerbehaviour.enabled = false;
+            }
             FollowMouse();
         }
     }
@@ -137,8 +143,14 @@ public class CharacterSelectionManager : MonoBehaviour
             
             Debug.Log($"Tower placed at: {hit.point}");
             currentTower.transform.position = hit.point;
-            currentTower.tag = "Tower";  
-            currentTower = null;  
+            currentTower.tag = "Tower";
+            // Enable TowerBehaviour after placing the tower
+            TowerBehaviour towerBehaviour = currentTower.GetComponent<TowerBehaviour>();
+            if (towerBehaviour != null)
+            {
+                towerBehaviour.enabled = true; // Enable the tower's behavior
+            }
+            currentTower = null;
             isPlacingTower = false;  
         }
         else
