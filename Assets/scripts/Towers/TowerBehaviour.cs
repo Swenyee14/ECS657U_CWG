@@ -19,15 +19,11 @@ public class TowerBehaviour : MonoBehaviour
 
     public GameObject AttackPreFab;
     public Transform attackPoint;
-    public int counter;
-    public GameObject gameUIWIN;
 
     // Start is called before the first frame update
     void Start()
     {
         InvokeRepeating("UpdateEnemy", 0f, 1f); // repeat the update enemy function
-        counter = 0;
-        UIScript = GameObject.FindGameObjectWithTag("Master").GetComponent<showWinUI>();
     }
 
     // update enemy focus for the tower
@@ -69,7 +65,6 @@ public class TowerBehaviour : MonoBehaviour
         {
             Shoot();
             reloadSpeed = 1f / attackSpeed;
-            counter++;
         }
         reloadSpeed = reloadSpeed - Time.deltaTime;
     }
