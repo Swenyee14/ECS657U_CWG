@@ -25,14 +25,19 @@ public class TowerBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("UpdateEnemy", 0f, 1f);
+        InvokeRepeating("UpdateEnemy", 0f, 1f); // repeat the update enemy function
+        counter = 0;
+        UIScript = GameObject.FindGameObjectWithTag("Master").GetComponent<showWinUI>();
     }
 
+    // update enemy focus for the tower
     void UpdateEnemy()
-    {
+    {   
+        // add and store all enemies with enemy tag in range and remove them once they leave the range
         List<GameObject> allEnemies = new List<GameObject>(GameObject.FindGameObjectsWithTag(enemyTag));
         allEnemies.RemoveAll(enemy => Vector3.Distance(transform.position, enemy.transform.position) > range); // Remove enemies out of range
 
+        //change the target enemy for the tower
         if (allEnemies.Count > 0)
         {
             GameObject nearestEnemy = allEnemies.Aggregate((closest, next) =>
@@ -59,6 +64,7 @@ public class TowerBehaviour : MonoBehaviour
         if (enemies == null)
             return;
 
+        // shoot in intervals
         if (reloadSpeed <= 0f)
         {
             Shoot();
@@ -68,14 +74,18 @@ public class TowerBehaviour : MonoBehaviour
         reloadSpeed = reloadSpeed - Time.deltaTime;
     }
 
+    // instantiate the attack prefab and call Travel method on the attack
     void Shoot()
     {
         GameObject attackGameObject = (GameObject)Instantiate(AttackPreFab, attackPoint.position, attackPoint.rotation);
         AttackBehaviour attack = attackGameObject.GetComponent<AttackBehaviour>();
 
-        if (attack != null)
+        if (attack != null) {
             attack.Travel(enemies);
+        }
     }
+
+    // To visualise the range in testing
     void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(transform.position, range);

@@ -25,6 +25,8 @@ public class CameraController : MonoBehaviour
     private void Update()
     {
         MoveCamera();
+
+        // rotate camera only if right mouse button is held
         if (Mouse.current.rightButton.isPressed)
         {
             RotateCamera();
@@ -64,8 +66,8 @@ public class CameraController : MonoBehaviour
         float horizontal = mouseDelta.x * rotationSpeed * Time.deltaTime;
         currentRotation.y += horizontal;
 
-        float pitchDelta = -mouseDelta.y * rotationSpeed * Time.deltaTime; 
-        vertical = Mathf.Clamp(vertical + pitchDelta, -90f, 90f);
+        float verticalDelta = -mouseDelta.y * rotationSpeed * Time.deltaTime; 
+        vertical = Mathf.Clamp(vertical + verticalDelta, -90f, 90f);
 
         transform.eulerAngles = new Vector3(vertical, currentRotation.y, 0f);
     }

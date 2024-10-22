@@ -20,12 +20,15 @@ public class AttackBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // destroy attack if enemy is out of range 
         if (enemies == null)
         {
             Destroy(gameObject);
             return;
         }
 
+        // if the distance between the tower and enemy is less than or equal to the distance the attack can travel in a frame
+        // then handle collision with enemy
         Vector3 direction = enemies.position - transform.position;
         float distancePerFrame = speed * Time.deltaTime;
 
@@ -39,6 +42,7 @@ public class AttackBehaviour : MonoBehaviour
 
     }
 
+    // handle collision with enemy by destroying both attack and enemy game object
     void CollisionWithEnemy()
     {
         UIScript.EnemyCounter(); //this line specifically calls a method in another script
