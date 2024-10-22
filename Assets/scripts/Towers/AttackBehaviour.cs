@@ -12,7 +12,7 @@ public class AttackBehaviour : MonoBehaviour
         enemies = _enemies;
     }
 
-    private void Start()
+    private void Start() //allows access to other methods in different scripts
     {
         UIScript = GameObject.FindGameObjectWithTag("Master").GetComponent<showWinUI>();
     }
@@ -41,7 +41,7 @@ public class AttackBehaviour : MonoBehaviour
 
     void CollisionWithEnemy()
     {
-        UIScript.EnemyCounter();
+        UIScript.EnemyCounter(); //this line specifically calls a method in another script
         Destroy(enemies.gameObject);
         Destroy(gameObject);
     }

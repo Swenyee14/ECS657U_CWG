@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class TowerBehaviour : MonoBehaviour
 {
-    showWinUI UIScript;
-
     public Transform enemies;
 
     [Header("Tower Stats")]
@@ -28,8 +26,6 @@ public class TowerBehaviour : MonoBehaviour
     void Start()
     {
         InvokeRepeating("UpdateEnemy", 0f, 1f);
-        counter = 0;
-        UIScript = GameObject.FindGameObjectWithTag("Master").GetComponent<showWinUI>();
     }
 
     void UpdateEnemy()

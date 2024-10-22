@@ -5,19 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class RetryButton : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void ResetGame()
+    public void ResetGame() //resets the scene 
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Debug.Log("Button preesed");
