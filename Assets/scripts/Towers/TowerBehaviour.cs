@@ -75,9 +75,8 @@ public class TowerBehaviour : MonoBehaviour
         GameObject attackGameObject = (GameObject)Instantiate(AttackPreFab, attackPoint.position, attackPoint.rotation);
         AttackBehaviour attack = attackGameObject.GetComponent<AttackBehaviour>();
 
-        if (attack != null) {
+        if (attack != null)
             attack.Travel(enemies);
-        }
     }
 
     // To visualise the range in testing
