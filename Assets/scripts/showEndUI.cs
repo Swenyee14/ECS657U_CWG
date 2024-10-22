@@ -7,19 +7,7 @@ public class showEndUI : MonoBehaviour
 
     public GameObject gameObjectUI;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void NeededMethod()
+    public void NeededMethod() //sets inactive object to become active
     {
         gameObjectUI.SetActive(true);
         

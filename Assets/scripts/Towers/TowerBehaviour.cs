@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class TowerBehaviour : MonoBehaviour
 {
-    showWinUI UIScript;
-
     public Transform enemies;
 
     [Header("Tower Stats")]
