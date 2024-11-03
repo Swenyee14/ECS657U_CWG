@@ -79,7 +79,18 @@ public class CharacterSelectionManager : MonoBehaviour
             return;
         }
 
-       
+        // Checks if the "C" key was pressed and cancels tower placement
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            CancelTowerPlacement();
+        }
+
+        // Checks if the "1" key was pressed to start tower placement
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            StartTowerPlacement();
+        }
+
         if (isPlacingTower && currentTower != null)
         {
             FollowMouse(); // Makes the tower follow the mouse
