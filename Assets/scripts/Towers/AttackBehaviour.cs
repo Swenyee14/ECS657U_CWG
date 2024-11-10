@@ -5,6 +5,7 @@ using UnityEngine;
 public class AttackBehaviour : MonoBehaviour
 {
     showWinUI UIScript;
+    private CurrencyManager currencyManager; 
     private Transform enemies;
     public float speed = 20f;
     public void Travel(Transform _enemies)
@@ -15,6 +16,7 @@ public class AttackBehaviour : MonoBehaviour
     private void Start() //allows access to other methods in different scripts
     {
         UIScript = GameObject.FindGameObjectWithTag("Master").GetComponent<showWinUI>();
+        currencyManager = GameObject.FindGameObjectWithTag("Master").GetComponent<CurrencyManager>();
     }
 
     // Update is called once per frame
@@ -46,6 +48,7 @@ public class AttackBehaviour : MonoBehaviour
     void CollisionWithEnemy()
     {
         UIScript.EnemyCounter(); //this line specifically calls a method in another script
+        currencyManager.AddCurrency(1);
         Destroy(enemies.gameObject);
         Destroy(gameObject);
     }
