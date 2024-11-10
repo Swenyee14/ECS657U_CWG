@@ -12,11 +12,13 @@ public class CharacterSelectionManager : MonoBehaviour
    
     private GameObject currentTower;
     private bool isPlacingTower = false; 
-    private bool cancelPressed = false; 
+    private bool cancelPressed = false;
+    private int towerCost = 1;
+    private CurrencyManager currencyManager;
 
-    
     void Start()
     {
+        currencyManager = GameObject.FindGameObjectWithTag("Master").GetComponent<CurrencyManager>();
         // Added listeners to buttons to handle tower placement and cancellation
         addTowerButton.onClick.AddListener(StartTowerPlacement);
         cancelPlacementButton.onClick.AddListener(CancelTowerPlacement);
@@ -168,7 +170,14 @@ public class CharacterSelectionManager : MonoBehaviour
             // Places the tower at the hit point
             Debug.Log($"Tower placed at: {hit.point}");
             currentTower.transform.position = hit.point;
-            currentTower.tag = "Tower"; 
+            currentTower.tag = "Tower";
+            if (currentTower.transform.position == hit.point) {
+                if(!currencyManager.SpendCurrency(towerCost))
+                {
+                    Debug.Log("Not enough currency!");
+                    return;
+                }
+            }
 
             // Enables the tower's behavior after placing it
             TowerBehaviour towerBehaviour = currentTower.GetComponent<TowerBehaviour>();
@@ -176,7 +185,6 @@ public class CharacterSelectionManager : MonoBehaviour
             {
                 towerBehaviour.enabled = true; 
             }
-
             currentTower = null;  
             isPlacingTower = false;  // Ends tower placement
         }
