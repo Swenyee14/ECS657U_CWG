@@ -107,7 +107,7 @@ public class CharacterSelectionManager : MonoBehaviour
             // Checks for left mouse click (using the new input system)
             if (playerInputs.TowerPlacement.PlaceTower.triggered)
             {
-                // Ensures the click wasn't over a ui element
+                // Ensures the click wasn't over a UI element
                 if (EventSystem.current.IsPointerOverGameObject())
                 {
                     Debug.Log("Click was on UI, not placing tower.");
@@ -143,6 +143,12 @@ public class CharacterSelectionManager : MonoBehaviour
 
     private void PlaceTower()
     {
+        if (currentTower == null)
+        {
+            Debug.Log("No tower to place.");
+            return;
+        }
+
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         RaycastHit hit;
 
