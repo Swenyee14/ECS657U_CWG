@@ -1,20 +1,27 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class CharacterSelectionManager : MonoBehaviour
 {
-    
     public Button addTowerButton;
     public Button cancelPlacementButton;
     public GameObject towerPrefab;
 
-   
     private GameObject currentTower;
-    private bool isPlacingTower = false; 
+    private bool isPlacingTower = false;
     private bool cancelPressed = false;
     private int towerCost = 1;
     private CurrencyManager currencyManager;
+
+    private PlayerInputs playerInputs;
+
+    private void Awake()
+    {
+        // Initialize the PlayerInputs instance
+        playerInputs = new PlayerInputs();
+    }
 
     void Start()
     {
@@ -22,9 +29,23 @@ public class CharacterSelectionManager : MonoBehaviour
         // Added listeners to buttons to handle tower placement and cancellation
         addTowerButton.onClick.AddListener(StartTowerPlacement);
         cancelPlacementButton.onClick.AddListener(CancelTowerPlacement);
+
+        // Add input action listeners
+        playerInputs.TowerPlacement.StartPlacement.performed += context => StartTowerPlacement();
+        playerInputs.TowerPlacement.CancelPlacement.performed += context => CancelTowerPlacement();
+        playerInputs.TowerPlacement.PlaceTower.performed += context => PlaceTower();
     }
 
-    
+    private void OnEnable()
+    {
+        playerInputs.Enable();
+    }
+
+    private void OnDisable()
+    {
+        playerInputs.Disable();
+    }
+
     private void StartTowerPlacement()
     {
         // Prevents starting tower placement if it's already in progress
@@ -34,7 +55,7 @@ public class CharacterSelectionManager : MonoBehaviour
             return;
         }
 
-        isPlacingTower = true; 
+        isPlacingTower = true;
 
         // Instantiates the tower if there isn't one currently being placed
         if (currentTower == null)
@@ -42,7 +63,7 @@ public class CharacterSelectionManager : MonoBehaviour
             currentTower = Instantiate(towerPrefab); // Creates the tower
             currentTower.transform.localScale = Vector3.one; // Sets scale to 1
 
-            // Disabled the tower's behavior while placing it
+            // Disable the tower's behavior while placing it
             TowerBehaviour towerBehaviour = currentTower.GetComponent<TowerBehaviour>();
             if (towerBehaviour != null)
             {
@@ -54,7 +75,6 @@ public class CharacterSelectionManager : MonoBehaviour
         }
     }
 
-    // Cancels tower placement
     private void CancelTowerPlacement()
     {
         // Checks if there is a tower being placed
@@ -62,16 +82,15 @@ public class CharacterSelectionManager : MonoBehaviour
         {
             Debug.Log("Cancelling tower placement. Destroying current tower.");
             Destroy(currentTower);  // Removes the tower 
-            currentTower = null;   
+            currentTower = null;
             Debug.Log("Tower destroyed.");
         }
 
-        isPlacingTower = false; 
+        isPlacingTower = false;
         cancelPressed = true;
         Debug.Log("Tower placement cancelled.");
     }
 
-    // Update is called once per frame
     void Update()
     {
         // If the cancel button was pressed, reset the flag and return
@@ -81,30 +100,18 @@ public class CharacterSelectionManager : MonoBehaviour
             return;
         }
 
-        // Checks if the "C" key was pressed and cancels tower placement
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            CancelTowerPlacement();
-        }
-
-        // Checks if the "1" key was pressed to start tower placement
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            StartTowerPlacement();
-        }
-
         if (isPlacingTower && currentTower != null)
         {
             FollowMouse(); // Makes the tower follow the mouse
 
-            // Checks for left mouse click
-            if (Input.GetMouseButtonDown(0))
+            // Checks for left mouse click (using the new input system)
+            if (playerInputs.TowerPlacement.PlaceTower.triggered)
             {
-                // Ensures the click wasn't over a UI element
+                // Ensures the click wasn't over a ui element
                 if (EventSystem.current.IsPointerOverGameObject())
                 {
                     Debug.Log("Click was on UI, not placing tower.");
-                    return;  
+                    return;
                 }
 
                 if (!isPlacingTower)
@@ -119,11 +126,10 @@ public class CharacterSelectionManager : MonoBehaviour
         }
     }
 
-    //Makes the tower follow the mouse position
     private void FollowMouse()
     {
         // Casts a ray from the camera to the mouse position
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         RaycastHit hit;
 
         // If the ray hits something, move the tower to the hit point
@@ -135,11 +141,9 @@ public class CharacterSelectionManager : MonoBehaviour
         }
     }
 
-
-    // Places the tower at the clicked location
     private void PlaceTower()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         RaycastHit hit;
 
         // Defined layers for the path and the floor
@@ -150,7 +154,7 @@ public class CharacterSelectionManager : MonoBehaviour
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, pathLayerMask))
         {
             Debug.Log($"Cannot place tower on the path: {hit.collider.gameObject.name}, Layer: {LayerMask.LayerToName(hit.collider.gameObject.layer)}");
-            return;  
+            return;
         }
 
         // Checks if the ray hits the floor
@@ -171,8 +175,9 @@ public class CharacterSelectionManager : MonoBehaviour
             Debug.Log($"Tower placed at: {hit.point}");
             currentTower.transform.position = hit.point;
             currentTower.tag = "Tower";
-            if (currentTower.transform.position == hit.point) {
-                if(!currencyManager.SpendCurrency(towerCost))
+            if (currentTower.transform.position == hit.point)
+            {
+                if (!currencyManager.SpendCurrency(towerCost))
                 {
                     Debug.Log("Not enough currency!");
                     return;
@@ -183,9 +188,9 @@ public class CharacterSelectionManager : MonoBehaviour
             TowerBehaviour towerBehaviour = currentTower.GetComponent<TowerBehaviour>();
             if (towerBehaviour != null)
             {
-                towerBehaviour.enabled = true; 
+                towerBehaviour.enabled = true;
             }
-            currentTower = null;  
+            currentTower = null;
             isPlacingTower = false;  // Ends tower placement
         }
         else
