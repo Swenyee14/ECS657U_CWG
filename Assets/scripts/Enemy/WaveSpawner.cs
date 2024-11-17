@@ -39,6 +39,7 @@ public class WaveSpawner : MonoBehaviour
         // If we have reached the total wave limit, stop spawning
         if (waveNumber >= totalWaves)
         {
+            Debug.Log("Done spawning");
             return;
         }
 
