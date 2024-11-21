@@ -8,12 +8,10 @@ public class Title : MonoBehaviour
     public void Play()
     {
         SceneManager.LoadScene("Main");
-
     }
 
     public void Quit()
     {
-
         Application.Quit();
     }
 }
