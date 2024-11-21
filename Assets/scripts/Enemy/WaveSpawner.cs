@@ -9,9 +9,9 @@ public class WaveSpawner : MonoBehaviour
     public EnemySpawner enemySpawner; // Reference to EnemySpawner component
 
     public float timeBetweenWaves = 10f;     // 10-second delay between waves
-    public float timeBetweenSpawns = 3f;     // 3-second delay between each enemy spawn
+    public float timeBetweenSpawns = 1f;     // 3-second delay between each enemy spawn
     public int enemiesPerWave = 5;           // 5 enemies per wave
-    public int totalWaves = 3;               // Total number of waves
+    public int totalWaves = 15;               // Total number of waves
 
     /// <summary>
     /// These numbers above will eventually be changed into global variables that have numbers linked thoughout the gamemaster :D
@@ -39,6 +39,7 @@ public class WaveSpawner : MonoBehaviour
         // If we have reached the total wave limit, stop spawning
         if (waveNumber >= totalWaves)
         {
+            Debug.Log("Done spawning");
             return;
         }
 
@@ -52,6 +53,9 @@ public class WaveSpawner : MonoBehaviour
                     enemySpawner.SpawnEnemies();
                     enemiesSpawnedInWave++;
                     spawnCountDown = timeBetweenSpawns;
+                    //add new spawn enemy line here
+                    //will need to add if loop here if you want different spawn timings to normal enemies
+                    //i will do it, just let me (swenyee) know once new enemy type spawn has been created
                 }
                 spawnCountDown -= Time.deltaTime;
             }
@@ -61,6 +65,7 @@ public class WaveSpawner : MonoBehaviour
                 waveNumber++;
                 enemiesSpawnedInWave = 0;
                 waveCountDown = timeBetweenWaves;
+                enemiesPerWave = enemiesPerWave + 5;
             }
         }
         else

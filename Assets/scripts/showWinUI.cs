@@ -16,7 +16,7 @@ public class showWinUI : MonoBehaviour
     // Update is called once per frame
     void Update() //once 15 enemies have been defeated object will be set to active
     {
-        if (counter == 15)
+        if (counter == 600)
             gameObjectUI.SetActive(true);
     }
 

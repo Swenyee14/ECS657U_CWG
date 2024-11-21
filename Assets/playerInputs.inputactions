@@ -94,6 +94,74 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "TowerPlacement",
+            "id": "606c4484-b4e9-4b39-a952-7f7ddf438a71",
+            "actions": [
+                {
+                    "name": "StartPlacement",
+                    "type": "Button",
+                    "id": "7df14286-1bf1-44d1-81d5-014db4331021",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CancelPlacement",
+                    "type": "Button",
+                    "id": "d8881e29-ac53-497b-9137-0cb6f2e95f62",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PlaceTower",
+                    "type": "Button",
+                    "id": "ee689fd0-080b-46cb-9266-2992ce1fb784",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "9fb3f94e-b3f5-4d8b-90ca-ec006b49ad57",
+                    "path": "<Keyboard>/#(1)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StartPlacement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b19cdc51-52b4-4012-9de1-b597b8515c08",
+                    "path": "<Keyboard>/#(C)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CancelPlacement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9d7f5dd3-960a-4d69-b9cf-857fc75f6b9b",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PlaceTower",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

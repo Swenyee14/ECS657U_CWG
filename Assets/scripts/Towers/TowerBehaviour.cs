@@ -10,8 +10,8 @@ public class TowerBehaviour : MonoBehaviour
 
     [Header("Tower Stats")]
     public float attackSpeed = 1f;
-    private float reloadSpeed = 0f;
-    public float range = 5f;
+    public float reloadSpeed = 0f;
+    public float range = 3.5f;
 
     [Header("Unity fields")]
     public string enemyTag = "Enemies";
