@@ -55,25 +55,12 @@ public class TowerSelector : MonoBehaviour
         selectedTower = this;
         ShowRangeIndicator();
         ShowTowerMenu();
-        if (TowerMenu != null)
-        {
-            upgradeButton.onClick.RemoveAllListeners();
-            upgradeButton.onClick.AddListener(UpgradeTower);
-
-            sellButton.onClick.RemoveAllListeners();
-            sellButton.onClick.AddListener(SellTower);
-        }
     }
 
     private void DeselectTower()
     {
         Destroy(rangeIndicator);
         HideTowerMenu();
-        if (TowerMenu != null)
-        {
-            upgradeButton.onClick.RemoveAllListeners();
-            sellButton.onClick.RemoveAllListeners();
-        }
         selectedTower = null;
     }
 
@@ -135,7 +122,6 @@ public class TowerSelector : MonoBehaviour
         // Apply the upgrade
         towerBehaviour.attackSpeed += 0.5f;
         towerBehaviour.range += 1f;
-        towerBehaviour.damage += 2f;
 
         // Update the range indicator immediately
         UpdateRangeIndicator();

@@ -62,14 +62,14 @@ public class WaveSpawner : MonoBehaviour
                         if (waveNumber >= 3)
                         {
                             enemySpawner.SpawnEnemiesFast();
-                            FastenemiesSpawnedInWave = FastenemiesSpawnedInWave + 3;
+                            FastenemiesSpawnedInWave = FastenemiesSpawnedInWave + 5;
 
                         }
 
                         if (waveNumber >= 7)
                         {
                             enemySpawner.SpawnEnemiesTank();
-                            TankenemiesSpawnedInWave = TankenemiesSpawnedInWave + 3;
+                            TankenemiesSpawnedInWave = TankenemiesSpawnedInWave + 5;
 
                         }
 
