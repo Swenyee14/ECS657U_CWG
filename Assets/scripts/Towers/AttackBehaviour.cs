@@ -8,9 +8,11 @@ public class AttackBehaviour : MonoBehaviour
     private CurrencyManager currencyManager; 
     private Transform enemies;
     public float speed = 20f;
-    public void Travel(Transform _enemies)
+    private float damage;
+    public void Travel(Transform _enemies, float _damage)
     {
         enemies = _enemies;
+        damage = _damage;
     }
 
     private void Start() //allows access to other methods in different scripts
@@ -48,8 +50,12 @@ public class AttackBehaviour : MonoBehaviour
     void CollisionWithEnemy()
     {
         UIScript.EnemyCounter(); //this line specifically calls a method in another script
-        currencyManager.AddCurrency(1);
-        Destroy(enemies.gameObject);
+        EnemyMovement enemy = enemies.GetComponent<EnemyMovement>();
+        if (enemy != null)
+        {
+            enemy.TakeDamage(damage); // Damage the enemy
+        }
+
         Destroy(gameObject);
     }
 }
