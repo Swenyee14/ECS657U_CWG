@@ -153,7 +153,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemies: {fileID: 0}
   attackSpeed: 1
+  reloadSpeed: 0
   range: 5
+  damage: 5
   enemyTag: Enemies
   AttackPreFab: {fileID: 5687210431401259412, guid: 90c456858c5ea414bb76dcae8442880c, type: 3}
   attackPoint: {fileID: 5092628552805320550}
@@ -169,3 +171,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e6d7e1c4fb460e49881791b1d6c2544, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rangeIndicator: {fileID: 0}
+  towerBehaviour: {fileID: 0}
+  TowerMenu: {fileID: 0}
+  upgradeButton: {fileID: 0}
+  sellButton: {fileID: 0}

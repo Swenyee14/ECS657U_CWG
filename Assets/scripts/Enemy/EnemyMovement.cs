@@ -9,6 +9,7 @@ public class EnemyMovement : MonoBehaviour
     public float speed = 6f;
     public Transform target;
     public int positionIndex = 0;
+    CurrencyManager currencyManager;
     showEndUI UIScript;
 
     [SerializeField] HealthBar healthBar;
@@ -18,6 +19,7 @@ public class EnemyMovement : MonoBehaviour
         // reference to the waypoint
         target = Positions.positions[0];
         UIScript = GameObject.FindGameObjectWithTag("Master").GetComponent<showEndUI>();
+        currencyManager = GameObject.FindGameObjectWithTag("Master").GetComponent<CurrencyManager>();
         healthBar = GetComponentInChildren<HealthBar>();
         healthBar.UpdateHealthBar(health, maxhealth); // Use this line whenever a takedamage function is added
     }
@@ -48,5 +50,18 @@ public class EnemyMovement : MonoBehaviour
         // get next position
         positionIndex++;
         target = Positions.positions[positionIndex];
+    }
+
+    // Method to reduce health when damaged
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        healthBar.UpdateHealthBar(health, maxhealth); // Update health bar
+
+        if (health <= 0f)
+        {
+            currencyManager.AddCurrency(1);
+            Destroy(gameObject);
+        }
     }
 }
