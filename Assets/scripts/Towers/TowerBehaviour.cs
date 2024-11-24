@@ -11,7 +11,8 @@ public class TowerBehaviour : MonoBehaviour
     [Header("Tower Stats")]
     public float attackSpeed = 1f;
     public float reloadSpeed = 0f;
-    public float range = 3.5f;
+    public float range = 5f;
+    public float damage = 5f;
 
     [Header("Unity fields")]
     public string enemyTag = "Enemies";
@@ -19,7 +20,7 @@ public class TowerBehaviour : MonoBehaviour
 
     public GameObject AttackPreFab;
     public Transform attackPoint;
-
+    private Transform currentTarget;
     // Start is called before the first frame update
     void Start()
     {
@@ -76,7 +77,7 @@ public class TowerBehaviour : MonoBehaviour
         AttackBehaviour attack = attackGameObject.GetComponent<AttackBehaviour>();
 
         if (attack != null)
-            attack.Travel(enemies);
+            attack.Travel(enemies, damage);
     }
 
     // To visualise the range in testing
