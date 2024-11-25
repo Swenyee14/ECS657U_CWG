@@ -16,6 +16,7 @@ public class showEndUI : MonoBehaviour
         if (counter == 0)
         {
             gameObjectUI.SetActive(true);
+            Time.timeScale = 0f;
         }
         else
         {
