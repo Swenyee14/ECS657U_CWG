@@ -1,31 +1,34 @@
 using UnityEngine;
 using UnityEngine.UI;
+
 public class TowerSelector : MonoBehaviour
 {
     public static TowerSelector selectedTower;
-    public GameObject rangeIndicator;
+    //public GameObject rangeIndicator;
     public TowerBehaviour towerBehaviour;
     private CurrencyManager currencyManager;
-    // Add these fields for TowerMenu and buttons
+
     public GameObject TowerMenu;
     public Button upgradeButton;
     public Button sellButton;
 
     private int upgradeCount = 0;
     private int[] upgradeCosts = { 2, 3, 5 };
+
+    // Reference to the range indicator sprite prefab (assign in the Inspector)
+    //public GameObject rangeIndicatorPrefab;
+
     void Awake()
     {
         towerBehaviour = GetComponent<TowerBehaviour>();
         currencyManager = Object.FindFirstObjectByType<CurrencyManager>();
 
-        // Get TowerMenu and buttons from UIManager
         if (UIManager.instance != null)
         {
             TowerMenu = UIManager.instance.towerMenu;
             upgradeButton = UIManager.instance.upgradeButton;
             sellButton = UIManager.instance.sellButton;
 
-            // Assign button actions
             upgradeButton.onClick.AddListener(UpgradeTower);
             sellButton.onClick.AddListener(SellTower);
         }
@@ -39,13 +42,11 @@ public class TowerSelector : MonoBehaviour
         }
         else
         {
-            // Deselect the previous tower
             if (selectedTower != null)
             {
                 selectedTower.DeselectTower();
             }
 
-            // Set this tower as the selected tower
             SelectTower();
         }
     }
@@ -53,37 +54,36 @@ public class TowerSelector : MonoBehaviour
     private void SelectTower()
     {
         selectedTower = this;
-        ShowRangeIndicator();
+        //ShowRangeIndicator();
         ShowTowerMenu();
     }
 
     private void DeselectTower()
     {
-        Destroy(rangeIndicator);
+        //if (rangeIndicator != null)
+        //{
+            //Destroy(rangeIndicator);
+        //}
         HideTowerMenu();
         selectedTower = null;
     }
 
+    /*
     private void ShowRangeIndicator()
     {
-        if (towerBehaviour == null) return;
+        if (towerBehaviour == null || rangeIndicatorPrefab == null) return;
 
-        // Create a sphere object to represent the range
-        rangeIndicator = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        rangeIndicator.transform.position = transform.position;
-        rangeIndicator.transform.localScale = new Vector3(towerBehaviour.range * 2, 0.1f, towerBehaviour.range * 2);
+        // Instantiate the range indicator prefab
+        rangeIndicator = Instantiate(rangeIndicatorPrefab, transform.position, Quaternion.identity);
 
-        // Set the sphere to be transparent
-        Material transparentMaterial = new Material(Shader.Find("Transparent/Diffuse"));
-        transparentMaterial.color = new Color(0, 0.5f, 1f, 0.4f); 
-        rangeIndicator.GetComponent<Renderer>().material = transparentMaterial;
+        // Adjust scale based on tower range
+        float rangeDiameter = towerBehaviour.range * 2;
+        rangeIndicator.transform.localScale = new Vector3(rangeDiameter, rangeDiameter, 1f);
 
-        // Disable collider on the range indicator to avoid interference with clicks
-        Destroy(rangeIndicator.GetComponent<Collider>());
-
-        // Make the range indicator a child of this tower for easy cleanup
+        // Set the range indicator to be a child of the tower
         rangeIndicator.transform.SetParent(transform);
     }
+    */
 
     private void HideTowerMenu()
     {
@@ -101,14 +101,12 @@ public class TowerSelector : MonoBehaviour
 
     private void UpgradeTower()
     {
-        // Check if the upgrade count is less than 3
         if (upgradeCount >= 3)
         {
             Debug.Log("Maximum upgrades reached.");
-            return; 
+            return;
         }
 
-        // Check if the player has enough currency to upgrade
         int upgradeCost = upgradeCosts[upgradeCount];
         if (CurrencyManager.currency < upgradeCost)
         {
@@ -116,17 +114,12 @@ public class TowerSelector : MonoBehaviour
             return;
         }
 
-        // Deduct the currency for the upgrade
         currencyManager.SpendCurrency(upgradeCost);
 
-        // Apply the upgrade
         towerBehaviour.attackSpeed += 0.5f;
         towerBehaviour.range += 1f;
 
-        // Update the range indicator immediately
-        UpdateRangeIndicator();
-
-        // Increment the upgrade count
+        //UpdateRangeIndicator();
         upgradeCount++;
     }
 
@@ -136,12 +129,12 @@ public class TowerSelector : MonoBehaviour
         Destroy(gameObject);
     }
 
-    // Update the range indicator based on the current tower range
-    private void UpdateRangeIndicator()
+    /*private void UpdateRangeIndicator()
     {
         if (rangeIndicator != null)
         {
-            rangeIndicator.transform.localScale = new Vector3(towerBehaviour.range * 2, 0.1f, towerBehaviour.range * 2);
+            float rangeDiameter = towerBehaviour.range * 2;
+            rangeIndicator.transform.localScale = new Vector3(rangeDiameter, rangeDiameter, 1f);
         }
-    }
+    }*/
 }

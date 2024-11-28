@@ -59,7 +59,7 @@ public class WaveSpawner : MonoBehaviour
                         enemiesSpawnedInWave++;
                         spawnCountDown = timeBetweenSpawns;
 
-                        if (waveNumber >= 0)//change num to 3
+                        if (waveNumber >= 3)//change num to 3
                         {
                             if (FastenemiesSpawnedInWave <= enemiesPerWave)
                             {
@@ -69,7 +69,7 @@ public class WaveSpawner : MonoBehaviour
 
                         }
 
-                        if (waveNumber >= 0)
+                        if (waveNumber >= 7)
                         {
                             if (TankenemiesSpawnedInWave <= enemiesPerWave)
                             {
