@@ -56,6 +56,14 @@ public class TowerSelector : MonoBehaviour
         selectedTower = this;
         //ShowRangeIndicator();
         ShowTowerMenu();
+        if (TowerMenu != null)
+        {
+            upgradeButton.onClick.RemoveAllListeners();
+            upgradeButton.onClick.AddListener(UpgradeTower);
+
+            sellButton.onClick.RemoveAllListeners();
+            sellButton.onClick.AddListener(SellTower);
+        }
     }
 
     private void DeselectTower()
