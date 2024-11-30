@@ -8,11 +8,17 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private Slider slider;
     [SerializeField] private Transform target;
     [SerializeField] private Vector3 offset;
-    private Camera camera;
+    private Camera mainCamera;
 
     private void Awake()
     {
-        camera = Camera.main;
+        mainCamera = Camera.main;
+
+        if (target==null)
+        {
+            target = GameObject.FindWithTag("Enemies").transform;
+        }
+
     }
     public void UpdateHealthBar(float health, float maxHealth)
     {
@@ -22,7 +28,14 @@ public class HealthBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.rotation = camera.transform.rotation;
-        transform.position = target.position + offset;
+        if (target != null)
+        {
+            transform.rotation = mainCamera.transform.rotation;
+            transform.position = target.position + offset;
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 }
