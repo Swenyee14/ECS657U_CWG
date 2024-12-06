@@ -17,20 +17,20 @@ public class CharacterSelectionManager : MonoBehaviour
 
     private PlayerInputs playerInputs;
 
+    // Stores the calculated tower position
+    private Vector3 towerPlacementPosition;
+
     private void Awake()
     {
-        // Initializes the PlayerInputs instance
         playerInputs = new PlayerInputs();
     }
 
     void Start()
     {
         currencyManager = GameObject.FindGameObjectWithTag("Master").GetComponent<CurrencyManager>();
-        // Added listeners to buttons to handle tower placement and cancellation
         addTowerButton.onClick.AddListener(StartTowerPlacement);
         cancelPlacementButton.onClick.AddListener(CancelTowerPlacement);
 
-        // Added input action listeners
         playerInputs.TowerPlacement.StartPlacement.performed += context => StartTowerPlacement();
         playerInputs.TowerPlacement.CancelPlacement.performed += context => CancelTowerPlacement();
         playerInputs.TowerPlacement.PlaceTower.performed += context => PlaceTower();
@@ -48,7 +48,6 @@ public class CharacterSelectionManager : MonoBehaviour
 
     private void StartTowerPlacement()
     {
-        // Prevents starting tower placement if it's already in progress
         if (isPlacingTower)
         {
             Debug.Log("Already placing a tower.");
@@ -57,20 +56,17 @@ public class CharacterSelectionManager : MonoBehaviour
 
         isPlacingTower = true;
 
-        // Instantiates the tower if there isn't one currently being placed
         if (currentTower == null)
         {
-            currentTower = Instantiate(towerPrefab); // Creates the tower
-            currentTower.transform.localScale = Vector3.one; // Sets scale to 1
+            currentTower = Instantiate(towerPrefab);
+            currentTower.transform.localScale = Vector3.one;
 
-            // Disables the tower's behavior while placing it
             TowerBehaviour towerBehaviour = currentTower.GetComponent<TowerBehaviour>();
             if (towerBehaviour != null)
             {
                 towerBehaviour.enabled = false;
             }
 
-            // Makes the tower follow the mouse
             FollowMouse();
         }
     }
@@ -79,7 +75,7 @@ public class CharacterSelectionManager : MonoBehaviour
     {
         if (currentTower != null)
         {
-            Destroy(currentTower);  // Removes the tower
+            Destroy(currentTower);
             currentTower = null;
             Debug.Log("Tower placement cancelled. Tower destroyed.");
         }
@@ -90,10 +86,8 @@ public class CharacterSelectionManager : MonoBehaviour
         isPlacingTower = false;
     }
 
-    
     void Update()
     {
-        // If the cancel button was pressed, reset the flag and return
         if (cancelPressed)
         {
             cancelPressed = false;
@@ -102,12 +96,10 @@ public class CharacterSelectionManager : MonoBehaviour
 
         if (isPlacingTower && currentTower != null)
         {
-            FollowMouse(); // Makes the tower follow the mouse
+            FollowMouse();
 
-            // Checks for left mouse click 
             if (playerInputs.TowerPlacement.PlaceTower.triggered)
             {
-                // Ensures the click wasn't over a UI element
                 if (EventSystem.current.IsPointerOverGameObject())
                 {
                     Debug.Log("Click was on UI, not placing tower.");
@@ -120,7 +112,6 @@ public class CharacterSelectionManager : MonoBehaviour
                     return;
                 }
 
-                // Places the tower at the clicked location
                 PlaceTower();
             }
         }
@@ -128,36 +119,21 @@ public class CharacterSelectionManager : MonoBehaviour
 
     private void FollowMouse()
     {
-        // Casts a ray from the camera to the mouse position
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         RaycastHit hit;
-        Vector3 newPosition;
 
-        // If the ray hits something, move the tower to the hit point
         if (Physics.Raycast(ray, out hit))
         {
-            newPosition = hit.point;
-        }
-        else
-        {
-            // Defines a plane at ground level
-            Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+            Vector3 newPosition = hit.point;
+            newPosition.y = 0f; // Ensures the tower stays on the ground
+            currentTower.transform.position = newPosition;
 
-            // Check if the ray intersects the plane
-            if (groundPlane.Raycast(ray, out float enter))
-            {
-                newPosition = ray.GetPoint(enter); // Gets the point on the plane
-            }
-            else
-            {
-                return;
-            }
-        }
+            // Stores the calculated position for use in PlaceTower
+            towerPlacementPosition = newPosition;
 
-        newPosition.y = 0f; // Ensures the tower stays on the ground
-        currentTower.transform.position = newPosition; // Move the tower
+            Debug.Log($"FollowMouse Position: {towerPlacementPosition}");
+        }
     }
-
 
     private void PlaceTower()
     {
@@ -167,59 +143,50 @@ public class CharacterSelectionManager : MonoBehaviour
             return;
         }
 
-        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-        RaycastHit hit;
+        // Uses the stored tower position from FollowMouse
+        Vector3 finalPosition = towerPlacementPosition;
+
+        Debug.Log($"PlaceTower Position: {finalPosition}");
 
         // Defined layers for the path and the floor
         int pathLayerMask = LayerMask.GetMask("Path");
         int floorLayerMask = LayerMask.GetMask("Floor");
 
-        // Prevents placing the tower on the path
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, pathLayerMask))
+        // Prevent placing the tower on the path
+        if (Physics.CheckSphere(finalPosition, 0.3f, pathLayerMask))
         {
-            Debug.Log($"Cannot place tower on the path: {hit.collider.gameObject.name}, Layer: {LayerMask.LayerToName(hit.collider.gameObject.layer)}");
+            Debug.Log("Cannot place tower on the path.");
             return;
         }
 
-        // Checks if the ray hits the floor
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, floorLayerMask))
+        // Check for overlapping towers
+        Collider[] hitColliders = Physics.OverlapSphere(finalPosition, 0.3f);
+        foreach (Collider collider in hitColliders)
         {
-            // Checks for overlapping towers in the hit area
-            Collider[] hitColliders = Physics.OverlapSphere(hit.point, 0.3f);
-            foreach (Collider collider in hitColliders)
+            if (collider.CompareTag("Tower") && collider.gameObject != currentTower)
             {
-                if (collider.CompareTag("Tower") && collider.gameObject != currentTower)
-                {
-                    Debug.Log("Cannot place tower: Another tower is already placed here.");
-                    return;  // Exits if there's already a tower in this position
-                }
+                Debug.Log("Cannot place tower: Another tower is already placed here.");
+                return;
             }
-
-            // Places the tower at the hit point
-            Debug.Log($"Tower placed at: {hit.point}");
-            currentTower.transform.position = hit.point;
-            currentTower.tag = "Tower";
-            if (currentTower.transform.position == hit.point)
-            {
-                if (!currencyManager.SpendCurrency(towerCost))
-                {
-                    Debug.Log("Not enough currency!");
-                    return;
-                }
-            }
-
-            // Enables the tower's behavior after placing it
-            TowerBehaviour towerBehaviour = currentTower.GetComponent<TowerBehaviour>();
-            if (towerBehaviour != null)
-            {
-                towerBehaviour.enabled = true;
-            }
-            currentTower = null;
-            isPlacingTower = false;  // Ends tower placement
         }
-        else
+
+        currentTower.transform.position = finalPosition;
+        Debug.Log($"Tower placed at: {finalPosition}");
+        currentTower.tag = "Tower";
+
+        if (!currencyManager.SpendCurrency(towerCost))
         {
-            Debug.Log("Raycast didn't hit anything.");
+            Debug.Log("Not enough currency!");
+            return;
         }
+
+        TowerBehaviour towerBehaviour = currentTower.GetComponent<TowerBehaviour>();
+        if (towerBehaviour != null)
+        {
+            towerBehaviour.enabled = true;
+        }
+
+        currentTower = null;
+        isPlacingTower = false;
     }
 }
