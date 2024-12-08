@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,7 @@ public class TowerSelector : MonoBehaviour
     public GameObject TowerMenu;
     public Button upgradeButton;
     public Button sellButton;
+    public TextMeshProUGUI upgradeLevelText;
 
     private int upgradeCount = 0;
     private int[] upgradeCosts = { 2, 3, 5 };
@@ -28,6 +30,7 @@ public class TowerSelector : MonoBehaviour
             TowerMenu = UIManager.instance.towerMenu;
             upgradeButton = UIManager.instance.upgradeButton;
             sellButton = UIManager.instance.sellButton;
+            upgradeLevelText = UIManager.instance.upgradeLevelText;
 
             upgradeButton.onClick.AddListener(UpgradeTower);
             sellButton.onClick.AddListener(SellTower);
@@ -64,6 +67,7 @@ public class TowerSelector : MonoBehaviour
             sellButton.onClick.RemoveAllListeners();
             sellButton.onClick.AddListener(SellTower);
         }
+        UpdateUpgradeText();
     }
 
     private void DeselectTower()
@@ -129,12 +133,31 @@ public class TowerSelector : MonoBehaviour
 
         //UpdateRangeIndicator();
         upgradeCount++;
+        UpdateUpgradeText();
     }
 
     private void SellTower()
     {
         currencyManager.AddCurrency(1);
+        if (selectedTower == this)
+        {
+            HideTowerMenu();
+            selectedTower = null; 
+        }
         Destroy(gameObject);
+    }
+    private void UpdateUpgradeText()
+    {
+        if (upgradeLevelText == null) return;
+
+        if (upgradeCount >= 3)
+        {
+            upgradeLevelText.text = "[MAX]";
+        }
+        else
+        {
+            upgradeLevelText.text = $"[{upgradeCount}]";
+        }
     }
 
     /*private void UpdateRangeIndicator()

@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,6 +7,7 @@ public class UIManager : MonoBehaviour
     public GameObject towerMenu;
     public Button upgradeButton;
     public Button sellButton;
+    public TextMeshProUGUI upgradeLevelText;
 
     // Singleton instance
     public static UIManager instance;
