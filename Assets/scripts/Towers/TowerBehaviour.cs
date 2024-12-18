@@ -28,32 +28,53 @@ public class TowerBehaviour : MonoBehaviour
 
     // update enemy focus for the tower
     void UpdateEnemy()
-    {   
-        // add and store all enemies with enemy tag in range and remove them once they leave the range
+    {
+        // Get all active enemies within range
         List<GameObject> allEnemies = new List<GameObject>(GameObject.FindGameObjectsWithTag(enemyTag));
-        allEnemies.RemoveAll(enemy => Vector3.Distance(transform.position, enemy.transform.position) > range); // Remove enemies out of range
+        allEnemies.RemoveAll(enemy =>
+            !enemy.activeInHierarchy ||
+            Vector3.Distance(transform.position, enemy.transform.position) > range); // Remove enemies out of range
 
-        //change the target enemy for the tower
         if (allEnemies.Count > 0)
         {
-            GameObject nearestEnemy = allEnemies.Aggregate((closest, next) =>
-                Vector3.Distance(transform.position, next.transform.position) <
-                Vector3.Distance(transform.position, closest.transform.position) ? next : closest);
+            // Find the first enemy based on their positionIndex and proximity to the next waypoint
+            GameObject firstEnemy = allEnemies.Aggregate((first, next) =>
+            {
+                EnemyMovement firstEnemyMovement = first.GetComponent<EnemyMovement>();
+                EnemyMovement nextEnemyMovement = next.GetComponent<EnemyMovement>();
 
-            enemies = nearestEnemy.transform;
-            // Check if a new enemy has entered range
+                if (firstEnemyMovement == null || nextEnemyMovement == null)
+                    return first; // Fallback if components are missing
+
+                // Compare by positionIndex; if equal, target the closest to their next waypoint
+                if (firstEnemyMovement.positionIndex != nextEnemyMovement.positionIndex)
+                {
+                    return firstEnemyMovement.positionIndex > nextEnemyMovement.positionIndex ? first : next;
+                }
+
+                // If positionIndex is the same, choose based on distance to the current target waypoint
+                float firstDistance = Vector3.Distance(first.transform.position, firstEnemyMovement.target.position);
+                float nextDistance = Vector3.Distance(next.transform.position, nextEnemyMovement.target.position);
+
+                return firstDistance < nextDistance ? first : next;
+            });
+
+            enemies = firstEnemy.transform;
+
+            // Check if a new enemy has been targeted
             if (enemies != lastEnemyInRange)
             {
-                Debug.Log("ENEMY IN RANGE");
+                Debug.Log("FIRST ENEMY TARGETED");
                 lastEnemyInRange = enemies; // Update the last detected enemy
             }
         }
         else
         {
+            // No enemies in range
             enemies = null;
+            lastEnemyInRange = null; // Reset last enemy
         }
     }
-
     // Update is called once per frame
     void Update()
     {
