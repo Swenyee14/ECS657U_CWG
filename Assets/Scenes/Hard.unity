@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028292, g: 0.22571306, b: 0.30692118, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -590,6 +590,7 @@ MonoBehaviour:
   timeBetweenSpawns: 1
   enemiesPerWave: 5
   totalWaves: 15
+  initialWaveCountDown: 0
   waveUINum: {fileID: 163396273}
 --- !u!114 &221876717
 MonoBehaviour:
@@ -1518,7 +1519,7 @@ Transform:
   m_GameObject: {fileID: 606605565}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.14, y: 3.2, z: 4.59}
+  m_LocalPosition: {x: -12.14, y: 3.2, z: 4.489}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1871,6 +1872,7 @@ MonoBehaviour:
   EnemyPrefab: {fileID: 1226690264224792447, guid: 4300b81132e0ea74fa2ef8c7d307a717, type: 3}
   EnemyPrefabFast: {fileID: 6280072749139300711, guid: 69c9b39bf9e98d5409ee34a58e8029d6, type: 3}
   EnemyPrefabTank: {fileID: 1725116296274709920, guid: 8223f5d66c7a4a64d94739cf59c17f0f, type: 3}
+  position: {fileID: 606605565}
 --- !u!4 &736281260
 Transform:
   m_ObjectHideFlags: 0

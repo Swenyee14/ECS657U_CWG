@@ -12,10 +12,12 @@ public class WaveSpawner : MonoBehaviour
     public float timeBetweenSpawns = 1f;     // 3-second delay between each enemy spawn
     public int enemiesPerWave = 5;           // 5 enemies per wave
     public int totalWaves = 15;               // Total number of waves
+    public float initialWaveCountDown;
 
     /// <summary>
     /// These numbers above will eventually be changed into global variables that have numbers linked thoughout the gamemaster :D
     /// </summary>
+
 
     private float waveCountDown = 2f;
     private float spawnCountDown;
@@ -45,66 +47,72 @@ public class WaveSpawner : MonoBehaviour
             return;
         }
 
-        if (waveCountDown <= 0)
+        if (initialWaveCountDown <= 0)
         {
-
-            //game should end at 15 waves
-            if (waveNumber <= 15)
+            if (waveCountDown <= 0)
             {
-                // Spawn enemies with a delay within a single wave
-                if (enemiesSpawnedInWave < enemiesPerWave)
+
+                //game should end at 15 waves
+                if (waveNumber <= 15)
                 {
-                    if (spawnCountDown <= 0f)
+                    // Spawn enemies with a delay within a single wave
+                    if (enemiesSpawnedInWave < enemiesPerWave)
                     {
-                        enemySpawner.SpawnEnemies();
-                        enemiesSpawnedInWave++;
-                        spawnCountDown = timeBetweenSpawns;
-
-                        //fast enemies spawn starting wave 4
-                        if (waveNumber >= 3)
+                        if (spawnCountDown <= 0f)
                         {
-                            if (FastenemiesSpawnedInWave <= enemiesPerWave)
+                            enemySpawner.SpawnEnemies();
+                            enemiesSpawnedInWave++;
+                            spawnCountDown = timeBetweenSpawns;
+
+                            //fast enemies spawn starting wave 4
+                            if (waveNumber >= 3)
                             {
-                                enemySpawner.SpawnEnemiesFast();
-                                FastenemiesSpawnedInWave = FastenemiesSpawnedInWave + 5;
+                                if (FastenemiesSpawnedInWave <= enemiesPerWave)
+                                {
+                                    enemySpawner.SpawnEnemiesFast();
+                                    FastenemiesSpawnedInWave = FastenemiesSpawnedInWave + 5;
+                                }
+
                             }
 
-                        }
-
-                        //tank enemies spawn starting wave 8
-                        if (waveNumber >= 7)
-                        {
-                            if (TankenemiesSpawnedInWave <= enemiesPerWave)
+                            //tank enemies spawn starting wave 8
+                            if (waveNumber >= 7)
                             {
-                                enemySpawner.SpawnEnemiesTank();
-                                TankenemiesSpawnedInWave = TankenemiesSpawnedInWave + 5;
+                                if (TankenemiesSpawnedInWave <= enemiesPerWave)
+                                {
+                                    enemySpawner.SpawnEnemiesTank();
+                                    TankenemiesSpawnedInWave = TankenemiesSpawnedInWave + 5;
+                                }
+
                             }
 
+
                         }
-
-
+                        spawnCountDown -= Time.deltaTime;
                     }
-                    spawnCountDown -= Time.deltaTime;
+                    else
+                    {
+                        // Reset for the next wave
+                        waveNumber++;
+                        enemiesSpawnedInWave = 0;
+                        FastenemiesSpawnedInWave = 0;
+                        TankenemiesSpawnedInWave = 0;
+                        waveCountDown = timeBetweenWaves;
+                        enemiesPerWave = enemiesPerWave + 5;
+                    }
+                    waveUINum.text = Mathf.Floor(waveNumber).ToString(); //AV style 
                 }
-                else
-                {
-                    // Reset for the next wave
-                    waveNumber++;
-                    enemiesSpawnedInWave = 0;
-                    FastenemiesSpawnedInWave = 0;
-                    TankenemiesSpawnedInWave = 0;
-                    waveCountDown = timeBetweenWaves;
-                    enemiesPerWave = enemiesPerWave + 5;
-                }
-                waveUINum.text = Mathf.Floor(waveNumber).ToString(); //AV style 
+
             }
-            
+            else
+            {
+                waveCountDown -= Time.deltaTime;
+            }
         }
         else
         {
-            waveCountDown -= Time.deltaTime;
+            initialWaveCountDown -= Time.deltaTime;
         }
-
    
     }
 }

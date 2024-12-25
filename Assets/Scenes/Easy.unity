@@ -486,6 +486,7 @@ MonoBehaviour:
   EnemyPrefab: {fileID: 1226690264224792447, guid: 4300b81132e0ea74fa2ef8c7d307a717, type: 3}
   EnemyPrefabFast: {fileID: 6280072749139300711, guid: 69c9b39bf9e98d5409ee34a58e8029d6, type: 3}
   EnemyPrefabTank: {fileID: 1725116296274709920, guid: 8223f5d66c7a4a64d94739cf59c17f0f, type: 3}
+  position: {fileID: 1373128405}
 --- !u!4 &217600226
 Transform:
   m_ObjectHideFlags: 0
@@ -2870,6 +2871,7 @@ MonoBehaviour:
   timeBetweenSpawns: 1
   enemiesPerWave: 5
   totalWaves: 15
+  initialWaveCountDown: 0
   waveUINum: {fileID: 103354851}
 --- !u!114 &1803163891
 MonoBehaviour:

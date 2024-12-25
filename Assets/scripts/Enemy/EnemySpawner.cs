@@ -7,24 +7,25 @@ public class EnemySpawner : MonoBehaviour
     public GameObject EnemyPrefab;
     public GameObject EnemyPrefabFast;
     public GameObject EnemyPrefabTank;
+    public GameObject position;
 
 
     //spawn normal enemies
     public void SpawnEnemies()
     { 
-        Instantiate(EnemyPrefab, new Vector3(-9.7f, 0.46f, 7.991f), Quaternion.identity);
+        Instantiate(EnemyPrefab, position.transform.position, Quaternion.identity);
     }
 
     //spawn fast enemies
     public void SpawnEnemiesFast()
     {
-        Instantiate(EnemyPrefabFast, new Vector3(-9.7f, 0.46f, 7.991f), Quaternion.identity);
+        Instantiate(EnemyPrefabFast, position.transform.position, Quaternion.identity);
     }
 
     //spawn tank enemies
     public void SpawnEnemiesTank()
     {
-        Instantiate(EnemyPrefabTank, new Vector3(-9.7f, 0.46f, 7.991f), Quaternion.identity);
+        Instantiate(EnemyPrefabTank, position.transform.position, Quaternion.identity);
     }
 }
  
