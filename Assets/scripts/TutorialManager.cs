@@ -7,7 +7,6 @@ public class TutorialManager : MonoBehaviour
 {
     public float countdownTime = 30f;
     private float timer;
-    public int tutorialStep = 0;
 
     [SerializeField] GameObject background;
     [SerializeField] GameObject cameraControls;
@@ -28,6 +27,7 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(5f);
         DeactivateBackground();
         Time.timeScale = 1f;
+        conditions.SetActive(false);
     }
 
     IEnumerator CountdownCoroutine()
@@ -126,6 +126,5 @@ public class TutorialManager : MonoBehaviour
         conditions.SetActive(true);
         Time.timeScale = 0f;
         StartCoroutine(WaitForTime());
-        conditions.SetActive(false);
     }
 }
