@@ -48,6 +48,7 @@ public class WaveSpawner : MonoBehaviour
         if (waveCountDown <= 0)
         {
 
+            //game should end at 15 waves
             if (waveNumber <= 15)
             {
                 // Spawn enemies with a delay within a single wave
@@ -59,7 +60,8 @@ public class WaveSpawner : MonoBehaviour
                         enemiesSpawnedInWave++;
                         spawnCountDown = timeBetweenSpawns;
 
-                        if (waveNumber >= 3)//change num to 3
+                        //fast enemies spawn starting wave 4
+                        if (waveNumber >= 3)
                         {
                             if (FastenemiesSpawnedInWave <= enemiesPerWave)
                             {
@@ -69,6 +71,7 @@ public class WaveSpawner : MonoBehaviour
 
                         }
 
+                        //tank enemies spawn starting wave 8
                         if (waveNumber >= 7)
                         {
                             if (TankenemiesSpawnedInWave <= enemiesPerWave)
@@ -102,6 +105,6 @@ public class WaveSpawner : MonoBehaviour
             waveCountDown -= Time.deltaTime;
         }
 
-        //waveUINum.text = Mathf.Floor(waveNumber).ToString();
+   
     }
 }
