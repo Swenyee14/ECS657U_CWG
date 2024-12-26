@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bf28ea158b8b6eb4da006a2df0a01d2e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 35944
+  packageName: Free Fancy Tower
+  packageVersion: First release
+  assetPath: Assets/Tazo_3D/Environment/fancy_tower/Materials/fancy_tower_color.mat
+  uploadId: 61801

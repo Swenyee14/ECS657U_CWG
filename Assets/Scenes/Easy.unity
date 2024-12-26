@@ -2698,9 +2698,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 088ec0c125cad6447879386090e5947a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  addTowerButton: {fileID: 387792662}
+  addTowerButton1: {fileID: 387792662}
+  addTowerButton2: {fileID: 6794236369778081314}
+  addTowerButton3: {fileID: 6794236369778081313}
   cancelPlacementButton: {fileID: 1996846934}
-  towerPrefab: {fileID: 8218423688579237297, guid: 451bfcb251210264cb12039ab2c6d158, type: 3}
+  towerPrefabs:
+  - {fileID: 8218423688579237297, guid: 451bfcb251210264cb12039ab2c6d158, type: 3}
+  - {fileID: 8218423688579237297, guid: 6e62c4c29c9de684bb9cb500b896aa4c, type: 3}
+  - {fileID: 8218423688579237297, guid: 23e90885748ccf7489e6f7540cf9f80c, type: 3}
 --- !u!4 &1629642430
 Transform:
   m_ObjectHideFlags: 0
@@ -3723,6 +3728,28 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1015304010839215045, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
   m_PrefabInstance: {fileID: 6794236369778081311}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6794236369778081313 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2531444787171268869, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+  m_PrefabInstance: {fileID: 6794236369778081311}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6794236369778081314 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5727448526999323988, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+  m_PrefabInstance: {fileID: 6794236369778081311}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
