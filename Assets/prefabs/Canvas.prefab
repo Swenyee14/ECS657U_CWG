@@ -33,12 +33,14 @@ RectTransform:
   m_Children:
   - {fileID: 4522608286643942421}
   - {fileID: 5563703154474889709}
+  - {fileID: 6883614033628592530}
   - {fileID: 836758478970466936}
   - {fileID: 3198329340280896334}
   - {fileID: 3100921965819128506}
   - {fileID: 7867533527500167237}
   - {fileID: 7416251527510621930}
   - {fileID: 1566957852083810508}
+  - {fileID: 6871454054561895532}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1919,7 +1921,7 @@ GameObject:
   - component: {fileID: 6581314499762141267}
   - component: {fileID: 7860123985850921891}
   - component: {fileID: 2647087110192186071}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2425,7 +2427,7 @@ GameObject:
   - component: {fileID: 8594849175952936015}
   - component: {fileID: 3548043858637598160}
   - component: {fileID: 2224759985905500491}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: AddTowerButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2612,6 +2614,58 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &3911784971882719402
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6883614033628592530}
+  - component: {fileID: 6988035621102111570}
+  m_Layer: 0
+  m_Name: CharacterSelectionManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6883614033628592530
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3911784971882719402}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -520, y: -347.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1015304010839215045}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6988035621102111570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3911784971882719402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 088ec0c125cad6447879386090e5947a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  addTowerButton1: {fileID: 2224759985905500491}
+  addTowerButton2: {fileID: 5727448526999323988}
+  addTowerButton3: {fileID: 2531444787171268869}
+  cancelPlacementButton: {fileID: 8230508297961087989}
+  towerPrefabs:
+  - {fileID: 8218423688579237297, guid: 451bfcb251210264cb12039ab2c6d158, type: 3}
+  - {fileID: 8218423688579237297, guid: 6e62c4c29c9de684bb9cb500b896aa4c, type: 3}
+  - {fileID: 8218423688579237297, guid: 23e90885748ccf7489e6f7540cf9f80c, type: 3}
 --- !u!1 &3984350443567884935
 GameObject:
   m_ObjectHideFlags: 0
@@ -2623,7 +2677,7 @@ GameObject:
   - component: {fileID: 5563703154474889709}
   - component: {fileID: 7140692526021772402}
   - component: {fileID: 823655621836194741}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4124,7 +4178,7 @@ GameObject:
   - component: {fileID: 6804545834671368378}
   - component: {fileID: 2758925291214577485}
   - component: {fileID: 8230508297961087989}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: CancelPlacementButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4369,6 +4423,54 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &7703051388682487627
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6871454054561895532}
+  - component: {fileID: 274304297168657635}
+  m_Layer: 0
+  m_Name: TowerMenuManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6871454054561895532
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7703051388682487627}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -55.465576, y: 88.241455, z: 87.4707}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1015304010839215045}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &274304297168657635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7703051388682487627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87af2358cb0dcc14a845966066ccf913, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerMenu: {fileID: 4951198138880827443}
+  upgradeButton: {fileID: 8732300416159840929}
+  sellButton: {fileID: 3918776060239750100}
+  upgradeLevelText: {fileID: 4311937745216377970}
 --- !u!1 &7860811502291508862
 GameObject:
   m_ObjectHideFlags: 0
@@ -4643,9 +4745,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4522608286643942421}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -144, y: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -256, y: -25}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1794202377446787256
@@ -5290,7 +5392,7 @@ GameObject:
   - component: {fileID: 7277348547788029203}
   - component: {fileID: 7040208312312682795}
   - component: {fileID: 5071571155061382754}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5446,9 +5548,9 @@ RectTransform:
   - {fileID: 5260307379575491049}
   m_Father: {fileID: 1015304010839215045}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 668, y: 223}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 30, y: -164}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4955156470160315897
@@ -5479,7 +5581,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
