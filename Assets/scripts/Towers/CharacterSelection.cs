@@ -5,10 +5,14 @@ using UnityEngine.InputSystem;
 
 public class CharacterSelectionManager : MonoBehaviour
 {
-    public Button addTowerButton;
+    public Button addTowerButton1;
+    public Button addTowerButton2;
+    public Button addTowerButton3;
     public Button cancelPlacementButton;
-    public GameObject towerPrefab;
 
+    public GameObject[] towerPrefabs; // Array to hold multiple tower prefabs
+
+    private GameObject selectedTowerPrefab; // Currently selected tower prefab
     private GameObject currentTower;
     private bool isPlacingTower = false;
     private bool cancelPressed = false;
@@ -28,10 +32,16 @@ public class CharacterSelectionManager : MonoBehaviour
     void Start()
     {
         currencyManager = GameObject.FindGameObjectWithTag("Master").GetComponent<CurrencyManager>();
-        addTowerButton.onClick.AddListener(StartTowerPlacement);
+
+        // Assign listeners for tower selection buttons
+        addTowerButton1.onClick.AddListener(() => SelectTower(0));
+        addTowerButton2.onClick.AddListener(() => SelectTower(1));
+        addTowerButton3.onClick.AddListener(() => SelectTower(2));
+
+        // Assign listener for cancel button
         cancelPlacementButton.onClick.AddListener(CancelTowerPlacement);
 
-        playerInputs.TowerPlacement.StartPlacement.performed += context => StartTowerPlacement();
+        // Map input actions
         playerInputs.TowerPlacement.CancelPlacement.performed += context => CancelTowerPlacement();
         playerInputs.TowerPlacement.PlaceTower.performed += context => PlaceTower();
     }
@@ -46,6 +56,19 @@ public class CharacterSelectionManager : MonoBehaviour
         playerInputs.Disable();
     }
 
+    private void SelectTower(int towerIndex)
+    {
+        if (towerIndex < 0 || towerIndex >= towerPrefabs.Length)
+        {
+            Debug.LogError("Invalid tower index selected.");
+            return;
+        }
+
+        selectedTowerPrefab = towerPrefabs[towerIndex];
+        StartTowerPlacement();
+        Debug.Log($"Tower {towerIndex + 1} selected: {selectedTowerPrefab.name}");
+    }
+
     private void StartTowerPlacement()
     {
         if (isPlacingTower)
@@ -54,21 +77,24 @@ public class CharacterSelectionManager : MonoBehaviour
             return;
         }
 
+        if (selectedTowerPrefab == null)
+        {
+            Debug.LogError("No tower prefab selected!");
+            return;
+        }
+
         isPlacingTower = true;
 
-        if (currentTower == null)
+        currentTower = Instantiate(selectedTowerPrefab);
+        currentTower.transform.localScale = Vector3.one;
+
+        TowerBehaviour towerBehaviour = currentTower.GetComponent<TowerBehaviour>();
+        if (towerBehaviour != null)
         {
-            currentTower = Instantiate(towerPrefab);
-            currentTower.transform.localScale = Vector3.one;
-
-            TowerBehaviour towerBehaviour = currentTower.GetComponent<TowerBehaviour>();
-            if (towerBehaviour != null)
-            {
-                towerBehaviour.enabled = false;
-            }
-
-            FollowMouse();
+            towerBehaviour.enabled = false;
         }
+
+        FollowMouse();
     }
 
     private void CancelTowerPlacement()
