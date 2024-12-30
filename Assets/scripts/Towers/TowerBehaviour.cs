@@ -12,6 +12,7 @@ public class TowerBehaviour : MonoBehaviour
     public float attackSpeed = 1f;
     public float reloadSpeed = 0f;
     public float range = 3.5f;
+    public AudioClip TowerShot;
 
     [Header("Unity fields")]
     public string enemyTag = "Enemies";
@@ -19,11 +20,13 @@ public class TowerBehaviour : MonoBehaviour
 
     public GameObject AttackPreFab;
     public Transform attackPoint;
+    AudioManager audioManager;
 
     // Start is called before the first frame update
     void Start()
     {
         InvokeRepeating("UpdateEnemy", 0f, 1f); // repeat the update enemy function
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
     // update enemy focus for the tower
@@ -77,6 +80,7 @@ public class TowerBehaviour : MonoBehaviour
 
         if (attack != null)
             attack.Travel(enemies);
+            audioManager.PlaySFX(TowerShot);
     }
 
     // To visualise the range in testing

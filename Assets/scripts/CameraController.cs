@@ -8,8 +8,8 @@ public class CameraController : MonoBehaviour
 {
     PlayerInput playerInput;
     InputAction moveAction;
-    [SerializeField] float speed = 10f;
-    [SerializeField] float rotationSpeed = 100f;
+    [SerializeField] float speed;
+    [SerializeField] float rotationSpeed;
 
     private Vector3 currentRotation;
     private float vertical = 0f;
@@ -20,6 +20,9 @@ public class CameraController : MonoBehaviour
 
         // Find the "movement" action
         moveAction = playerInput.actions["movement"];
+
+        speed = PlayerPrefs.GetInt("speed", 10);
+        rotationSpeed = PlayerPrefs.GetInt("sensitivity", 100);
     }
 
     private void Update()
@@ -31,6 +34,8 @@ public class CameraController : MonoBehaviour
         {
             RotateCamera();
         }
+        speed = PlayerPrefs.GetInt("speed");
+        rotationSpeed = PlayerPrefs.GetInt("sensitivity");
     }
 
     // Method to move the camera/player

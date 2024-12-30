@@ -630,6 +630,7 @@ MonoBehaviour:
   attackSpeed: 1
   reloadSpeed: 0
   range: 3.5
+  TowerShot: {fileID: 8300000, guid: 5e1a9f876d3dafd47bc6b3dde25135fa, type: 3}
   enemyTag: Enemies
   AttackPreFab: {fileID: 5687210431401259412, guid: 90c456858c5ea414bb76dcae8442880c, type: 3}
   attackPoint: {fileID: 6352938486944635626}

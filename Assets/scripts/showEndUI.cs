@@ -9,7 +9,12 @@ public class showEndUI : MonoBehaviour
     private int counter = 20;
 
     public GameObject gameObjectUI;
+    AudioManager audioManager;
 
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
     public void NeededMethod() //sets inactive object to become active
     {
 
@@ -21,9 +26,10 @@ public class showEndUI : MonoBehaviour
         else
         {
             counter--;
+            //audioManager.PlaySFX(audioManager.<YOUR SOUND>);
         }
 
-        Debug.Log("This is how many lives you have" + counter);
+        Debug.Log("This is how many lives you have " + counter);
         
     }
 }
