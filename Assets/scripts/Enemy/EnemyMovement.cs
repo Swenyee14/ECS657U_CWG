@@ -7,9 +7,11 @@ public class EnemyMovement : MonoBehaviour
     public float health = 5f;
     public float maxhealth = 5f;
     public float speed = 6f;
+    public float rotationSpeed = 5f;
     public Transform target;
     public int positionIndex = 0;
     showEndUI UIScript;
+    
 
     [SerializeField] HealthBar healthBar;
 
@@ -27,6 +29,7 @@ public class EnemyMovement : MonoBehaviour
         // travel in the direction of the waypoints
         Vector3 dir = target.position - transform.position;
         transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
+        Rotate();
 
         // get the next positions location once an enemy is close to the current one
         if (Vector3.Distance(transform.position, target.position) <= 0.1f)
@@ -48,5 +51,12 @@ public class EnemyMovement : MonoBehaviour
         // get next position
         positionIndex++;
         target = Positions.positions[positionIndex];
+    }
+
+    private void Rotate()
+    {
+        Vector3 dir = target.position - transform.position;
+        Quaternion rotation = Quaternion.LookRotation(dir);
+        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, rotationSpeed);
     }
 }
