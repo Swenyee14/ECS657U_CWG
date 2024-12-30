@@ -1740,7 +1740,7 @@ AudioSource:
   m_GameObject: {fileID: 1233437871}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 37f8f1e21913fa24d9a4949c8b1f713e, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.1
@@ -2902,14 +2902,74 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1467097102401322235, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1467097102401322235, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1467097102401322235, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2386491007646192584, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 705507996}
+    - target: {fileID: 3295732695696961046, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3295732695696961046, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3295732695696961046, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000553470344149415, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000553470344149415, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749181732555254525, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749181732555254525, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7212713422433840982, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 705507996}
+    - target: {fileID: 7706393208402930680, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7706393208402930680, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016674378157096921, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016674378157096921, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016674378157096921, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
