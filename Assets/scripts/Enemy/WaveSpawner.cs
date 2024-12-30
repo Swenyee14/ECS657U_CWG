@@ -27,6 +27,7 @@ public class WaveSpawner : MonoBehaviour
     private int TankenemiesSpawnedInWave = 0;
 
     public TextMeshProUGUI waveUINum;
+    AudioManager audioManager;
 
     [System.Obsolete]
     void Start() //method needed to use EnemySpawner.cs code
@@ -36,6 +37,7 @@ public class WaveSpawner : MonoBehaviour
             enemySpawner = FindObjectOfType<EnemySpawner>();
         }
         spawnCountDown = timeBetweenSpawns;
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
     void Update()
@@ -99,6 +101,7 @@ public class WaveSpawner : MonoBehaviour
                         TankenemiesSpawnedInWave = 0;
                         waveCountDown = timeBetweenWaves;
                         enemiesPerWave = enemiesPerWave + 5;
+                        audioManager.PlaySFX(audioManager.waveCompleteSound);
                     }
                     waveUINum.text = Mathf.Floor(waveNumber).ToString(); //AV style 
                 }

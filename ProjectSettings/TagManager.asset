@@ -11,6 +11,7 @@ TagManager:
   - Map
   - ShowEndUI
   - Master
+  - Audio
   layers:
   - Default
   - TransparentFX
