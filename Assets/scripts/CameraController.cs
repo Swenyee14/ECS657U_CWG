@@ -8,8 +8,8 @@ public class CameraController : MonoBehaviour
 {
     PlayerInput playerInput;
     InputAction moveAction;
-    [SerializeField] float speed;
-    [SerializeField] float rotationSpeed;
+    [SerializeField] float speed = 10;
+    [SerializeField] float rotationSpeed = 100;
 
     private Vector3 currentRotation;
     private float vertical = 0f;
@@ -21,8 +21,8 @@ public class CameraController : MonoBehaviour
         // Find the "movement" action
         moveAction = playerInput.actions["movement"];
 
-        speed = PlayerPrefs.GetInt("speed", 10);
-        rotationSpeed = PlayerPrefs.GetInt("sensitivity", 100);
+        speed = PlayerPrefs.GetInt("speed");
+        rotationSpeed = PlayerPrefs.GetInt("sensitivity");
     }
 
     private void Update()
