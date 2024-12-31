@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 5006654820161607329}
   - component: {fileID: 3169924248637623943}
   m_Layer: 0
-  m_Name: Enterance
+  m_Name: Entrance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -191,7 +191,7 @@ Transform:
   m_GameObject: {fileID: 3440477395767762851}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -632,7 +632,7 @@ MonoBehaviour:
   range: 3.5
   TowerShot: {fileID: 8300000, guid: b1b9c1f0ea1fcae439ed1a4d44ff05fd, type: 3}
   enemyTag: Enemies
-  AttackPreFab: {fileID: 5687210431401259412, guid: 90c456858c5ea414bb76dcae8442880c, type: 3}
+  AttackPreFab: {fileID: 1176027992388313477, guid: c5568b006fa78f4428412bae6db6259b, type: 3}
   attackPoint: {fileID: 6352938486944635626}
 --- !u!114 &2973033697170904146
 MonoBehaviour:
