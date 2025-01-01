@@ -16,7 +16,7 @@ public class CharacterSelectionManager : MonoBehaviour
     private GameObject currentTower;
     private bool isPlacingTower = false;
     private bool cancelPressed = false;
-    private int towerCost = 1;
+    private int[] towerCosts = { 1, 3, 6 };
     private CurrencyManager currencyManager;
 
     private PlayerInputs playerInputs;
@@ -221,9 +221,18 @@ public class CharacterSelectionManager : MonoBehaviour
         Debug.Log($"Tower placed at: {finalPosition}");
         currentTower.tag = "Tower";
 
+        int towerIndex = System.Array.IndexOf(towerPrefabs, selectedTowerPrefab);
+        if (towerIndex < 0 || towerIndex >= towerCosts.Length)
+        {
+            Debug.LogError("Invalid tower index for cost deduction.");
+            return;
+        }
+
+        int towerCost = towerCosts[towerIndex];
+
         if (!currencyManager.SpendCurrency(towerCost))
         {
-            Debug.Log("Not enough currency!");
+            Debug.Log($"Not enough currency! This tower costs {towerCost} currency");
             return;
         }
 
@@ -233,7 +242,6 @@ public class CharacterSelectionManager : MonoBehaviour
             towerBehaviour.enabled = true;
         }
 
-        int towerIndex = System.Array.IndexOf(towerPrefabs, selectedTowerPrefab);
         if (towerIndex >= 0)
         {
             towerPlacementCounts[towerIndex]++;
