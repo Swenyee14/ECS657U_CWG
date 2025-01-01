@@ -31,45 +31,66 @@ public class TowerBehaviour : MonoBehaviour
 
     // update enemy focus for the tower
     void UpdateEnemy()
-    {   
-        // add and store all enemies with enemy tag in range and remove them once they leave the range
+    {
+        // Gather all enemies in range
         List<GameObject> allEnemies = new List<GameObject>(GameObject.FindGameObjectsWithTag(enemyTag));
-        allEnemies.RemoveAll(enemy => Vector3.Distance(transform.position, enemy.transform.position) > range); // Remove enemies out of range
+        allEnemies.RemoveAll(enemy => Vector3.Distance(transform.position, enemy.transform.position) > range);
 
-        //change the target enemy for the tower
-        if (allEnemies.Count > 0)
-        {
-            GameObject nearestEnemy = allEnemies.Aggregate((closest, next) =>
-                Vector3.Distance(transform.position, next.transform.position) <
-                Vector3.Distance(transform.position, closest.transform.position) ? next : closest);
-
-            enemies = nearestEnemy.transform;
-            // Check if a new enemy has entered range
-            if (enemies != lastEnemyInRange)
-            {
-                Debug.Log("ENEMY IN RANGE");
-                lastEnemyInRange = enemies; // Update the last detected enemy
-            }
-        }
-        else
+        // If there are no enemies in range, clear the target and return
+        if (allEnemies.Count == 0)
         {
             enemies = null;
+            return;
+        }
+
+        // Find the enemy closest to the end of the path
+        GameObject firstEnemy = allEnemies.Aggregate((first, next) =>
+        {
+            EnemyMovement firstMovement = first.GetComponent<EnemyMovement>();
+            EnemyMovement nextMovement = next.GetComponent<EnemyMovement>();
+
+            if (firstMovement == null || nextMovement == null)
+                return first;
+
+            // Prioritize enemies with higher positionIndex; if equal, use distance to the target
+            if (firstMovement.positionIndex != nextMovement.positionIndex)
+                return firstMovement.positionIndex > nextMovement.positionIndex ? first : next;
+
+            float firstDistance = Vector3.Distance(first.transform.position, firstMovement.target.position);
+            float nextDistance = Vector3.Distance(next.transform.position, nextMovement.target.position);
+            return firstDistance < nextDistance ? first : next;
+        });
+
+        // Set the target to the first enemy
+        enemies = firstEnemy.transform;
+
+        // Check if a new enemy has entered range
+        if (enemies != lastEnemyInRange)
+        {
+            Debug.Log("ENEMY IN RANGE");
+            lastEnemyInRange = enemies; // Update the last detected enemy
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (enemies == null)
-            return;
+        // Reduce reload timer
+        reloadSpeed -= Time.deltaTime;
 
-        // shoot in intervals
+        // If the reload timer is complete, attempt to shoot
         if (reloadSpeed <= 0f)
         {
-            Shoot();
-            reloadSpeed = 1f / attackSpeed;
+            reloadSpeed = 1f / attackSpeed; // Reset reload timer
+
+            if (enemies != null) // Check if an enemy is in range
+            {
+                Shoot(); // Shoot at the current target
+            }
         }
-        reloadSpeed = reloadSpeed - Time.deltaTime;
+
+        // Continuously update enemy target
+        UpdateEnemy();
     }
 
     // instantiate the attack prefab and call Travel method on the attack
