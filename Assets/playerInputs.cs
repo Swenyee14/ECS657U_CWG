@@ -165,7 +165,18 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""b19cdc51-52b4-4012-9de1-b597b8515c08"",
                     ""path"": ""<Keyboard>/#(C)"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CancelPlacement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""47d6e586-d32d-4a4a-9d04-6338849a26ad"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""CancelPlacement"",
@@ -184,6 +195,74 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""TowerSelection"",
+            ""id"": ""247614b0-e918-4fbd-bb5a-0b68b48bbcf7"",
+            ""actions"": [
+                {
+                    ""name"": ""SelectTower1"",
+                    ""type"": ""Button"",
+                    ""id"": ""bca5ff68-2b58-4914-8f29-c20929386a3f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectTower2"",
+                    ""type"": ""Button"",
+                    ""id"": ""8643e968-87f8-4240-b352-3334b84fbd17"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectTower3"",
+                    ""type"": ""Button"",
+                    ""id"": ""e9a968f5-6ff3-40a7-b405-bdee9475be3a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""60796e64-c22e-4f41-a52f-70063f0ae8e8"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectTower1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b7358045-8672-4228-8757-e35101803d07"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectTower2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""61abc1d4-54a9-4ed6-9b0b-12e5b0579395"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectTower3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -196,6 +275,11 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_TowerPlacement_StartPlacement = m_TowerPlacement.FindAction("StartPlacement", throwIfNotFound: true);
         m_TowerPlacement_CancelPlacement = m_TowerPlacement.FindAction("CancelPlacement", throwIfNotFound: true);
         m_TowerPlacement_PlaceTower = m_TowerPlacement.FindAction("PlaceTower", throwIfNotFound: true);
+        // TowerSelection
+        m_TowerSelection = asset.FindActionMap("TowerSelection", throwIfNotFound: true);
+        m_TowerSelection_SelectTower1 = m_TowerSelection.FindAction("SelectTower1", throwIfNotFound: true);
+        m_TowerSelection_SelectTower2 = m_TowerSelection.FindAction("SelectTower2", throwIfNotFound: true);
+        m_TowerSelection_SelectTower3 = m_TowerSelection.FindAction("SelectTower3", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -361,6 +445,68 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         }
     }
     public TowerPlacementActions @TowerPlacement => new TowerPlacementActions(this);
+
+    // TowerSelection
+    private readonly InputActionMap m_TowerSelection;
+    private List<ITowerSelectionActions> m_TowerSelectionActionsCallbackInterfaces = new List<ITowerSelectionActions>();
+    private readonly InputAction m_TowerSelection_SelectTower1;
+    private readonly InputAction m_TowerSelection_SelectTower2;
+    private readonly InputAction m_TowerSelection_SelectTower3;
+    public struct TowerSelectionActions
+    {
+        private @PlayerInputs m_Wrapper;
+        public TowerSelectionActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @SelectTower1 => m_Wrapper.m_TowerSelection_SelectTower1;
+        public InputAction @SelectTower2 => m_Wrapper.m_TowerSelection_SelectTower2;
+        public InputAction @SelectTower3 => m_Wrapper.m_TowerSelection_SelectTower3;
+        public InputActionMap Get() { return m_Wrapper.m_TowerSelection; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(TowerSelectionActions set) { return set.Get(); }
+        public void AddCallbacks(ITowerSelectionActions instance)
+        {
+            if (instance == null || m_Wrapper.m_TowerSelectionActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_TowerSelectionActionsCallbackInterfaces.Add(instance);
+            @SelectTower1.started += instance.OnSelectTower1;
+            @SelectTower1.performed += instance.OnSelectTower1;
+            @SelectTower1.canceled += instance.OnSelectTower1;
+            @SelectTower2.started += instance.OnSelectTower2;
+            @SelectTower2.performed += instance.OnSelectTower2;
+            @SelectTower2.canceled += instance.OnSelectTower2;
+            @SelectTower3.started += instance.OnSelectTower3;
+            @SelectTower3.performed += instance.OnSelectTower3;
+            @SelectTower3.canceled += instance.OnSelectTower3;
+        }
+
+        private void UnregisterCallbacks(ITowerSelectionActions instance)
+        {
+            @SelectTower1.started -= instance.OnSelectTower1;
+            @SelectTower1.performed -= instance.OnSelectTower1;
+            @SelectTower1.canceled -= instance.OnSelectTower1;
+            @SelectTower2.started -= instance.OnSelectTower2;
+            @SelectTower2.performed -= instance.OnSelectTower2;
+            @SelectTower2.canceled -= instance.OnSelectTower2;
+            @SelectTower3.started -= instance.OnSelectTower3;
+            @SelectTower3.performed -= instance.OnSelectTower3;
+            @SelectTower3.canceled -= instance.OnSelectTower3;
+        }
+
+        public void RemoveCallbacks(ITowerSelectionActions instance)
+        {
+            if (m_Wrapper.m_TowerSelectionActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ITowerSelectionActions instance)
+        {
+            foreach (var item in m_Wrapper.m_TowerSelectionActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_TowerSelectionActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public TowerSelectionActions @TowerSelection => new TowerSelectionActions(this);
     public interface IPlayerMovementActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -370,5 +516,11 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         void OnStartPlacement(InputAction.CallbackContext context);
         void OnCancelPlacement(InputAction.CallbackContext context);
         void OnPlaceTower(InputAction.CallbackContext context);
+    }
+    public interface ITowerSelectionActions
+    {
+        void OnSelectTower1(InputAction.CallbackContext context);
+        void OnSelectTower2(InputAction.CallbackContext context);
+        void OnSelectTower3(InputAction.CallbackContext context);
     }
 }

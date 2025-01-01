@@ -27,6 +27,12 @@ public class CharacterSelectionManager : MonoBehaviour
     private void Awake()
     {
         playerInputs = new PlayerInputs();
+        // Map keyboard shortcuts for selecting towers
+        playerInputs.TowerSelection.SelectTower1.performed += context => SelectTower(0);
+        playerInputs.TowerSelection.SelectTower2.performed += context => SelectTower(1);
+        playerInputs.TowerSelection.SelectTower3.performed += context => SelectTower(2);
+
+        playerInputs.TowerPlacement.CancelPlacement.performed += context => CancelTowerPlacement();
     }
 
     void Start()
@@ -62,6 +68,11 @@ public class CharacterSelectionManager : MonoBehaviour
         {
             Debug.LogError("Invalid tower index selected.");
             return;
+        }
+
+        if (isPlacingTower)
+        {
+            CancelTowerPlacement();
         }
 
         selectedTowerPrefab = towerPrefabs[towerIndex];
