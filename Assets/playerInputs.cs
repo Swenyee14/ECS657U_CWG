@@ -175,7 +175,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""47d6e586-d32d-4a4a-9d04-6338849a26ad"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""path"": ""<Mouse>/middleButton"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
