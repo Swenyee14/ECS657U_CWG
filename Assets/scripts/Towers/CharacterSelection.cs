@@ -23,6 +23,8 @@ public class CharacterSelectionManager : MonoBehaviour
 
     // Stores the calculated tower position
     private Vector3 towerPlacementPosition;
+    private int[] towerPlacementLimits = { 4, 2, 1 }; // Maximum placements for each tower
+    private int[] towerPlacementCounts;
 
     private void Awake()
     {
@@ -37,6 +39,7 @@ public class CharacterSelectionManager : MonoBehaviour
 
     void Start()
     {
+        towerPlacementCounts = new int[towerPlacementLimits.Length];
         currencyManager = GameObject.FindGameObjectWithTag("Master").GetComponent<CurrencyManager>();
 
         // Assign listeners for tower selection buttons
@@ -69,6 +72,13 @@ public class CharacterSelectionManager : MonoBehaviour
             Debug.LogError("Invalid tower index selected.");
             return;
         }
+
+        if (towerPlacementCounts[towerIndex] >= towerPlacementLimits[towerIndex])
+        {
+            Debug.Log($"Tower {towerIndex + 1} has reached its placement limit.");
+            return;
+        }
+
 
         if (isPlacingTower)
         {
@@ -221,6 +231,13 @@ public class CharacterSelectionManager : MonoBehaviour
         if (towerBehaviour != null)
         {
             towerBehaviour.enabled = true;
+        }
+
+        int towerIndex = System.Array.IndexOf(towerPrefabs, selectedTowerPrefab);
+        if (towerIndex >= 0)
+        {
+            towerPlacementCounts[towerIndex]++;
+            Debug.Log($"Tower {towerIndex + 1} placed. Total placed: {towerPlacementCounts[towerIndex]}");
         }
 
         currentTower = null;
