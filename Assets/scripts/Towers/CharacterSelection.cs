@@ -240,6 +240,21 @@ public class CharacterSelectionManager : MonoBehaviour
         if (towerBehaviour != null)
         {
             towerBehaviour.enabled = true;
+            switch (System.Array.IndexOf(towerPrefabs, selectedTowerPrefab))
+            {
+                case 0: // Tower 1
+                    towerBehaviour.towerDamage = 4f;
+                    break;
+                case 1: // Tower 2
+                    towerBehaviour.towerDamage = 6f;
+                    break;
+                case 2: // Tower 3
+                    towerBehaviour.towerDamage = 10f;
+                    break;
+                default:
+                    Debug.LogError("Tower index out of range!");
+                    break;
+            }
         }
 
         if (towerIndex >= 0)

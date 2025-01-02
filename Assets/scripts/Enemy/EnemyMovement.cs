@@ -59,4 +59,14 @@ public class EnemyMovement : MonoBehaviour
         Quaternion rotation = Quaternion.LookRotation(dir);
         transform.rotation = Quaternion.Lerp(transform.rotation, rotation, rotationSpeed);
     }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+
+        if (health <=0)
+        {
+            Destroy(gameObject);
+        }
+    }
 }
