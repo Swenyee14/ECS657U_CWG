@@ -630,6 +630,7 @@ MonoBehaviour:
   attackSpeed: 1
   reloadSpeed: 0
   range: 3.5
+  towerDamage: 4
   TowerShot: {fileID: 8300000, guid: 78419f98379502c4dbfb2774bc94e7c1, type: 3}
   enemyTag: Enemies
   AttackPreFab: {fileID: 2617371413754802101, guid: 0a8bf69f9c05c304f8298acd9cb0b504, type: 3}
@@ -651,3 +652,4 @@ MonoBehaviour:
   upgradeButton: {fileID: 0}
   sellButton: {fileID: 0}
   upgradeLevelText: {fileID: 0}
+  towerType: Tower2

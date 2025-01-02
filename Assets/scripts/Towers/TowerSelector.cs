@@ -16,6 +16,7 @@ public class TowerSelector : MonoBehaviour
 
     private int upgradeCount = 0;
     private int[] upgradeCosts = { 2, 3, 5 };
+    public string towerType;
 
     // Reference to the range indicator sprite prefab (assign in the Inspector)
     //public GameObject rangeIndicatorPrefab;
@@ -130,6 +131,22 @@ public class TowerSelector : MonoBehaviour
 
         towerBehaviour.attackSpeed += 0.5f;
         towerBehaviour.range += 1f;
+        if (towerType == "Tower1")
+        {
+            towerBehaviour.towerDamage += 2f;
+        }
+        else if (towerType == "Tower2")
+        {
+            towerBehaviour.towerDamage += 3f;
+        }
+        else if (towerType == "Tower3")
+        {
+            towerBehaviour.towerDamage += 5f;
+        }
+        else
+        {
+            Debug.LogWarning("Unknown tower type. No damage increase applied.");
+        }
 
         //UpdateRangeIndicator();
         upgradeCount++;
