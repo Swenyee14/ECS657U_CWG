@@ -181,6 +181,24 @@ public class CharacterSelectionManager : MonoBehaviour
             Debug.Log($"FollowMouse Position: {towerPlacementPosition}");
         }
     }
+    public void DecreaseTowerPlacementCount(int towerIndex)
+    {
+        if (towerIndex < 0 || towerIndex >= towerPlacementCounts.Length)
+        {
+            Debug.LogWarning("Invalid tower index for decrement.");
+            return;
+        }
+
+        if (towerPlacementCounts[towerIndex] > 0)
+        {
+            towerPlacementCounts[towerIndex]--;
+            Debug.Log($"Tower {towerIndex + 1} count decremented. Total placed: {towerPlacementCounts[towerIndex]}");
+        }
+        else
+        {
+            Debug.LogWarning($"Tower {towerIndex + 1} placement count is already 0.");
+        }
+    }
 
     private void PlaceTower()
     {
