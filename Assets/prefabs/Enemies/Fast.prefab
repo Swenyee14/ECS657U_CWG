@@ -3006,5 +3006,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 3189682660317508396}
-  target: {fileID: 0}
-  offset: {x: 0, y: 0.4, z: 0}
+  target: {fileID: 4463868907105534}
+  offset: {x: 0, y: 0.65, z: 0}

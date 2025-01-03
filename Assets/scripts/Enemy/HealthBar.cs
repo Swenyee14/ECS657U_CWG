@@ -14,7 +14,7 @@ public class HealthBar : MonoBehaviour
     {
         mainCamera = Camera.main;
 
-        if (target==null)
+        if (target == null)
         {
             target = GameObject.FindWithTag("Enemies").transform;
         }
@@ -22,7 +22,7 @@ public class HealthBar : MonoBehaviour
     }
     public void UpdateHealthBar(float health, float maxHealth)
     {
-        slider.value = health/maxHealth;
+        slider.value = health / maxHealth;
     }
 
     // Update is called once per frame
