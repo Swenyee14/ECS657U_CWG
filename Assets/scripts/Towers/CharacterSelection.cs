@@ -16,21 +16,30 @@ public class CharacterSelectionManager : MonoBehaviour
     private GameObject currentTower;
     private bool isPlacingTower = false;
     private bool cancelPressed = false;
-    private int towerCost = 1;
+    private int[] towerCosts = { 1, 3, 6 };
     private CurrencyManager currencyManager;
 
     private PlayerInputs playerInputs;
 
     // Stores the calculated tower position
     private Vector3 towerPlacementPosition;
+    private int[] towerPlacementLimits = { 4, 2, 1 }; // Maximum placements for each tower
+    private int[] towerPlacementCounts;
 
     private void Awake()
     {
         playerInputs = new PlayerInputs();
+        // Map keyboard shortcuts for selecting towers
+        playerInputs.TowerSelection.SelectTower1.performed += context => SelectTower(0);
+        playerInputs.TowerSelection.SelectTower2.performed += context => SelectTower(1);
+        playerInputs.TowerSelection.SelectTower3.performed += context => SelectTower(2);
+
+        playerInputs.TowerPlacement.CancelPlacement.performed += context => CancelTowerPlacement();
     }
 
     void Start()
     {
+        towerPlacementCounts = new int[towerPlacementLimits.Length];
         currencyManager = GameObject.FindGameObjectWithTag("Master").GetComponent<CurrencyManager>();
 
         // Assign listeners for tower selection buttons
@@ -62,6 +71,18 @@ public class CharacterSelectionManager : MonoBehaviour
         {
             Debug.LogError("Invalid tower index selected.");
             return;
+        }
+
+        if (towerPlacementCounts[towerIndex] >= towerPlacementLimits[towerIndex])
+        {
+            Debug.Log($"Tower {towerIndex + 1} has reached its placement limit.");
+            return;
+        }
+
+
+        if (isPlacingTower)
+        {
+            CancelTowerPlacement();
         }
 
         selectedTowerPrefab = towerPrefabs[towerIndex];
@@ -147,17 +168,51 @@ public class CharacterSelectionManager : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         RaycastHit hit;
+        Vector3 newPosition;
 
         if (Physics.Raycast(ray, out hit))
         {
-            Vector3 newPosition = hit.point;
-            newPosition.y = 0f; // Ensures the tower stays on the ground
-            currentTower.transform.position = newPosition;
-
-            // Stores the calculated position for use in PlaceTower
-            towerPlacementPosition = newPosition;
+            newPosition = hit.point;
 
             Debug.Log($"FollowMouse Position: {towerPlacementPosition}");
+        }
+        else
+        {
+            // Define a plane at y = 0 (ground level)
+            Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+
+            // Check if the ray intersects the plane
+            if (groundPlane.Raycast(ray, out float enter))
+            {
+                newPosition = ray.GetPoint(enter); // Get the point on the plane
+            }
+            else
+            {
+                return;
+            }
+        }
+        newPosition.y = 0f; // Ensures the tower stays on the ground
+        currentTower.transform.position = newPosition;
+
+        // Stores the calculated position for use in PlaceTower
+        towerPlacementPosition = newPosition;
+    }
+    public void DecreaseTowerPlacementCount(int towerIndex)
+    {
+        if (towerIndex < 0 || towerIndex >= towerPlacementCounts.Length)
+        {
+            Debug.LogWarning("Invalid tower index for decrement.");
+            return;
+        }
+
+        if (towerPlacementCounts[towerIndex] > 0)
+        {
+            towerPlacementCounts[towerIndex]--;
+            Debug.Log($"Tower {towerIndex + 1} count decremented. Total placed: {towerPlacementCounts[towerIndex]}");
+        }
+        else
+        {
+            Debug.LogWarning($"Tower {towerIndex + 1} placement count is already 0.");
         }
     }
 
@@ -196,13 +251,29 @@ public class CharacterSelectionManager : MonoBehaviour
             }
         }
 
-        currentTower.transform.position = finalPosition;
-        Debug.Log($"Tower placed at: {finalPosition}");
-        currentTower.tag = "Tower";
+        if (Physics.CheckSphere(finalPosition, 0f, floorLayerMask)){
+            currentTower.transform.position = finalPosition;
+            Debug.Log($"Tower placed at: {finalPosition}");
+            currentTower.tag = "Tower";
+        }
+        else
+        {
+            Debug.Log("Cannot place tower.");
+            return;
+        }
+
+        int towerIndex = System.Array.IndexOf(towerPrefabs, selectedTowerPrefab);
+        if (towerIndex < 0 || towerIndex >= towerCosts.Length)
+        {
+            Debug.LogError("Invalid tower index for cost deduction.");
+            return;
+        }
+
+        int towerCost = towerCosts[towerIndex];
 
         if (!currencyManager.SpendCurrency(towerCost))
         {
-            Debug.Log("Not enough currency!");
+            Debug.Log($"Not enough currency! This tower costs {towerCost} currency");
             return;
         }
 
@@ -210,6 +281,27 @@ public class CharacterSelectionManager : MonoBehaviour
         if (towerBehaviour != null)
         {
             towerBehaviour.enabled = true;
+            switch (System.Array.IndexOf(towerPrefabs, selectedTowerPrefab))
+            {
+                case 0: // Tower 1
+                    towerBehaviour.towerDamage = 4f;
+                    break;
+                case 1: // Tower 2
+                    towerBehaviour.towerDamage = 6f;
+                    break;
+                case 2: // Tower 3
+                    towerBehaviour.towerDamage = 10f;
+                    break;
+                default:
+                    Debug.LogError("Tower index out of range!");
+                    break;
+            }
+        }
+
+        if (towerIndex >= 0)
+        {
+            towerPlacementCounts[towerIndex]++;
+            Debug.Log($"Tower {towerIndex + 1} placed. Total placed: {towerPlacementCounts[towerIndex]}");
         }
 
         currentTower = null;

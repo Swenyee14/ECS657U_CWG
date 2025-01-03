@@ -143,7 +143,18 @@
                     "name": "",
                     "id": "b19cdc51-52b4-4012-9de1-b597b8515c08",
                     "path": "<Keyboard>/#(C)",
-                    "interactions": "",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CancelPlacement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "47d6e586-d32d-4a4a-9d04-6338849a26ad",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
                     "action": "CancelPlacement",
@@ -158,6 +169,74 @@
                     "processors": "",
                     "groups": "",
                     "action": "PlaceTower",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "TowerSelection",
+            "id": "247614b0-e918-4fbd-bb5a-0b68b48bbcf7",
+            "actions": [
+                {
+                    "name": "SelectTower1",
+                    "type": "Button",
+                    "id": "bca5ff68-2b58-4914-8f29-c20929386a3f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SelectTower2",
+                    "type": "Button",
+                    "id": "8643e968-87f8-4240-b352-3334b84fbd17",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SelectTower3",
+                    "type": "Button",
+                    "id": "e9a968f5-6ff3-40a7-b405-bdee9475be3a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "60796e64-c22e-4f41-a52f-70063f0ae8e8",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectTower1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b7358045-8672-4228-8757-e35101803d07",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectTower2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "61abc1d4-54a9-4ed6-9b0b-12e5b0579395",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectTower3",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

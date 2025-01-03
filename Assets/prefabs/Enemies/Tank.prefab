@@ -2448,7 +2448,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 15
   maxhealth: 15
-  speed: 3
+  speed: 1
   rotationSpeed: 5
   target: {fileID: 0}
   positionIndex: 0
@@ -2931,8 +2931,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 823729880816047589}
-  target: {fileID: 0}
-  offset: {x: 0, y: 0.4, z: 0}
+  target: {fileID: 4063552230360950}
+  offset: {x: 0, y: 2, z: 0}
 --- !u!1 &5240199465278152580
 GameObject:
   m_ObjectHideFlags: 0
