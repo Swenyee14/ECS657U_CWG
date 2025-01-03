@@ -168,18 +168,34 @@ public class CharacterSelectionManager : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         RaycastHit hit;
+        Vector3 newPosition;
 
         if (Physics.Raycast(ray, out hit))
         {
-            Vector3 newPosition = hit.point;
-            newPosition.y = 0f; // Ensures the tower stays on the ground
-            currentTower.transform.position = newPosition;
-
-            // Stores the calculated position for use in PlaceTower
-            towerPlacementPosition = newPosition;
+            newPosition = hit.point;
 
             Debug.Log($"FollowMouse Position: {towerPlacementPosition}");
         }
+        else
+        {
+            // Define a plane at y = 0 (ground level)
+            Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+
+            // Check if the ray intersects the plane
+            if (groundPlane.Raycast(ray, out float enter))
+            {
+                newPosition = ray.GetPoint(enter); // Get the point on the plane
+            }
+            else
+            {
+                return;
+            }
+        }
+        newPosition.y = 0f; // Ensures the tower stays on the ground
+        currentTower.transform.position = newPosition;
+
+        // Stores the calculated position for use in PlaceTower
+        towerPlacementPosition = newPosition;
     }
     public void DecreaseTowerPlacementCount(int towerIndex)
     {
@@ -235,9 +251,16 @@ public class CharacterSelectionManager : MonoBehaviour
             }
         }
 
-        currentTower.transform.position = finalPosition;
-        Debug.Log($"Tower placed at: {finalPosition}");
-        currentTower.tag = "Tower";
+        if (Physics.CheckSphere(finalPosition, 0f, floorLayerMask)){
+            currentTower.transform.position = finalPosition;
+            Debug.Log($"Tower placed at: {finalPosition}");
+            currentTower.tag = "Tower";
+        }
+        else
+        {
+            Debug.Log("Cannot place tower.");
+            return;
+        }
 
         int towerIndex = System.Array.IndexOf(towerPrefabs, selectedTowerPrefab);
         if (towerIndex < 0 || towerIndex >= towerCosts.Length)

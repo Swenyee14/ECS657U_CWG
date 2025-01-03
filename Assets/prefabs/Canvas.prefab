@@ -1796,7 +1796,7 @@ GameObject:
   - component: {fileID: 6581314499762141267}
   - component: {fileID: 7860123985850921891}
   - component: {fileID: 2647087110192186071}
-  m_Layer: 2
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2302,7 +2302,7 @@ GameObject:
   - component: {fileID: 8594849175952936015}
   - component: {fileID: 3548043858637598160}
   - component: {fileID: 2224759985905500491}
-  m_Layer: 2
+  m_Layer: 5
   m_Name: AddTowerButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2552,7 +2552,7 @@ GameObject:
   - component: {fileID: 5563703154474889709}
   - component: {fileID: 7140692526021772402}
   - component: {fileID: 823655621836194741}
-  m_Layer: 2
+  m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3785,7 +3785,7 @@ GameObject:
   - component: {fileID: 6804545834671368378}
   - component: {fileID: 2758925291214577485}
   - component: {fileID: 8230508297961087989}
-  m_Layer: 2
+  m_Layer: 5
   m_Name: CancelPlacementButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4998,7 +4998,7 @@ GameObject:
   - component: {fileID: 7277348547788029203}
   - component: {fileID: 7040208312312682795}
   - component: {fileID: 5071571155061382754}
-  m_Layer: 2
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5079,8 +5079,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 22
+  m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
