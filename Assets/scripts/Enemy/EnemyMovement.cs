@@ -63,6 +63,7 @@ public class EnemyMovement : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
+        healthBar.UpdateHealthBar(health, maxhealth);
 
         if (health <=0)
         {
