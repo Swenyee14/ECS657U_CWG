@@ -16,6 +16,8 @@ public class TowerSelector : MonoBehaviour
 
     private int upgradeCount = 0;
     private int[] upgradeCosts = { 2, 3, 5 };
+    public string towerType;
+    private CharacterSelectionManager characterSelectionManager;
 
     // Reference to the range indicator sprite prefab (assign in the Inspector)
     //public GameObject rangeIndicatorPrefab;
@@ -24,6 +26,7 @@ public class TowerSelector : MonoBehaviour
     {
         towerBehaviour = GetComponent<TowerBehaviour>();
         currencyManager = Object.FindFirstObjectByType<CurrencyManager>();
+        characterSelectionManager = Object.FindFirstObjectByType<CharacterSelectionManager>();
 
         if (UIManager.instance != null)
         {
@@ -130,6 +133,22 @@ public class TowerSelector : MonoBehaviour
 
         towerBehaviour.attackSpeed += 0.5f;
         towerBehaviour.range += 1f;
+        if (towerType == "Tower1")
+        {
+            towerBehaviour.towerDamage += 2f;
+        }
+        else if (towerType == "Tower2")
+        {
+            towerBehaviour.towerDamage += 3f;
+        }
+        else if (towerType == "Tower3")
+        {
+            towerBehaviour.towerDamage += 5f;
+        }
+        else
+        {
+            Debug.LogWarning("Unknown tower type. No damage increase applied.");
+        }
 
         //UpdateRangeIndicator();
         upgradeCount++;
@@ -139,6 +158,33 @@ public class TowerSelector : MonoBehaviour
     private void SellTower()
     {
         currencyManager.AddCurrency(1);
+        // Use the towerType to determine the correct tower index
+        int towerIndex = -1;
+        switch (towerType)
+        {
+            case "Tower1":
+                towerIndex = 0;
+                break;
+            case "Tower2":
+                towerIndex = 1;
+                break;
+            case "Tower3":
+                towerIndex = 2;
+                break;
+            default:
+                Debug.LogWarning("Unknown tower type. Could not find matching tower index for decrement.");
+                break;
+        }
+
+        if (towerIndex >= 0)
+        {
+            characterSelectionManager.DecreaseTowerPlacementCount(towerIndex);
+        }
+        else
+        {
+            Debug.LogWarning("Could not find matching tower index for decrement.");
+        }
+
         if (selectedTower == this)
         {
             HideTowerMenu();

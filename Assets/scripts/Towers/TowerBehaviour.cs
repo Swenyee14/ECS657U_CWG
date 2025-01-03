@@ -12,6 +12,7 @@ public class TowerBehaviour : MonoBehaviour
     public float attackSpeed = 1f;
     public float reloadSpeed = 0f;
     public float range = 3.5f;
+    public float towerDamage = 4f;
     public AudioClip TowerShot;
 
     [Header("Unity fields")]
@@ -100,6 +101,7 @@ public class TowerBehaviour : MonoBehaviour
         AttackBehaviour attack = attackGameObject.GetComponent<AttackBehaviour>();
 
         if (attack != null)
+            attack.SetDamage(towerDamage); // set the damage for this tower
             attack.Travel(enemies);
             audioManager.PlaySFX(TowerShot);
     }
