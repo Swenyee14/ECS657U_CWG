@@ -9,6 +9,7 @@ public class AttackBehaviour : MonoBehaviour
     private Transform enemies;
     public float speed = 20f;
     public float damage;
+    public float AoeRadius = 0f;
     public void Travel(Transform _enemies)
     {
         enemies = _enemies;
@@ -52,12 +53,33 @@ public class AttackBehaviour : MonoBehaviour
     // handle collision with enemy by destroying both attack and enemy game object
     void CollisionWithEnemy()
     {
-        EnemyMovement enemyScript = enemies.GetComponent<EnemyMovement>();
-        if (enemyScript != null)
+        if (AoeRadius > 0f)
         {
-            enemyScript.TakeDamage(damage);
+            // Find all colliders within the AOE radius
+            Collider[] colliders = Physics.OverlapSphere(transform.position, AoeRadius);
+
+            foreach (Collider collider in colliders)
+            {
+                // Get the EnemyMovement script on each collider
+                EnemyMovement enemyScript = collider.GetComponent<EnemyMovement>();
+
+                // Apply damage if the collider has an EnemyMovement script
+                if (enemyScript != null)
+                {
+                    enemyScript.TakeDamage(damage);
+                }
+            }
         }
-            
+        else
+        {
+            // Single target logic
+            EnemyMovement enemyScript = enemies.GetComponent<EnemyMovement>();
+            if (enemyScript != null)
+            {
+                enemyScript.TakeDamage(damage);
+            }
+        }
+
         UIScript.EnemyCounter(); //this line specifically calls a method in another script
         currencyManager.AddCurrency(1);
         Destroy(gameObject);
