@@ -738,8 +738,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 856cd412d0e5c08498b441b5c2833b98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5
-  maxhealth: 5
+  health: 10
+  maxhealth: 10
   speed: 3
   rotationSpeed: 5
   target: {fileID: 0}

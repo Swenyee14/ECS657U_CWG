@@ -131,15 +131,17 @@ public class TowerSelector : MonoBehaviour
 
         currencyManager.SpendCurrency(upgradeCost);
 
-        towerBehaviour.attackSpeed += 0.5f;
-        towerBehaviour.range += 1f;
+       
         if (towerType == "Tower1")
         {
             towerBehaviour.towerDamage += 2f;
+            towerBehaviour.attackSpeed += 0.3f;
+            towerBehaviour.range += 1f;
         }
         else if (towerType == "Tower2")
         {
             towerBehaviour.towerDamage += 3f;
+            towerBehaviour.range += 2.5f;
         }
         else if (towerType == "Tower3")
         {
