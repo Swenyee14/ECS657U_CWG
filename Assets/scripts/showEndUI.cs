@@ -6,7 +6,7 @@ public class showEndUI : MonoBehaviour
 
 {
 
-    private int counter = 20;
+    private int counter = 1;
 
     public GameObject gameObjectUI;
     AudioManager audioManager;

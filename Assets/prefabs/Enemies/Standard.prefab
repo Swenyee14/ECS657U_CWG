@@ -745,6 +745,7 @@ MonoBehaviour:
   target: {fileID: 0}
   positionIndex: 0
   deathParticles: {fileID: 3891973445508218817, guid: e190bf97c041e58448af6b043116cba0, type: 3}
+  currencyValue: 1
   healthBar: {fileID: 0}
 --- !u!1 &1251583507443948
 GameObject:
