@@ -10,6 +10,7 @@ public class EnemyMovement : MonoBehaviour
     public float rotationSpeed = 5f;
     public Transform target;
     public int positionIndex = 0;
+    public int currencyValue = 1;
     showEndUI UIScript;
     
     [SerializeField] HealthBar healthBar;
@@ -72,6 +73,11 @@ public class EnemyMovement : MonoBehaviour
 
         if (health <=0)
         {
+            CurrencyManager currencyManager = GameObject.FindGameObjectWithTag("Master").GetComponent<CurrencyManager>();
+            if (currencyManager != null)
+            {
+                currencyManager.AddCurrency(currencyValue);
+            }
             Destroy(gameObject);
         }
     }

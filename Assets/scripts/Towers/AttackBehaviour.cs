@@ -81,7 +81,6 @@ public class AttackBehaviour : MonoBehaviour
         }
 
         UIScript.EnemyCounter(); //this line specifically calls a method in another script
-        currencyManager.AddCurrency(1);
         Destroy(gameObject);
     }
 }
