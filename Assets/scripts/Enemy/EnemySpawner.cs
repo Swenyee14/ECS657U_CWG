@@ -19,7 +19,7 @@ public class EnemySpawner : MonoBehaviour
     public void SpawnEnemies()
     {
         GameObject enemy = Instantiate(EnemyPrefab, position.transform.position, Quaternion.identity);
-        StartCoroutine(InitializeStandardEnemyAfterDelay(enemy));
+        StartCoroutine(InitializeStandardEnemyAfterDelay(enemy, 1));
     }
 
     //spawn fast enemies
