@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public float health = 5f;
-    public float maxhealth = 5f;
-    public float speed = 6f;
+    public float health;
+    public float maxhealth;
+    public float speed;
     public float rotationSpeed = 5f;
     public Transform target;
     public int positionIndex = 0;
     showEndUI UIScript;
     
-
     [SerializeField] HealthBar healthBar;
 
     void Start()
@@ -21,7 +20,6 @@ public class EnemyMovement : MonoBehaviour
         target = Positions.positions[0];
         UIScript = GameObject.FindGameObjectWithTag("Master").GetComponent<showEndUI>();
         healthBar = GetComponentInChildren<HealthBar>();
-        healthBar.UpdateHealthBar(health, maxhealth); // Use this line whenever a takedamage function is added
     }
 
     void Update()
@@ -36,6 +34,13 @@ public class EnemyMovement : MonoBehaviour
         {
             GetNextPosition();
         }
+    }
+
+    public void Initialize(float healthValue)
+    {
+        maxhealth = healthValue; // Set max health
+        health = healthValue;    // Initialize current health
+        healthBar.UpdateHealthBar(health, maxhealth); // Update health bar UI
     }
 
     void GetNextPosition()
