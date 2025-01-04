@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3291,6 +3291,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 196952400}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &203455689 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4541423283656593209, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+  m_PrefabInstance: {fileID: 6794236369778081311}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &203693949
 GameObject:
   m_ObjectHideFlags: 0
@@ -11263,6 +11274,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 758033170}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &758685961 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3551734360372318375, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+  m_PrefabInstance: {fileID: 6794236369778081311}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &766419797
 GameObject:
   m_ObjectHideFlags: 0
@@ -14422,6 +14444,17 @@ Transform:
   - {fileID: 654959697}
   m_Father: {fileID: 1143508315}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1060409675 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2647087110192186071, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+  m_PrefabInstance: {fileID: 6794236369778081311}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1072225370
 GameObject:
   m_ObjectHideFlags: 0
@@ -26453,6 +26486,64 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2647087110192186071, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+      propertyPath: m_text
+      value: '
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2647087110192186071, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+      propertyPath: m_fontSize
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 2647087110192186071, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 3551734360372318375, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+      propertyPath: m_text
+      value: '
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3551734360372318375, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+      propertyPath: m_fontSize
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 3551734360372318375, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 4541423283656593209, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+      propertyPath: m_text
+      value: '
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4541423283656593209, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+      propertyPath: m_fontSize
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 4541423283656593209, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 4951198138880827443, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6988035621102111570, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+      propertyPath: addTowerButton1Text
+      value: 
+      objectReference: {fileID: 1060409675}
+    - target: {fileID: 6988035621102111570, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+      propertyPath: addTowerButton2Text
+      value: 
+      objectReference: {fileID: 203455689}
+    - target: {fileID: 6988035621102111570, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+      propertyPath: addTowerButton3Text
+      value: 
+      objectReference: {fileID: 758685961}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -17,6 +17,7 @@ public class TowerSelector : MonoBehaviour
     private int upgradeCount = 0;
     private int[] upgradeCosts = { 2, 3, 5 };
     public string towerType;
+    private bool isPlaced = false;
     private CharacterSelectionManager characterSelectionManager;
 
     // Reference to the range indicator sprite prefab (assign in the Inspector)
@@ -39,10 +40,18 @@ public class TowerSelector : MonoBehaviour
             sellButton.onClick.AddListener(SellTower);
         }
     }
-
+    public void MarkAsPlaced()
+    {
+        isPlaced = true; // Mark the tower as fully placed
+    }
 
     void OnMouseDown()
     {
+        if (!isPlaced)
+        {
+            return;
+        }
+
         if (selectedTower == this)
         {
             DeselectTower();
@@ -74,7 +83,7 @@ public class TowerSelector : MonoBehaviour
         UpdateUpgradeText();
     }
 
-    private void DeselectTower()
+    public void DeselectTower()
     {
         //if (rangeIndicator != null)
         //{
@@ -173,7 +182,24 @@ public class TowerSelector : MonoBehaviour
 
     private void SellTower()
     {
-        currencyManager.AddCurrency(1);
+        int sellPrice = 0;
+
+        switch (towerType)
+        {
+            case "Tower1":
+                sellPrice = 1;
+                break;
+            case "Tower2":
+                sellPrice = 2;
+                break;
+            case "Tower3":
+                sellPrice = 3;
+                break;
+            default:
+                Debug.LogWarning("Unknown tower type. Defaulting sell price to 0.");
+                break;
+        }
+        currencyManager.AddCurrency(sellPrice);
         // Use the towerType to determine the correct tower index
         int towerIndex = -1;
         switch (towerType)

@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class CharacterSelectionManager : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class CharacterSelectionManager : MonoBehaviour
     private bool isPlacingTower = false;
     private bool cancelPressed = false;
     private int[] towerCosts = { 1, 3, 6 };
+    public TextMeshProUGUI addTowerButton1Text;
+    public TextMeshProUGUI addTowerButton2Text;
+    public TextMeshProUGUI addTowerButton3Text;
     private CurrencyManager currencyManager;
 
     private PlayerInputs playerInputs;
@@ -53,6 +57,8 @@ public class CharacterSelectionManager : MonoBehaviour
         // Map input actions
         playerInputs.TowerPlacement.CancelPlacement.performed += context => CancelTowerPlacement();
         playerInputs.TowerPlacement.PlaceTower.performed += context => PlaceTower();
+
+        UpdateTowerButtonTexts();
     }
 
     private void OnEnable()
@@ -63,6 +69,16 @@ public class CharacterSelectionManager : MonoBehaviour
     private void OnDisable()
     {
         playerInputs.Disable();
+    }
+
+    private void UpdateTowerButtonTexts()
+    {
+        if (addTowerButton1Text != null)
+            addTowerButton1Text.text = $"Basic Tower ({towerCosts[0]} cost)";
+        if (addTowerButton2Text != null)
+            addTowerButton2Text.text = $"Sniper Tower ({towerCosts[1]} cost)";
+        if (addTowerButton3Text != null)
+            addTowerButton3Text.text = $"Bomb Tower ({towerCosts[2]} cost)";
     }
 
     private void SelectTower(int towerIndex)
@@ -84,6 +100,7 @@ public class CharacterSelectionManager : MonoBehaviour
         {
             CancelTowerPlacement();
         }
+        HideTowerMenuIfActive();
 
         selectedTowerPrefab = towerPrefabs[towerIndex];
         StartTowerPlacement();
@@ -131,6 +148,13 @@ public class CharacterSelectionManager : MonoBehaviour
             Debug.Log("No active tower to cancel.");
         }
         isPlacingTower = false;
+    }
+    private void HideTowerMenuIfActive()
+    {
+        if (TowerSelector.selectedTower != null)
+        {
+            TowerSelector.selectedTower.DeselectTower();
+        }
     }
 
     void Update()
@@ -302,6 +326,15 @@ public class CharacterSelectionManager : MonoBehaviour
         {
             towerPlacementCounts[towerIndex]++;
             Debug.Log($"Tower {towerIndex + 1} placed. Total placed: {towerPlacementCounts[towerIndex]}");
+        }
+
+        if (currentTower != null)
+        {
+            TowerSelector towerSelector = currentTower.GetComponent<TowerSelector>();
+            if (towerSelector != null)
+            {
+                towerSelector.MarkAsPlaced();
+            }
         }
 
         currentTower = null;
