@@ -11,6 +11,7 @@ public class EnemyMovement : MonoBehaviour
     public Transform target;
     public int positionIndex = 0;
     public ParticleSystem deathParticles;
+    public int currencyValue = 1;
     showEndUI UIScript;
    
     [SerializeField] HealthBar healthBar;
@@ -74,6 +75,11 @@ public class EnemyMovement : MonoBehaviour
         if (health <=0)
         {
             Instantiate(deathParticles, transform.position, Quaternion.identity);
+            CurrencyManager currencyManager = GameObject.FindGameObjectWithTag("Master").GetComponent<CurrencyManager>();
+            if (currencyManager != null)
+            {
+                currencyManager.AddCurrency(currencyValue);
+            }
             Destroy(gameObject);
         }
     }

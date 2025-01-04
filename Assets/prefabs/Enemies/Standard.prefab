@@ -740,7 +740,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 15
   maxhealth: 15
-  speed: 2
+  speed: 1.2
   rotationSpeed: 5
   target: {fileID: 0}
   positionIndex: 0

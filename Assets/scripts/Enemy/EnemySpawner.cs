@@ -26,7 +26,7 @@ public class EnemySpawner : MonoBehaviour
     public void SpawnEnemiesFast()
     {
         GameObject enemy = Instantiate(EnemyPrefabFast, position.transform.position, Quaternion.identity);
-        StartCoroutine(InitializeFastEnemyAfterDelay(enemy));
+        StartCoroutine(InitializeFastEnemyAfterDelay(enemy, 3));
 
     }
 
@@ -34,10 +34,10 @@ public class EnemySpawner : MonoBehaviour
     public void SpawnEnemiesTank()
     {
         GameObject enemy = Instantiate(EnemyPrefabTank, position.transform.position, Quaternion.identity);
-        StartCoroutine(InitializeTankEnemyAfterDelay(enemy));
+        StartCoroutine(InitializeTankEnemyAfterDelay(enemy, 5));
     }
 
-    private IEnumerator InitializeStandardEnemyAfterDelay(GameObject enemy)
+    private IEnumerator InitializeStandardEnemyAfterDelay(GameObject enemy, int currencyValue)
     {
         // Wait for one frame to ensure that all components are fully initialized
         yield return null;
@@ -47,13 +47,14 @@ public class EnemySpawner : MonoBehaviour
         {
             Debug.Log("Initializing enemy with health: " + enemyStats.standardHealth);
             enemyMovement.Initialize(enemyStats.standardHealth);
+            enemyMovement.currencyValue = currencyValue;
         }
         else
         {
             Debug.LogError("EnemyMovement component not found!");
         }
     }
-    private IEnumerator InitializeFastEnemyAfterDelay(GameObject enemy)
+    private IEnumerator InitializeFastEnemyAfterDelay(GameObject enemy, int currencyValue)
     {
         // Wait for one frame to ensure that all components are fully initialized
         yield return null;
@@ -63,13 +64,14 @@ public class EnemySpawner : MonoBehaviour
         {
             Debug.Log("Initializing enemy with health: " + enemyStats.fastHealth);
             enemyMovement.Initialize(enemyStats.fastHealth);
+            enemyMovement.currencyValue = currencyValue;
         }
         else
         {
             Debug.LogError("EnemyMovement component not found!");
         }
     }
-    private IEnumerator InitializeTankEnemyAfterDelay(GameObject enemy)
+    private IEnumerator InitializeTankEnemyAfterDelay(GameObject enemy, int currencyValue)
     {
         // Wait for one frame to ensure that all components are fully initialized
         yield return null;
@@ -79,6 +81,7 @@ public class EnemySpawner : MonoBehaviour
         {
             Debug.Log("Initializing enemy with health: " + enemyStats.tankHealth);
             enemyMovement.Initialize(enemyStats.tankHealth);
+            enemyMovement.currencyValue = currencyValue;
         }
         else
         {

@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
+using System.Collections.Generic;
 public class TowerSelector : MonoBehaviour
 {
     public static TowerSelector selectedTower;
@@ -39,6 +39,7 @@ public class TowerSelector : MonoBehaviour
             sellButton.onClick.AddListener(SellTower);
         }
     }
+
 
     void OnMouseDown()
     {
@@ -114,11 +115,24 @@ public class TowerSelector : MonoBehaviour
         TowerMenu.SetActive(true);
     }
 
+    private Dictionary<string, int[]> towerUpgradeCosts = new Dictionary<string, int[]>()
+    {
+        { "Tower1", new int[] { 5, 8, 12 } }, // Upgrade costs for Tower 1
+        { "Tower2", new int[] { 10, 15, 20 } }, // Upgrade costs for Tower 2
+        { "Tower3", new int[] { 15, 20, 25 } } // Upgrade costs for Tower 3
+    };
+
     private void UpgradeTower()
     {
         if (upgradeCount >= 3)
         {
             Debug.Log("Maximum upgrades reached.");
+            return;
+        }
+
+        if (!towerUpgradeCosts.TryGetValue(towerType, out int[] upgradeCosts))
+        {
+            Debug.LogError("Upgrade costs not defined for this tower type.");
             return;
         }
 
