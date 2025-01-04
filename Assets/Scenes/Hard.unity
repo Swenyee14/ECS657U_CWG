@@ -1860,17 +1860,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 160411885}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &163396273 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8665320732343640714, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
-  m_PrefabInstance: {fileID: 2012881879}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &168185038
 GameObject:
   m_ObjectHideFlags: 0
@@ -3042,9 +3031,9 @@ GameObject:
   - component: {fileID: 221876719}
   - component: {fileID: 221876718}
   - component: {fileID: 221876717}
-  - component: {fileID: 221876716}
   - component: {fileID: 221876715}
   - component: {fileID: 221876714}
+  - component: {fileID: 221876721}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Master
@@ -3079,25 +3068,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startcurrency: 2
---- !u!114 &221876716
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 221876713}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f3d54c290c754dabbb5b575ed1cb517, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemySpawner: {fileID: 0}
-  timeBetweenWaves: 10
-  timeBetweenSpawns: 1
-  enemiesPerWave: 5
-  totalWaves: 15
-  initialWaveCountDown: 0
-  waveUINum: {fileID: 163396273}
 --- !u!114 &221876717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3152,6 +3122,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &221876721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 221876713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7eb787225282b4a87983e14c92336498, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemySpawner: {fileID: 0}
+  timeBetweenWaves: 10
+  timeBetweenSpawns: 1
+  enemiesPerWave: 10
+  totalWaves: 15
+  initialWaveCountDown: 0
+  waveUINum: {fileID: 0}
 --- !u!1 &230248635
 GameObject:
   m_ObjectHideFlags: 0
