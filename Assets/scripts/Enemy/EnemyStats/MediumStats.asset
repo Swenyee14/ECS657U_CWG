@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00a3784b2a22dc847be3d172c988791e, type: 3}
   m_Name: MediumStats
   m_EditorClassIdentifier: 
-  standardHealth: 0
-  fastHealth: 0
-  tankHealth: 0
+  standardHealth: 15
+  fastHealth: 10
+  tankHealth: 40
