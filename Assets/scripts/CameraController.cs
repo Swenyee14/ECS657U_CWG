@@ -8,8 +8,8 @@ public class CameraController : MonoBehaviour
 {
     PlayerInput playerInput;
     InputAction moveAction;
-    [SerializeField] float speed = 10;
-    [SerializeField] float rotationSpeed = 100;
+    [SerializeField] float speed = 10f;
+    [SerializeField] float rotationSpeed = 100f;
 
     private Vector3 currentRotation;
     private float vertical = 0f;
