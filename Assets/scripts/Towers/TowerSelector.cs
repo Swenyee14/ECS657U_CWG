@@ -83,7 +83,7 @@ public class TowerSelector : MonoBehaviour
         UpdateUpgradeText();
     }
 
-    private void DeselectTower()
+    public void DeselectTower()
     {
         //if (rangeIndicator != null)
         //{

@@ -84,6 +84,7 @@ public class CharacterSelectionManager : MonoBehaviour
         {
             CancelTowerPlacement();
         }
+        HideTowerMenuIfActive();
 
         selectedTowerPrefab = towerPrefabs[towerIndex];
         StartTowerPlacement();
@@ -131,6 +132,13 @@ public class CharacterSelectionManager : MonoBehaviour
             Debug.Log("No active tower to cancel.");
         }
         isPlacingTower = false;
+    }
+    private void HideTowerMenuIfActive()
+    {
+        if (TowerSelector.selectedTower != null)
+        {
+            TowerSelector.selectedTower.DeselectTower();
+        }
     }
 
     void Update()
