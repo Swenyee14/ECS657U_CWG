@@ -38,10 +38,11 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    public void Initialize(float healthValue)
+    public void Initialize(float healthValue, float speedValue)
     {
         maxhealth = healthValue; // Set max health
         health = healthValue;    // Initialize current health
+        speed = speedValue;
         healthBar.UpdateHealthBar(health, maxhealth); // Update health bar UI
     }
 

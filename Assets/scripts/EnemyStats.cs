@@ -9,4 +9,9 @@ public class EnemyStats : ScriptableObject
     public float standardHealth;
     public float fastHealth;
     public float tankHealth;
+
+    [Header("Speed")]
+    public float standardSpeed;
+    public float fastSpeed;
+    public float tankSpeed;
 }

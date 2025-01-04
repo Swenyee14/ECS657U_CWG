@@ -15,3 +15,6 @@ MonoBehaviour:
   standardHealth: 15
   fastHealth: 10
   tankHealth: 40
+  standardSpeed: 1.2
+  fastSpeed: 3
+  tankSpeed: 1
