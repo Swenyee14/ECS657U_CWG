@@ -88,7 +88,7 @@ public class EnemyMovement : MonoBehaviour
                 currencyManager.AddCurrency(currencyValue);
             }
             Destroy(gameObject);
-            UIHHHode.DeletingMethodHHH();
+            //UIHHHode.DeletingMethodHHH();
             UIHode.DeletingMethodH();
             UICode.DeletingMethod();
         }
