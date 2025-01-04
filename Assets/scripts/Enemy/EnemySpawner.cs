@@ -19,8 +19,6 @@ public class EnemySpawner : MonoBehaviour
     public void SpawnEnemies()
     {
         GameObject enemy = Instantiate(EnemyPrefab, position.transform.position, Quaternion.identity);
-        Debug.Log("Enemy instantiated: " + enemy.name);
-
         StartCoroutine(InitializeStandardEnemyAfterDelay(enemy));
     }
 

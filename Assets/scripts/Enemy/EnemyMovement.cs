@@ -10,8 +10,9 @@ public class EnemyMovement : MonoBehaviour
     public float rotationSpeed = 5f;
     public Transform target;
     public int positionIndex = 0;
+    public ParticleSystem deathParticles;
     showEndUI UIScript;
-    
+   
     [SerializeField] HealthBar healthBar;
 
     void Start()
@@ -72,6 +73,7 @@ public class EnemyMovement : MonoBehaviour
 
         if (health <=0)
         {
+            Instantiate(deathParticles, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

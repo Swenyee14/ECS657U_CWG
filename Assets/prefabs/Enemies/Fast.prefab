@@ -744,6 +744,7 @@ MonoBehaviour:
   rotationSpeed: 5
   target: {fileID: 0}
   positionIndex: 0
+  deathParticles: {fileID: 4596544553357837919, guid: 8eb503696b886e04faff8fc0f480d473, type: 3}
   healthBar: {fileID: 0}
 --- !u!1 &1251583507443948
 GameObject:
