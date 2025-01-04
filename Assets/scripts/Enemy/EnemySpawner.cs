@@ -46,7 +46,7 @@ public class EnemySpawner : MonoBehaviour
         if (enemyMovement != null)
         {
             Debug.Log("Initializing enemy with health: " + enemyStats.standardHealth);
-            enemyMovement.Initialize(enemyStats.standardHealth);
+            enemyMovement.Initialize(enemyStats.standardHealth, enemyStats.standardSpeed);
             enemyMovement.currencyValue = currencyValue;
         }
         else
@@ -63,7 +63,7 @@ public class EnemySpawner : MonoBehaviour
         if (enemyMovement != null)
         {
             Debug.Log("Initializing enemy with health: " + enemyStats.fastHealth);
-            enemyMovement.Initialize(enemyStats.fastHealth);
+            enemyMovement.Initialize(enemyStats.fastHealth, enemyStats.fastSpeed);
             enemyMovement.currencyValue = currencyValue;
         }
         else
@@ -80,7 +80,7 @@ public class EnemySpawner : MonoBehaviour
         if (enemyMovement != null)
         {
             Debug.Log("Initializing enemy with health: " + enemyStats.tankHealth);
-            enemyMovement.Initialize(enemyStats.tankHealth);
+            enemyMovement.Initialize(enemyStats.tankHealth, enemyStats.tankSpeed);
             enemyMovement.currencyValue = currencyValue;
         }
         else
