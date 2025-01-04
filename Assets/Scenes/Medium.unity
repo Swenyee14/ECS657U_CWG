@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028292, g: 0.22571306, b: 0.30692118, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4904,7 +4904,7 @@ GameObject:
   - component: {fileID: 405763194}
   - component: {fileID: 405763193}
   - component: {fileID: 405763192}
-  - component: {fileID: 405763191}
+  - component: {fileID: 405763195}
   - component: {fileID: 405763190}
   - component: {fileID: 405763189}
   - component: {fileID: 405763188}
@@ -4961,20 +4961,6 @@ MonoBehaviour:
   totalWaves: 15
   initialWaveCountDown: 0
   waveUINum: {fileID: 894614316}
---- !u!114 &405763191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 405763187}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19a94b2f6501247cc90d6534c8fffdf4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameObjectUI: {fileID: 894614314}
-  counter: 0
 --- !u!114 &405763192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5015,6 +5001,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &405763195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405763187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ae10996730aa45ffab524eb60886d67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameObjectUI: {fileID: 0}
+  counterH: 0
 --- !u!1 &426116982
 GameObject:
   m_ObjectHideFlags: 0
@@ -11880,11 +11880,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &894614314 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3399634112622688268, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
-  m_PrefabInstance: {fileID: 894614312}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &894614315 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2414209791901373721, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}

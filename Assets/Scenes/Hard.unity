@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028292, g: 0.22571306, b: 0.30692118, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3030,7 +3030,7 @@ GameObject:
   - component: {fileID: 221876720}
   - component: {fileID: 221876719}
   - component: {fileID: 221876718}
-  - component: {fileID: 221876717}
+  - component: {fileID: 221876722}
   - component: {fileID: 221876715}
   - component: {fileID: 221876714}
   - component: {fileID: 221876721}
@@ -3068,20 +3068,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startcurrency: 2
---- !u!114 &221876717
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 221876713}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19a94b2f6501247cc90d6534c8fffdf4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameObjectUI: {fileID: 2012881880}
-  counter: 0
 --- !u!114 &221876718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3089,7 +3075,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 221876713}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65bb958d36f664a9d93ef375da6ab39c, type: 3}
   m_Name: 
@@ -3141,6 +3127,20 @@ MonoBehaviour:
   totalWaves: 15
   initialWaveCountDown: 0
   waveUINum: {fileID: 2012881882}
+--- !u!114 &221876722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 221876713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c068fd99bd0624f059eb340166912494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameObjectUI: {fileID: 2012881880}
+  counterHHH: 0
 --- !u!1 &230248635
 GameObject:
   m_ObjectHideFlags: 0
