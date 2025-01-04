@@ -10,6 +10,7 @@ public class AttackBehaviour : MonoBehaviour
     public float speed = 20f;
     public float damage;
     public float AoeRadius = 0f;
+    public ParticleSystem trail;
     public void Travel(Transform _enemies)
     {
         enemies = _enemies;
@@ -28,6 +29,7 @@ public class AttackBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Instantiate(trail, transform.position, Quaternion.identity);
         // destroy attack if enemy is out of range 
         if (enemies == null)
         {
