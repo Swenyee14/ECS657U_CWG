@@ -72,7 +72,7 @@ public class WaveSpawner : MonoBehaviour
                                 if (FastenemiesSpawnedInWave <= enemiesPerWave)
                                 {
                                     enemySpawner.SpawnEnemiesFast();
-                                    FastenemiesSpawnedInWave = FastenemiesSpawnedInWave + 5;
+                                    FastenemiesSpawnedInWave += 5;
                                 }
 
                             }
@@ -83,7 +83,7 @@ public class WaveSpawner : MonoBehaviour
                                 if (TankenemiesSpawnedInWave <= enemiesPerWave)
                                 {
                                     enemySpawner.SpawnEnemiesTank();
-                                    TankenemiesSpawnedInWave = TankenemiesSpawnedInWave + 5;
+                                    TankenemiesSpawnedInWave += 5;
                                 }
 
                             }
@@ -100,7 +100,7 @@ public class WaveSpawner : MonoBehaviour
                         FastenemiesSpawnedInWave = 0;
                         TankenemiesSpawnedInWave = 0;
                         waveCountDown = timeBetweenWaves;
-                        enemiesPerWave = enemiesPerWave + 5;
+                        enemiesPerWave += 5;
                         audioManager.PlaySFX(audioManager.waveCompleteSound);
                     }
                     waveUINum.text = Mathf.Floor(waveNumber).ToString(); //AV style 

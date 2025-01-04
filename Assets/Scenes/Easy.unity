@@ -26635,6 +26635,14 @@ PrefabInstance:
       propertyPath: position
       value: 
       objectReference: {fileID: 1373128405}
+    - target: {fileID: 3082563459806574252, guid: 185b8a0f93d58dd4eb6a85939f19e247, type: 3}
+      propertyPath: enemyStats
+      value: 
+      objectReference: {fileID: 11400000, guid: d54189556bb93224884566ca5b520ff0, type: 2}
+    - target: {fileID: 3082563459806574252, guid: 185b8a0f93d58dd4eb6a85939f19e247, type: 3}
+      propertyPath: standardHealth
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
