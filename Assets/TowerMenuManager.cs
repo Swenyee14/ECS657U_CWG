@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     public Button sellButton;
     public TextMeshProUGUI upgradeLevelText;
     public TextMeshProUGUI towerDamageText;
+    public TextMeshProUGUI towerRangeText;
 
     // Singleton instance
     public static UIManager instance;

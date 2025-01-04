@@ -14,6 +14,7 @@ public class TowerSelector : MonoBehaviour
     public Button sellButton;
     public TextMeshProUGUI upgradeLevelText;
     public TextMeshProUGUI towerDamageText;
+    public TextMeshProUGUI towerRangeText;
     private int upgradeCount = 0;
     private int[] upgradeCosts = { 2, 3, 5 };
     public string towerType;
@@ -36,7 +37,7 @@ public class TowerSelector : MonoBehaviour
             sellButton = UIManager.instance.sellButton;
             upgradeLevelText = UIManager.instance.upgradeLevelText;
             towerDamageText = UIManager.instance.towerDamageText;
-
+            towerRangeText = UIManager.instance.towerRangeText;
             upgradeButton.onClick.AddListener(UpgradeTower);
             sellButton.onClick.AddListener(SellTower);
         }
@@ -81,6 +82,7 @@ public class TowerSelector : MonoBehaviour
             sellButton.onClick.RemoveAllListeners();
             sellButton.onClick.AddListener(SellTower);
         }
+        UpdateRangeText();
         UpdateDamageText();
         UpdateUpgradeText();
     }
@@ -180,6 +182,7 @@ public class TowerSelector : MonoBehaviour
 
         //UpdateRangeIndicator();
         upgradeCount++;
+        UpdateRangeText();
         UpdateDamageText();
         UpdateUpgradeText();
     }
@@ -258,6 +261,15 @@ public class TowerSelector : MonoBehaviour
         {
             towerDamageText.text = $"Damage: {towerBehaviour.towerDamage}";
         }
+    }
+
+    private void UpdateRangeText()
+    {
+        if (towerRangeText != null)
+        {
+            towerRangeText.text = $"Range: {towerBehaviour.range}";
+        }
+        
     }
 
     /*private void UpdateRangeIndicator()

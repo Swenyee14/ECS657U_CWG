@@ -26814,6 +26814,10 @@ PrefabInstance:
       value: Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 274304297168657635, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+      propertyPath: towerRangeText
+      value: 
+      objectReference: {fileID: 1176803094}
+    - target: {fileID: 274304297168657635, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
       propertyPath: towerDamageText
       value: 
       objectReference: {fileID: 1391962682}
