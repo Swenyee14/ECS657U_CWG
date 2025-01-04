@@ -304,6 +304,15 @@ public class CharacterSelectionManager : MonoBehaviour
             Debug.Log($"Tower {towerIndex + 1} placed. Total placed: {towerPlacementCounts[towerIndex]}");
         }
 
+        if (currentTower != null)
+        {
+            TowerSelector towerSelector = currentTower.GetComponent<TowerSelector>();
+            if (towerSelector != null)
+            {
+                towerSelector.MarkAsPlaced();
+            }
+        }
+
         currentTower = null;
         isPlacingTower = false;
     }
