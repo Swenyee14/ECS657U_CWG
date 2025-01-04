@@ -15,6 +15,7 @@ public class TowerSelector : MonoBehaviour
     public TextMeshProUGUI upgradeLevelText;
     public TextMeshProUGUI towerDamageText;
     public TextMeshProUGUI towerRangeText;
+    public TextMeshProUGUI towerFireRateText;
     private int upgradeCount = 0;
     private int[] upgradeCosts = { 2, 3, 5 };
     public string towerType;
@@ -38,6 +39,7 @@ public class TowerSelector : MonoBehaviour
             upgradeLevelText = UIManager.instance.upgradeLevelText;
             towerDamageText = UIManager.instance.towerDamageText;
             towerRangeText = UIManager.instance.towerRangeText;
+            towerFireRateText = UIManager.instance.towerFireRateText;
             upgradeButton.onClick.AddListener(UpgradeTower);
             sellButton.onClick.AddListener(SellTower);
         }
@@ -82,6 +84,7 @@ public class TowerSelector : MonoBehaviour
             sellButton.onClick.RemoveAllListeners();
             sellButton.onClick.AddListener(SellTower);
         }
+        UpdateFireRateText();
         UpdateRangeText();
         UpdateDamageText();
         UpdateUpgradeText();
@@ -162,7 +165,7 @@ public class TowerSelector : MonoBehaviour
         if (towerType == "Tower1")
         {
             towerBehaviour.towerDamage += 2f;
-            towerBehaviour.attackSpeed += 0.3f;
+            towerBehaviour.attackSpeed -= 0.1f;
             towerBehaviour.range += 1f;
         }
         else if (towerType == "Tower2")
@@ -182,6 +185,7 @@ public class TowerSelector : MonoBehaviour
 
         //UpdateRangeIndicator();
         upgradeCount++;
+        UpdateFireRateText();
         UpdateRangeText();
         UpdateDamageText();
         UpdateUpgradeText();
@@ -270,6 +274,15 @@ public class TowerSelector : MonoBehaviour
             towerRangeText.text = $"Range: {towerBehaviour.range}";
         }
         
+    }
+
+    private void UpdateFireRateText()
+    {
+        if (towerFireRateText != null)
+        {
+            towerFireRateText.text = $"Fire rate: {towerBehaviour.attackSpeed}";
+        }
+
     }
 
     /*private void UpdateRangeIndicator()
