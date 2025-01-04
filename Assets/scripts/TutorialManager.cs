@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TutorialManager : MonoBehaviour
 {
-    public float countdownTime = 30f;
+    public float countdownTime = 40f;
     private float timer;
 
     [SerializeField] GameObject background;
@@ -38,17 +38,17 @@ public class TutorialManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
             timer -= 1;
 
-            if (Mathf.Approximately(timer, 27))
+            if (Mathf.Approximately(timer, 37))
             {
                 CameraControls();
             }
 
-            if (Mathf.Approximately(timer, 22))
+            if (Mathf.Approximately(timer, 30))
             {
                 TowerPlacementControls();
             }
 
-            if (Mathf.Approximately(timer, 17))
+            if (Mathf.Approximately(timer, 24))
             {
                 EnemyTutorial();
             }
@@ -58,12 +58,12 @@ public class TutorialManager : MonoBehaviour
                 CurrencyTutorial();
             }
 
-            if (Mathf.Approximately(timer, 14))
+            if (Mathf.Approximately(timer, 9))
             {
                 UpgradeTutorial();
             }
 
-            if (Mathf.Approximately(timer, 9))
+            if (Mathf.Approximately(timer, 3))
             {
                 Conditions();
             }
@@ -97,7 +97,6 @@ public class TutorialManager : MonoBehaviour
     public void EnemyTutorial()
     {
         towerPlacementControls.SetActive(false);
-        Time.timeScale = 0f;
         enemyTutorial.SetActive(true);
         StartCoroutine(WaitForTime());
     }
@@ -114,7 +113,6 @@ public class TutorialManager : MonoBehaviour
     public void UpgradeTutorial()
     {
         currencyTutorial.SetActive(false);
-        Time.timeScale = 0f;
         upgradeTutorial.SetActive(true);
         StartCoroutine(WaitForTime());
     }
