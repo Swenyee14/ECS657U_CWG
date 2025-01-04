@@ -305,6 +305,7 @@ public class CharacterSelectionManager : MonoBehaviour
         if (towerBehaviour != null)
         {
             towerBehaviour.enabled = true;
+            towerBehaviour.SetTowerType(towerIndex); // Set the attack speed (reload time)
             switch (System.Array.IndexOf(towerPrefabs, selectedTowerPrefab))
             {
                 case 0: // Tower 1

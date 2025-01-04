@@ -10,7 +10,7 @@ public class TowerBehaviour : MonoBehaviour
 
     [Header("Tower Stats")]
     public float attackSpeed = 1f;
-    public float reloadSpeed = 0f;
+    public float reloadTime = 0f;
     public float range = 3.5f;
     public float towerDamage = 4f;
     public AudioClip TowerShot;
@@ -76,17 +76,16 @@ public class TowerBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Reduce reload timer
-        reloadSpeed -= Time.deltaTime;
+        // Always decrease reload timer, regardless of enemy presence
+        reloadTime -= Time.deltaTime;
 
-        // If the reload timer is complete, attempt to shoot
-        if (reloadSpeed <= 0f)
+        // If the reload timer has finished, shoot
+        if (reloadTime <= 0f)
         {
-            reloadSpeed = 1f / attackSpeed; // Reset reload timer
-
-            if (enemies != null) // Check if an enemy is in range
+            if (enemies != null)
             {
-                Shoot(); // Shoot at the current target
+                Shoot(); // Shoot at the current enemy target
+                reloadTime = attackSpeed; // Reset the reload timer
             }
         }
 
@@ -104,6 +103,27 @@ public class TowerBehaviour : MonoBehaviour
             attack.SetDamage(towerDamage); // set the damage for this tower
             attack.Travel(enemies);
             audioManager.PlaySFX(TowerShot);
+    }
+
+    public void SetTowerType(int towerType)
+    {
+        switch (towerType)
+        {
+            case 0: // Tower 1
+                attackSpeed = 1.25f;
+                break;
+            case 1: // Tower 2
+                attackSpeed = 2f;
+                break;
+            case 2: // Tower 3
+                attackSpeed = 5f;
+                break;
+            default:
+                Debug.LogError("Unknown tower type.");
+                break;
+        }
+
+        reloadTime = 0f; // Allow the first shot to fire immediately after placement
     }
 
     // To visualise the range in testing
