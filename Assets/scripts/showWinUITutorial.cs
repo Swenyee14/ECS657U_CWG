@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class showWinUI : MonoBehaviour
+public class showWinUITutorial : MonoBehaviour
 {
     public GameObject gameObjectUI;
     public int counter;
@@ -16,18 +16,12 @@ public class showWinUI : MonoBehaviour
     // Update is called once per frame
     void Update() //once 15 enemies have been defeated object will be set to active
     {
-        if (counter == 10)
+        if (counter == 20)
             gameObjectUI.SetActive(true);
     }
 
-
-    /// <summary>
-    /// Needed
-    /// </summary>
-    public void DeletingMethod() //sets inactive object to become active
+    public void EnemyCounter()
     {
         counter++;
- 
-
     }
 }
