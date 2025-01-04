@@ -627,7 +627,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemies: {fileID: 0}
-  attackSpeed: 1
+  attackSpeed: 1.2
   reloadSpeed: 0
   range: 3.5
   towerDamage: 4
