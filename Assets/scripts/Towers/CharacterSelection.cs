@@ -27,7 +27,7 @@ public class CharacterSelectionManager : MonoBehaviour
 
     // Stores the calculated tower position
     private Vector3 towerPlacementPosition;
-    private int[] towerPlacementLimits = { 4, 2, 1 }; // Maximum placements for each tower
+    private int[] towerPlacementLimits = { 7, 4, 2 }; // Maximum placements for each tower
     private int[] towerPlacementCounts;
 
     private void Awake()

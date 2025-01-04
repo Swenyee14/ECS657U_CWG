@@ -8,9 +8,9 @@ public class WaveSpawnerHard : MonoBehaviour
 {
     public EnemySpawner enemySpawner; // Reference to EnemySpawner component
 
-    public float timeBetweenWaves = 10f;     // 10-second delay between waves
+    public float timeBetweenWaves = 15f;     // 10-second delay between waves
     public float timeBetweenSpawns = 1f;     // 3-second delay between each enemy spawn
-    public int enemiesPerWave = 5;           // 5 enemies per wave
+    public int enemiesPerWave = 10;           // 5 enemies per wave
     public int totalWaves = 15;               // Total number of waves
     public float initialWaveCountDown;
 
@@ -72,7 +72,7 @@ public class WaveSpawnerHard : MonoBehaviour
                                 if (FastenemiesSpawnedInWave <= enemiesPerWave)
                                 {
                                     enemySpawner.SpawnEnemiesFast();
-                                    FastenemiesSpawnedInWave = FastenemiesSpawnedInWave + 10;
+                                    FastenemiesSpawnedInWave = FastenemiesSpawnedInWave + 3;
                                 }
 
                             }
@@ -83,7 +83,7 @@ public class WaveSpawnerHard : MonoBehaviour
                                 if (TankenemiesSpawnedInWave <= enemiesPerWave)
                                 {
                                     enemySpawner.SpawnEnemiesTank();
-                                    TankenemiesSpawnedInWave = TankenemiesSpawnedInWave + 5;
+                                    TankenemiesSpawnedInWave = TankenemiesSpawnedInWave + 3;
                                 }
 
                             }
