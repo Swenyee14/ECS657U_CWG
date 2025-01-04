@@ -2,21 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class showWinUI : MonoBehaviour
+public class showWinUIHHH : MonoBehaviour
 {
     public GameObject gameObjectUI;
-    public int counter;
+    public int counterHHH;
 
     // Start is called before the first frame update
     void Start()
     {
-        counter = 0;
+        counterHHH = 0;
     }
 
     // Update is called once per frame
     void Update() //once 15 enemies have been defeated object will be set to active
     {
-        if (counter == 10)
+        if (counterHHH == 100)
             gameObjectUI.SetActive(true);
     }
 
@@ -24,10 +24,10 @@ public class showWinUI : MonoBehaviour
     /// <summary>
     /// Needed
     /// </summary>
-    public void DeletingMethod() //sets inactive object to become active
+    public void DeletingMethodHHH() //sets inactive object to become active
     {
-        counter++;
- 
+        counterHHH++;
+
 
     }
 }
