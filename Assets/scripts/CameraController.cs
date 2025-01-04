@@ -21,8 +21,11 @@ public class CameraController : MonoBehaviour
         // Find the "movement" action
         moveAction = playerInput.actions["movement"];
 
-        speed = PlayerPrefs.GetInt("speed");
-        rotationSpeed = PlayerPrefs.GetInt("sensitivity");
+        if (PlayerPrefs.GetInt("speed") != 0 && PlayerPrefs.GetInt("sensitivity") != 0)
+        {
+            speed = PlayerPrefs.GetInt("speed");
+            rotationSpeed = PlayerPrefs.GetInt("sensitivity");
+        }
     }
 
     private void Update()
@@ -34,8 +37,11 @@ public class CameraController : MonoBehaviour
         {
             RotateCamera();
         }
-        speed = PlayerPrefs.GetInt("speed");
-        rotationSpeed = PlayerPrefs.GetInt("sensitivity");
+        if (PlayerPrefs.GetInt("speed") != 0 && PlayerPrefs.GetInt("sensitivity") != 0)
+        {
+            speed = PlayerPrefs.GetInt("speed");
+            rotationSpeed = PlayerPrefs.GetInt("sensitivity");
+        }
     }
 
     // Method to move the camera/player
