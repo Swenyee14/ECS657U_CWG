@@ -72,7 +72,7 @@ public class WaveSpawnerHard : MonoBehaviour
                                 if (FastenemiesSpawnedInWave <= enemiesPerWave)
                                 {
                                     enemySpawner.SpawnEnemiesFast();
-                                    FastenemiesSpawnedInWave = FastenemiesSpawnedInWave + 3;
+                                    FastenemiesSpawnedInWave = FastenemiesSpawnedInWave + 2;
                                 }
 
                             }
@@ -83,7 +83,19 @@ public class WaveSpawnerHard : MonoBehaviour
                                 if (TankenemiesSpawnedInWave <= enemiesPerWave)
                                 {
                                     enemySpawner.SpawnEnemiesTank();
-                                    TankenemiesSpawnedInWave = TankenemiesSpawnedInWave + 3;
+                                    TankenemiesSpawnedInWave = TankenemiesSpawnedInWave + 2;
+                                }
+
+                            }
+
+                            if (waveNumber >= 5)
+                            {
+                                if (TankenemiesSpawnedInWave <= enemiesPerWave)
+                                {
+                                    enemySpawner.SpawnEnemiesTank();
+                                    TankenemiesSpawnedInWave = TankenemiesSpawnedInWave + 1;
+                                    enemySpawner.SpawnEnemiesFast();
+                                    FastenemiesSpawnedInWave = FastenemiesSpawnedInWave + 1;
                                 }
 
                             }
