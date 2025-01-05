@@ -67,6 +67,12 @@ public class CameraController : MonoBehaviour
 
         // Apply vertical movement (up/down)
         transform.position += Vector3.up * inputDirection.y * speed * Time.deltaTime;
+        float newY = transform.position.y + inputDirection.y * speed * Time.deltaTime;
+        if (newY < 2.5f)
+        {
+            newY = 2.5f;  // Clamp Y to 1
+        }
+        transform.position = new Vector3(transform.position.x, newY, transform.position.z);
     }
 
     // Method to rotate the camera while holding the right mouse button

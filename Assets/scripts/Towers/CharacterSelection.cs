@@ -75,10 +75,22 @@ public class CharacterSelectionManager : MonoBehaviour
     {
         if (addTowerButton1Text != null)
             addTowerButton1Text.text = $"Basic Tower ({towerCosts[0]} cost)";
+        {
+            addTowerButton1Text.text = $"Basic Tower ({towerCosts[0]} cost)\n" +
+                                       $"{towerPlacementCounts[0]}/{towerPlacementLimits[0]} placed";
+        }
         if (addTowerButton2Text != null)
             addTowerButton2Text.text = $"Sniper Tower ({towerCosts[1]} cost)";
+        {
+            addTowerButton2Text.text = $"Sniper Tower ({towerCosts[1]} cost)\n" +
+                                       $"{towerPlacementCounts[1]}/{towerPlacementLimits[1]} placed";
+        }
         if (addTowerButton3Text != null)
             addTowerButton3Text.text = $"Bomb Tower ({towerCosts[2]} cost)";
+        {
+            addTowerButton3Text.text = $"Bomb Tower ({towerCosts[2]} cost)\n" +
+                                       $"{towerPlacementCounts[2]}/{towerPlacementLimits[2]} placed";
+        }
     }
 
     private void SelectTower(int towerIndex)
@@ -327,6 +339,7 @@ public class CharacterSelectionManager : MonoBehaviour
         {
             towerPlacementCounts[towerIndex]++;
             Debug.Log($"Tower {towerIndex + 1} placed. Total placed: {towerPlacementCounts[towerIndex]}");
+            UpdateTowerButtonTexts();
         }
 
         if (currentTower != null)

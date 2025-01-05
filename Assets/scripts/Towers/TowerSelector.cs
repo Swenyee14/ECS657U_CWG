@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class TowerSelector : MonoBehaviour
 {
     public static TowerSelector selectedTower;
-    //public GameObject rangeIndicator;
     public TowerBehaviour towerBehaviour;
     private CurrencyManager currencyManager;
 
@@ -16,14 +15,22 @@ public class TowerSelector : MonoBehaviour
     public TextMeshProUGUI towerDamageText;
     public TextMeshProUGUI towerRangeText;
     public TextMeshProUGUI towerFireRateText;
+    public TextMeshProUGUI towerNameText;
     private int upgradeCount = 0;
     private int[] upgradeCosts = { 2, 3, 5 };
     public string towerType;
     private bool isPlaced = false;
     private CharacterSelectionManager characterSelectionManager;
-
-    // Reference to the range indicator sprite prefab (assign in the Inspector)
-    //public GameObject rangeIndicatorPrefab;
+    private string GetTowerDisplayName()
+    {
+        switch (towerType)
+        {
+            case "Tower1": return "Basic Tower";
+            case "Tower2": return "Sniper Tower";
+            case "Tower3": return "Bomb Tower";
+            default: return "Unknown Tower";
+        }
+    }
 
     void Awake()
     {
@@ -40,6 +47,7 @@ public class TowerSelector : MonoBehaviour
             towerDamageText = UIManager.instance.towerDamageText;
             towerRangeText = UIManager.instance.towerRangeText;
             towerFireRateText = UIManager.instance.towerFireRateText;
+            towerNameText = UIManager.instance.towerNameText;
             upgradeButton.onClick.AddListener(UpgradeTower);
             sellButton.onClick.AddListener(SellTower);
         }
@@ -84,6 +92,7 @@ public class TowerSelector : MonoBehaviour
             sellButton.onClick.RemoveAllListeners();
             sellButton.onClick.AddListener(SellTower);
         }
+        UpdateTowerNameText();
         UpdateFireRateText();
         UpdateRangeText();
         UpdateDamageText();
@@ -92,30 +101,9 @@ public class TowerSelector : MonoBehaviour
 
     public void DeselectTower()
     {
-        //if (rangeIndicator != null)
-        //{
-            //Destroy(rangeIndicator);
-        //}
         HideTowerMenu();
         selectedTower = null;
     }
-
-    /*
-    private void ShowRangeIndicator()
-    {
-        if (towerBehaviour == null || rangeIndicatorPrefab == null) return;
-
-        // Instantiate the range indicator prefab
-        rangeIndicator = Instantiate(rangeIndicatorPrefab, transform.position, Quaternion.identity);
-
-        // Adjust scale based on tower range
-        float rangeDiameter = towerBehaviour.range * 2;
-        rangeIndicator.transform.localScale = new Vector3(rangeDiameter, rangeDiameter, 1f);
-
-        // Set the range indicator to be a child of the tower
-        rangeIndicator.transform.SetParent(transform);
-    }
-    */
 
     private void HideTowerMenu()
     {
@@ -181,10 +169,8 @@ public class TowerSelector : MonoBehaviour
         {
             Debug.LogWarning("Unknown tower type. No damage increase applied.");
         }
-
-
-        //UpdateRangeIndicator();
         upgradeCount++;
+        UpdateTowerNameText();
         UpdateFireRateText();
         UpdateRangeText();
         UpdateDamageText();
@@ -255,7 +241,17 @@ public class TowerSelector : MonoBehaviour
         }
         else
         {
-            upgradeLevelText.text = $"[{upgradeCount}]";
+            if (towerUpgradeCosts.TryGetValue(towerType, out int[] upgradeCosts))
+            {
+                int nextUpgradeCost = upgradeCosts[upgradeCount];
+                upgradeLevelText.text = $"Upgrade Cost: {nextUpgradeCost}\n" + $"Current Level: {upgradeCount}";
+
+            }
+            else
+            {
+                Debug.LogWarning("Upgrade costs not defined for this tower type.");
+                upgradeLevelText.text = "[Upgrade Cost Unknown]";
+            }
         }
     }
 
@@ -285,12 +281,11 @@ public class TowerSelector : MonoBehaviour
 
     }
 
-    /*private void UpdateRangeIndicator()
+    private void UpdateTowerNameText()
     {
-        if (rangeIndicator != null)
+        if (towerNameText != null)
         {
-            float rangeDiameter = towerBehaviour.range * 2;
-            rangeIndicator.transform.localScale = new Vector3(rangeDiameter, rangeDiameter, 1f);
+            towerNameText.text = GetTowerDisplayName(); // Display the tower type as the name
         }
-    }*/
+    }
 }
