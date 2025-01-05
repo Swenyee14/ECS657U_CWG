@@ -123,7 +123,7 @@ public class TowerSelector : MonoBehaviour
     {
         { "Tower1", new int[] { 5, 8, 12 } }, // Upgrade costs for Tower 1
         { "Tower2", new int[] { 10, 15, 20 } }, // Upgrade costs for Tower 2
-        { "Tower3", new int[] { 15, 20, 25 } } // Upgrade costs for Tower 3
+        { "Tower3", new int[] { 25, 40, 60 } } // Upgrade costs for Tower 3
     };
 
     private void UpgradeTower()

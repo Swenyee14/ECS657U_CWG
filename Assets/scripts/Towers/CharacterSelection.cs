@@ -17,7 +17,7 @@ public class CharacterSelectionManager : MonoBehaviour
     private GameObject currentTower;
     private bool isPlacingTower = false;
     private bool cancelPressed = false;
-    private int[] towerCosts = { 1, 3, 6 };
+    private int[] towerCosts = { 1, 5, 10 };
     public TextMeshProUGUI addTowerButton1Text;
     public TextMeshProUGUI addTowerButton2Text;
     public TextMeshProUGUI addTowerButton3Text;
