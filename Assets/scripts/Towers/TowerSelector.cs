@@ -16,11 +16,22 @@ public class TowerSelector : MonoBehaviour
     public TextMeshProUGUI towerDamageText;
     public TextMeshProUGUI towerRangeText;
     public TextMeshProUGUI towerFireRateText;
+    public TextMeshProUGUI towerNameText;
     private int upgradeCount = 0;
     private int[] upgradeCosts = { 2, 3, 5 };
     public string towerType;
     private bool isPlaced = false;
     private CharacterSelectionManager characterSelectionManager;
+    private string GetTowerDisplayName()
+    {
+        switch (towerType)
+        {
+            case "Tower1": return "Basic Tower";
+            case "Tower2": return "Sniper Tower";
+            case "Tower3": return "Bomb Tower";
+            default: return "Unknown Tower";
+        }
+    }
 
     // Reference to the range indicator sprite prefab (assign in the Inspector)
     //public GameObject rangeIndicatorPrefab;
@@ -40,6 +51,7 @@ public class TowerSelector : MonoBehaviour
             towerDamageText = UIManager.instance.towerDamageText;
             towerRangeText = UIManager.instance.towerRangeText;
             towerFireRateText = UIManager.instance.towerFireRateText;
+            towerNameText = UIManager.instance.towerNameText;
             upgradeButton.onClick.AddListener(UpgradeTower);
             sellButton.onClick.AddListener(SellTower);
         }
@@ -84,6 +96,7 @@ public class TowerSelector : MonoBehaviour
             sellButton.onClick.RemoveAllListeners();
             sellButton.onClick.AddListener(SellTower);
         }
+        UpdateTowerNameText();
         UpdateFireRateText();
         UpdateRangeText();
         UpdateDamageText();
@@ -185,6 +198,7 @@ public class TowerSelector : MonoBehaviour
 
         //UpdateRangeIndicator();
         upgradeCount++;
+        UpdateTowerNameText();
         UpdateFireRateText();
         UpdateRangeText();
         UpdateDamageText();
@@ -255,7 +269,17 @@ public class TowerSelector : MonoBehaviour
         }
         else
         {
-            upgradeLevelText.text = $"[{upgradeCount}]";
+            if (towerUpgradeCosts.TryGetValue(towerType, out int[] upgradeCosts))
+            {
+                int nextUpgradeCost = upgradeCosts[upgradeCount];
+                upgradeLevelText.text = $"Upgrade Cost: {nextUpgradeCost}\n" + $"Current Level: {upgradeCount}";
+                                        
+            }
+            else
+            {
+                Debug.LogWarning("Upgrade costs not defined for this tower type.");
+                upgradeLevelText.text = "[Upgrade Cost Unknown]";
+            }
         }
     }
 
@@ -283,6 +307,14 @@ public class TowerSelector : MonoBehaviour
             towerFireRateText.text = $"Fire rate: {towerBehaviour.attackSpeed}";
         }
 
+    }
+
+    private void UpdateTowerNameText()
+    {
+        if (towerNameText != null)
+        {
+            towerNameText.text = GetTowerDisplayName(); // Display the tower type as the name
+        }
     }
 
     /*private void UpdateRangeIndicator()

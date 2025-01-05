@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI towerDamageText;
     public TextMeshProUGUI towerRangeText;
     public TextMeshProUGUI towerFireRateText;
+    public TextMeshProUGUI towerNameText;
 
     // Singleton instance
     public static UIManager instance;
