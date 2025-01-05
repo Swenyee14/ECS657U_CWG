@@ -82,7 +82,7 @@ public class AttackBehaviour : MonoBehaviour
             }
         }
 
-        UIScript.EnemyCounter(); //this line specifically calls a method in another script
+        //UIScript.EnemyCounter(); //this line specifically calls a method in another script
         Destroy(gameObject);
     }
 }

@@ -13,7 +13,10 @@ public class EnemyMovement : MonoBehaviour
     public ParticleSystem deathParticles;
     public int currencyValue = 1;
     showEndUI UIScript;
-   
+    showWinUI UICode;
+    showWinUIH UIHode;
+    showWinUIHHH UIHHHode;
+
     [SerializeField] HealthBar healthBar;
 
     void Start()
@@ -21,6 +24,9 @@ public class EnemyMovement : MonoBehaviour
         // reference to the waypoint
         target = Positions.positions[0];
         UIScript = GameObject.FindGameObjectWithTag("Master").GetComponent<showEndUI>();
+        UICode = GameObject.FindGameObjectWithTag("Master").GetComponent<showWinUI>();
+        UIHode = GameObject.FindGameObjectWithTag("Master").GetComponent<showWinUIH>();
+        UIHHHode = GameObject.FindGameObjectWithTag("Master").GetComponent<showWinUIHHH>();
         healthBar = GetComponentInChildren<HealthBar>();
     }
 
@@ -82,6 +88,9 @@ public class EnemyMovement : MonoBehaviour
                 currencyManager.AddCurrency(currencyValue);
             }
             Destroy(gameObject);
+            //UIHHHode.DeletingMethodHHH();
+            UIHode.DeletingMethodH();
+            UICode.DeletingMethod();
         }
     }
 }
