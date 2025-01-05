@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class showEndUI : MonoBehaviour
 
 {
 
-    private int counter = 1;
+    public int counter = 20;
 
     public GameObject gameObjectUI;
+    public Slider playerHealth;
     AudioManager audioManager;
 
     private void Awake()
@@ -17,19 +19,15 @@ public class showEndUI : MonoBehaviour
     }
     public void NeededMethod() //sets inactive object to become active
     {
-
+        counter--;
+        playerHealth.value = counter;
+        //audioManager.PlaySFX(audioManager.<YOUR SOUND>);
         if (counter == 0)
         {
             gameObjectUI.SetActive(true);
             Time.timeScale = 0f;
         }
-        else
-        {
-            counter--;
-            //audioManager.PlaySFX(audioManager.<YOUR SOUND>);
-        }
 
         Debug.Log("This is how many lives you have " + counter);
-        
     }
 }
