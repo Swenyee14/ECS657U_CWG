@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class showEndUI : MonoBehaviour
 
 {
 
     public int counter = 20;
-
     public GameObject gameObjectUI;
     public Slider playerHealth;
     AudioManager audioManager;
@@ -17,6 +17,7 @@ public class showEndUI : MonoBehaviour
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
+
     public void NeededMethod() //sets inactive object to become active
     {
         counter--;

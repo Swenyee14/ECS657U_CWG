@@ -1754,6 +1754,7 @@ MonoBehaviour:
   enemiesPerWave: 10
   totalWaves: 1
   initialWaveCountDown: 10
+  waveNumber: 0
   waveUINum: {fileID: 1480278218}
 --- !u!114 &387049855
 MonoBehaviour:
@@ -1929,8 +1930,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2167510967470905999, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2414209791901373721, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3399634112622688268, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4591627188770406769, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+      propertyPath: m_text
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6656806605015708106, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
@@ -1939,6 +1952,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6656806605015708106, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684363536464556714, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+      propertyPath: m_text
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684363536464556714, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+      propertyPath: m_isRightToLeft
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7212713422433840982, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}

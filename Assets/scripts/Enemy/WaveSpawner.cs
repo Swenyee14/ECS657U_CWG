@@ -21,7 +21,7 @@ public class WaveSpawner : MonoBehaviour
 
     private float waveCountDown = 2f;
     private float spawnCountDown;
-    private int waveNumber = 0;
+    public int waveNumber = 0;
     private int enemiesSpawnedInWave = 0;
     private int FastenemiesSpawnedInWave = 0;
     private int TankenemiesSpawnedInWave = 0;
