@@ -35,7 +35,11 @@ public class TowerBehaviour : MonoBehaviour
     {
         // Gather all enemies in range
         List<GameObject> allEnemies = new List<GameObject>(GameObject.FindGameObjectsWithTag(enemyTag));
-        allEnemies.RemoveAll(enemy => Vector3.Distance(transform.position, enemy.transform.position) > range);
+        allEnemies.RemoveAll(enemy =>
+        {
+            var enemyMovement = enemy.GetComponent<EnemyMovement>();
+            return enemyMovement == null || enemyMovement.target == null || Vector3.Distance(transform.position, enemy.transform.position) > range;
+        });
 
         // If there are no enemies in range, clear the target and return
         if (allEnemies.Count == 0)

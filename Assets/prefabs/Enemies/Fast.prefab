@@ -738,13 +738,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 856cd412d0e5c08498b441b5c2833b98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
-  maxhealth: 10
+  health: 100
+  maxhealth: 100
   speed: 3
   rotationSpeed: 5
   target: {fileID: 0}
   positionIndex: 0
   deathParticles: {fileID: 4596544553357837919, guid: 8eb503696b886e04faff8fc0f480d473, type: 3}
+  currencyValue: 1
   healthBar: {fileID: 0}
 --- !u!1 &1251583507443948
 GameObject:

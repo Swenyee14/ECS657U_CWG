@@ -13,6 +13,12 @@ public class AttackBehaviour : MonoBehaviour
     public ParticleSystem trail;
     public void Travel(Transform _enemies)
     {
+        if (_enemies == null)
+        {
+            Debug.LogWarning("Assigned enemy is null. Projectile will self-destruct.");
+            Destroy(gameObject);
+            return;
+        }
         enemies = _enemies;
     }
     public void SetDamage(float damageValue)
@@ -55,6 +61,13 @@ public class AttackBehaviour : MonoBehaviour
     // handle collision with enemy by destroying both attack and enemy game object
     void CollisionWithEnemy()
     {
+        if (enemies == null)
+        {
+            Debug.LogWarning("Enemy target is null or destroyed. Aborting collision.");
+            Destroy(gameObject); // Destroy the attack if no valid target
+            return;
+        }
+
         if (AoeRadius > 0f)
         {
             // Find all colliders within the AOE radius
