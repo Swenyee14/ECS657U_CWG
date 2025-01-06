@@ -3262,6 +3262,7 @@ MonoBehaviour:
   enemiesPerWave: 10
   totalWaves: 15
   initialWaveCountDown: 0
+  gameObjectUI: {fileID: 2012881880}
   waveUINum: {fileID: 2012881882}
 --- !u!114 &221876722
 MonoBehaviour:

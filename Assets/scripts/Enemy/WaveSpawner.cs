@@ -15,7 +15,7 @@ public class WaveSpawner : MonoBehaviour
     public float initialWaveCountDown;
     public GameObject gameObjectUI;
     float CTime = 0f;
-    float STime = 10f;
+    float STime = 760f;
 
     /// <summary>
     /// These numbers above will eventually be changed into global variables that have numbers linked thoughout the gamemaster :D
@@ -49,13 +49,13 @@ public class WaveSpawner : MonoBehaviour
     {
         
 
-        //CTime -= 1 * Time.deltaTime;
+        CTime -= 1 * Time.deltaTime;
 
-        //if (CTime <= 0)
-        //{
-            //gameObjectUI.SetActive(true);
+        if (CTime <= 0)
+        {
+            gameObjectUI.SetActive(true);
 
-        //}
+        }
 
         // If we have reached the total wave limit, stop spawning
         if (waveNumber >= totalWaves)

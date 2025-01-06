@@ -5020,7 +5020,7 @@ MonoBehaviour:
   enemiesPerWave: 5
   totalWaves: 15
   initialWaveCountDown: 0
-  gameObjectUI: {fileID: 0}
+  gameObjectUI: {fileID: 857308652}
   waveNumber: 0
   waveUINum: {fileID: 894614316}
 --- !u!114 &405763192
@@ -10584,6 +10584,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 856737846}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &857308652 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3399634112622688268, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
+  m_PrefabInstance: {fileID: 894614312}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &866134765
 GameObject:
   m_ObjectHideFlags: 0
