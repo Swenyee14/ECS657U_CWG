@@ -13,6 +13,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip tower3Shot;
     public AudioClip waveCompleteSound;
 
+    // plays audio clips
     public void PlaySFX(AudioClip clip)
     {
         SFXSource.PlayOneShot(clip);

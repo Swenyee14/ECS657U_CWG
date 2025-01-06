@@ -71,6 +71,7 @@ public class CharacterSelectionManager : MonoBehaviour
         playerInputs.Disable();
     }
 
+    // Update the button text for the towers if the text component exists
     private void UpdateTowerButtonTexts()
     {
         if (addTowerButton1Text != null)
@@ -95,25 +96,31 @@ public class CharacterSelectionManager : MonoBehaviour
 
     private void SelectTower(int towerIndex)
     {
+
+        // Validate the tower index to ensure it's within range
         if (towerIndex < 0 || towerIndex >= towerPrefabs.Length)
         {
             Debug.LogError("Invalid tower index selected.");
             return;
         }
 
+        // Check if the selected tower has reached its placement limit
         if (towerPlacementCounts[towerIndex] >= towerPlacementLimits[towerIndex])
         {
             Debug.Log($"Tower {towerIndex + 1} has reached its placement limit.");
             return;
         }
 
-
+        // Cancel any ongoing tower placement if applicable
         if (isPlacingTower)
         {
             CancelTowerPlacement();
         }
+
+        // Hide the tower menu if it is currently active
         HideTowerMenuIfActive();
 
+        // Set the selected tower prefab and start its placement process
         selectedTowerPrefab = towerPrefabs[towerIndex];
         StartTowerPlacement();
         Debug.Log($"Tower {towerIndex + 1} selected: {selectedTowerPrefab.name}");
@@ -121,12 +128,14 @@ public class CharacterSelectionManager : MonoBehaviour
 
     private void StartTowerPlacement()
     {
+        // Ensure no tower placement is already in progress
         if (isPlacingTower)
         {
             Debug.Log("Already placing a tower.");
             return;
         }
 
+        // Validate that a tower prefab has been selected
         if (selectedTowerPrefab == null)
         {
             Debug.LogError("No tower prefab selected!");
@@ -135,9 +144,11 @@ public class CharacterSelectionManager : MonoBehaviour
 
         isPlacingTower = true;
 
+        // Instantiate the selected tower and reset its scale
         currentTower = Instantiate(selectedTowerPrefab);
         currentTower.transform.localScale = Vector3.one;
 
+        // Disable the tower's behavior script until placement is confirmed
         TowerBehaviour towerBehaviour = currentTower.GetComponent<TowerBehaviour>();
         if (towerBehaviour != null)
         {
@@ -147,6 +158,7 @@ public class CharacterSelectionManager : MonoBehaviour
         FollowMouse();
     }
 
+    //cancels tower placement
     private void CancelTowerPlacement()
     {
         if (currentTower != null)
@@ -161,6 +173,8 @@ public class CharacterSelectionManager : MonoBehaviour
         }
         isPlacingTower = false;
     }
+
+    // hides tower menu
     private void HideTowerMenuIfActive()
     {
         if (TowerSelector.selectedTower != null)
@@ -169,32 +183,39 @@ public class CharacterSelectionManager : MonoBehaviour
         }
     }
 
+    
     void Update()
     {
+        // Handle cancellation input and reset the flag
         if (cancelPressed)
         {
             cancelPressed = false;
             return;
         }
 
+        // Check if the player is in the process of placing a tower
         if (isPlacingTower && currentTower != null)
         {
             FollowMouse();
 
+            // Handle input to place the tower
             if (playerInputs.TowerPlacement.PlaceTower.triggered)
             {
+                // Prevent tower placement if the pointer is over a UI element
                 if (EventSystem.current.IsPointerOverGameObject())
                 {
                     Debug.Log("Click was on UI, not placing tower.");
                     return;
                 }
 
+                // Double-check that placement is still active before proceeding
                 if (!isPlacingTower)
                 {
                     Debug.Log("Placement was cancelled, no tower will be placed.");
                     return;
                 }
 
+                // Finalize tower placement
                 PlaceTower();
             }
         }
@@ -202,15 +223,15 @@ public class CharacterSelectionManager : MonoBehaviour
 
     private void FollowMouse()
     {
+        // Cast a ray from the camera to the mouse position
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         RaycastHit hit;
         Vector3 newPosition;
 
+        // Check if the ray hits any collider
         if (Physics.Raycast(ray, out hit))
         {
             newPosition = hit.point;
-
-            Debug.Log($"FollowMouse Position: {towerPlacementPosition}");
         }
         else
         {
@@ -220,7 +241,7 @@ public class CharacterSelectionManager : MonoBehaviour
             // Check if the ray intersects the plane
             if (groundPlane.Raycast(ray, out float enter))
             {
-                newPosition = ray.GetPoint(enter); // Get the point on the plane
+                newPosition = ray.GetPoint(enter); 
             }
             else
             {
@@ -233,14 +254,17 @@ public class CharacterSelectionManager : MonoBehaviour
         // Stores the calculated position for use in PlaceTower
         towerPlacementPosition = newPosition;
     }
+
     public void DecreaseTowerPlacementCount(int towerIndex)
     {
+        // Validate the tower index to ensure it is within range
         if (towerIndex < 0 || towerIndex >= towerPlacementCounts.Length)
         {
             Debug.LogWarning("Invalid tower index for decrement.");
             return;
         }
 
+        // Decrease the placement count
         if (towerPlacementCounts[towerIndex] > 0)
         {
             towerPlacementCounts[towerIndex]--;
@@ -254,6 +278,7 @@ public class CharacterSelectionManager : MonoBehaviour
 
     private void PlaceTower()
     {
+        // Ensure there is a tower ready to place
         if (currentTower == null)
         {
             Debug.Log("No tower to place.");
@@ -287,6 +312,7 @@ public class CharacterSelectionManager : MonoBehaviour
             }
         }
 
+        // Ensure placement is on floor layer
         if (Physics.CheckSphere(finalPosition, 0f, floorLayerMask)){
             currentTower.transform.position = finalPosition;
             Debug.Log($"Tower placed at: {finalPosition}");
@@ -298,6 +324,7 @@ public class CharacterSelectionManager : MonoBehaviour
             return;
         }
 
+        // Deduct currency for the placed tower
         int towerIndex = System.Array.IndexOf(towerPrefabs, selectedTowerPrefab);
         if (towerIndex < 0 || towerIndex >= towerCosts.Length)
         {
@@ -335,6 +362,7 @@ public class CharacterSelectionManager : MonoBehaviour
             }
         }
 
+        // Update tower placement count and UI
         if (towerIndex >= 0)
         {
             towerPlacementCounts[towerIndex]++;
@@ -342,6 +370,7 @@ public class CharacterSelectionManager : MonoBehaviour
             UpdateTowerButtonTexts();
         }
 
+        // Mark tower as placed and clean up
         if (currentTower != null)
         {
             TowerSelector towerSelector = currentTower.GetComponent<TowerSelector>();

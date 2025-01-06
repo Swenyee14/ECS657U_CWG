@@ -42,10 +42,10 @@ public class EnemySpawner : MonoBehaviour
         // Wait for one frame to ensure that all components are fully initialized
         yield return null;
 
+        //initialise enemies with set health from the scriptable objectfor standards
         EnemyMovement enemyMovement = enemy.GetComponent<EnemyMovement>();
         if (enemyMovement != null)
         {
-            Debug.Log("Initializing enemy with health: " + enemyStats.standardHealth);
             enemyMovement.Initialize(enemyStats.standardHealth, enemyStats.standardSpeed);
             enemyMovement.currencyValue = currencyValue;
         }
@@ -59,10 +59,10 @@ public class EnemySpawner : MonoBehaviour
         // Wait for one frame to ensure that all components are fully initialized
         yield return null;
 
+        //initialise enemies with set health from the scriptable object for fasts
         EnemyMovement enemyMovement = enemy.GetComponent<EnemyMovement>();
         if (enemyMovement != null)
         {
-            Debug.Log("Initializing enemy with health: " + enemyStats.fastHealth);
             enemyMovement.Initialize(enemyStats.fastHealth, enemyStats.fastSpeed);
             enemyMovement.currencyValue = currencyValue;
         }
@@ -76,10 +76,10 @@ public class EnemySpawner : MonoBehaviour
         // Wait for one frame to ensure that all components are fully initialized
         yield return null;
 
+        //initialise enemies with set health from the scriptable object for tanks
         EnemyMovement enemyMovement = enemy.GetComponent<EnemyMovement>();
         if (enemyMovement != null)
         {
-            Debug.Log("Initializing enemy with health: " + enemyStats.tankHealth);
             enemyMovement.Initialize(enemyStats.tankHealth, enemyStats.tankSpeed);
             enemyMovement.currencyValue = currencyValue;
         }

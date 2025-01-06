@@ -10,6 +10,7 @@ public class CameraSettings : MonoBehaviour
 
     private void Start()
     {
+        // loads settings if they are saved
         if (PlayerPrefs.HasKey("sensitivity") && PlayerPrefs.HasKey("speed"))
         {
             LoadSettings();
@@ -20,6 +21,8 @@ public class CameraSettings : MonoBehaviour
             SetSpeed();
         }
     }
+
+    // gets sensitivity value and saves it
     public void SetSensitivity()
     {
         int sens = Mathf.RoundToInt(sensitivitySlider.value);
@@ -27,6 +30,7 @@ public class CameraSettings : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    //gets and saves speed value
     public void SetSpeed() 
     {
         int speed = Mathf.RoundToInt(speedSlider.value);
@@ -34,6 +38,7 @@ public class CameraSettings : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    // loads saved speed and sensitivity
     private void LoadSettings()
     {
         sensitivitySlider.value = PlayerPrefs.GetInt("sensitivity");

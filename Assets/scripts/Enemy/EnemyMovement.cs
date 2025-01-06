@@ -67,6 +67,7 @@ public class EnemyMovement : MonoBehaviour
         target = Positions.positions[positionIndex];
     }
 
+    // rotate enemy towards the waypoint
     private void Rotate()
     {
         Vector3 dir = target.position - transform.position;
@@ -74,13 +75,16 @@ public class EnemyMovement : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, rotation, rotationSpeed);
     }
 
+    // Damages enemy
     public void TakeDamage(float damage)
     {
         health -= damage;
         healthBar.UpdateHealthBar(health, maxhealth);
 
+        // runs if enemy dies
         if (health <=0)
         {
+            // spawns death particles and gives the player money
             Instantiate(deathParticles, transform.position, Quaternion.identity);
             CurrencyManager currencyManager = GameObject.FindGameObjectWithTag("Master").GetComponent<CurrencyManager>();
             if (currencyManager != null)

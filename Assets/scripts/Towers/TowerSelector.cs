@@ -21,6 +21,8 @@ public class TowerSelector : MonoBehaviour
     public string towerType;
     private bool isPlaced = false;
     private CharacterSelectionManager characterSelectionManager;
+
+    // Gets the name of the tower
     private string GetTowerDisplayName()
     {
         switch (towerType)
@@ -32,6 +34,7 @@ public class TowerSelector : MonoBehaviour
         }
     }
 
+    // Set UI buttons and gmae components on game awake
     void Awake()
     {
         towerBehaviour = GetComponent<TowerBehaviour>();
@@ -52,11 +55,13 @@ public class TowerSelector : MonoBehaviour
             sellButton.onClick.AddListener(SellTower);
         }
     }
+
     public void MarkAsPlaced()
     {
         isPlaced = true; // Mark the tower as fully placed
     }
 
+    // Stops the tower following the mouse after placing it
     void OnMouseDown()
     {
         if (!isPlaced)
@@ -79,6 +84,7 @@ public class TowerSelector : MonoBehaviour
         }
     }
 
+    // call the method to allow user to see the tower upgrade menu
     private void SelectTower()
     {
         selectedTower = this;
@@ -99,12 +105,14 @@ public class TowerSelector : MonoBehaviour
         UpdateUpgradeText();
     }
 
+    // calls function to hide tower menu
     public void DeselectTower()
     {
         HideTowerMenu();
         selectedTower = null;
     }
 
+    // hides tower menu
     private void HideTowerMenu()
     {
         if (TowerMenu != null)
@@ -113,6 +121,7 @@ public class TowerSelector : MonoBehaviour
         }
     }
 
+    // shows tower menu
     private void ShowTowerMenu()
     {
         if (TowerMenu == null) return;
@@ -126,6 +135,7 @@ public class TowerSelector : MonoBehaviour
         { "Tower3", new int[] { 25, 40, 60 } } // Upgrade costs for Tower 3
     };
 
+    // Upgrades the towers by different amounts for each tower
     private void UpgradeTower()
     {
         if (upgradeCount >= 3)
@@ -177,6 +187,7 @@ public class TowerSelector : MonoBehaviour
         UpdateUpgradeText();
     }
 
+    // Sells tower and returns currency
     private void SellTower()
     {
         int sellPrice = 0;
@@ -231,6 +242,8 @@ public class TowerSelector : MonoBehaviour
         }
         Destroy(gameObject);
     }
+
+    // updates upgrade text to be correct after upgrades
     private void UpdateUpgradeText()
     {
         if (upgradeLevelText == null) return;
@@ -254,7 +267,8 @@ public class TowerSelector : MonoBehaviour
             }
         }
     }
-
+    
+    // updates damage text in tower menu ui
     private void UpdateDamageText()
     {
         if (towerDamageText != null)
@@ -263,6 +277,7 @@ public class TowerSelector : MonoBehaviour
         }
     }
 
+    // updates range text in tower menu ui
     private void UpdateRangeText()
     {
         if (towerRangeText != null)
@@ -272,6 +287,7 @@ public class TowerSelector : MonoBehaviour
         
     }
 
+    // updates fire rate text in tower menu ui
     private void UpdateFireRateText()
     {
         if (towerFireRateText != null)
@@ -281,6 +297,7 @@ public class TowerSelector : MonoBehaviour
 
     }
 
+    // updates tower name text in tower menu ui
     private void UpdateTowerNameText()
     {
         if (towerNameText != null)

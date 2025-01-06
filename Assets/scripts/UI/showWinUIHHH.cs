@@ -14,17 +14,15 @@ public class showWinUIHHH : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update() //once 15 enemies have been defeated object will be set to active
+    void Update() 
     {
+        //once 2050 enemies have been defeated object will be set to active
         if (counterHHH == 2050)
             gameObjectUI.SetActive(true);
     }
 
-
-    /// <summary>
-    /// Needed
-    /// </summary>
-    public void DeletingMethodHHH() //sets inactive object to become active
+    // Increase Counter
+    public void DeletingMethodHHH() 
     {
         counterHHH++;
     }

@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class Tutorial : MonoBehaviour
 {
-
     public GameObject gameObjectUI;
-    float CTime = 0f;
-    float STime = 52f;
+    float CTime = 0f; //current time
+    float STime = 52f; //starting time
 
     // Start is called before the first frame update
     void Start()
@@ -20,10 +19,10 @@ public class Tutorial : MonoBehaviour
     {
         CTime -= 1 * Time.deltaTime;
 
+        // runs if the time for the scene is over
         if (CTime <= 0)
         {
             gameObjectUI.SetActive(true);
-
         }
     }
 }
