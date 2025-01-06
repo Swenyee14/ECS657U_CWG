@@ -15,7 +15,7 @@ public class WaveSpawnerHard : MonoBehaviour
     public float initialWaveCountDown;
     public GameObject gameObjectUI;
     float CTime = 0f;                        // current time
-    float STime = 1430f;                    // starting time
+    float STime = 1425f;                    // starting time
 
     private float waveCountDown = 2f;
     private float spawnCountDown;
