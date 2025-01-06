@@ -14,12 +14,8 @@ public class WaveSpawner : MonoBehaviour
     public int totalWaves = 15;               // Total number of waves
     public float initialWaveCountDown;
     public GameObject gameObjectUI;
-    float CTime = 0f;
-    float STime = 760f;
-
-    /// <summary>
-    /// These numbers above will eventually be changed into global variables that have numbers linked thoughout the gamemaster :D
-    /// </summary>
+    float CTime = 0f;                        // current time
+    float STime = 760f;                      // starting time
 
 
     private float waveCountDown = 2f;

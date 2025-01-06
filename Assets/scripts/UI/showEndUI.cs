@@ -5,24 +5,16 @@ using UnityEngine.UI;
 using TMPro;
 
 public class showEndUI : MonoBehaviour
-
 {
-
     public int counter = 20;
     public GameObject gameObjectUI;
     public Slider playerHealth;
-    AudioManager audioManager;
 
-    private void Awake()
-    {
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
-    }
-
-    public void NeededMethod() //sets inactive object to become active
+    // Shows the game lost screen when counter = 0
+    public void NeededMethod()
     {
         counter--;
         playerHealth.value = counter;
-        //audioManager.PlaySFX(audioManager.<YOUR SOUND>);
         if (counter == 0)
         {
             if (TowerSelector.selectedTower != null)

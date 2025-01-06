@@ -72,7 +72,6 @@ public class TowerBehaviour : MonoBehaviour
         // Check if a new enemy has entered range
         if (enemies != lastEnemyInRange)
         {
-            Debug.Log("ENEMY IN RANGE");
             lastEnemyInRange = enemies; // Update the last detected enemy
         }
     }
@@ -109,6 +108,7 @@ public class TowerBehaviour : MonoBehaviour
             audioManager.PlaySFX(TowerShot);
     }
 
+    // sets the attack speed for each tower
     public void SetTowerType(int towerType)
     {
         switch (towerType)

@@ -8,6 +8,7 @@ public class TutorialManager : MonoBehaviour
     public float countdownTime = 40f;
     private float timer;
 
+    // Elements for for tutorial
     [SerializeField] GameObject background;
     [SerializeField] GameObject cameraControls;
     [SerializeField] GameObject towerPlacementControls;
@@ -22,6 +23,7 @@ public class TutorialManager : MonoBehaviour
         StartCoroutine(CountdownCoroutine());
     }
 
+    //waits 5 seconds
     IEnumerator WaitForTime()
     {
         yield return new WaitForSecondsRealtime(5f);
@@ -30,6 +32,7 @@ public class TutorialManager : MonoBehaviour
         conditions.SetActive(false);
     }
 
+    // Calls different parts of the tutorial based on the timer
     IEnumerator CountdownCoroutine()
     {
         while (timer > 0)
@@ -80,6 +83,7 @@ public class TutorialManager : MonoBehaviour
         background.SetActive(false);
     }
 
+    // shows Camera Tutorial section
     public void CameraControls()
     {
         ActivateBackground();
@@ -87,6 +91,7 @@ public class TutorialManager : MonoBehaviour
         StartCoroutine(WaitForTime());
     }
 
+    // shows tower placement Tutorial section
     public void TowerPlacementControls()
     {
         cameraControls.SetActive(false);
@@ -94,6 +99,7 @@ public class TutorialManager : MonoBehaviour
         StartCoroutine(WaitForTime());
     }
 
+    // shows enemy Tutorial section
     public void EnemyTutorial()
     {
         towerPlacementControls.SetActive(false);
@@ -101,6 +107,7 @@ public class TutorialManager : MonoBehaviour
         StartCoroutine(WaitForTime());
     }
 
+    // shows currency Tutorial section
     public void CurrencyTutorial()
     {
         ActivateBackground();
@@ -110,6 +117,7 @@ public class TutorialManager : MonoBehaviour
         StartCoroutine(WaitForTime());
     }
 
+    // shows upgrade Tutorial section
     public void UpgradeTutorial()
     {
         currencyTutorial.SetActive(false);
@@ -117,6 +125,7 @@ public class TutorialManager : MonoBehaviour
         StartCoroutine(WaitForTime());
     }
 
+    // // shows conditions Tutorial section
     public void Conditions()
     {
         ActivateBackground();

@@ -20,6 +20,8 @@ public class HealthBar : MonoBehaviour
         }
 
     }
+
+    // updates healthbar using given values
     public void UpdateHealthBar(float health, float maxHealth)
     {
         slider.value = health / maxHealth;
@@ -28,6 +30,7 @@ public class HealthBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //makes healthbar follow the enemy and rotate towards the camera
         if (target != null)
         {
             transform.rotation = mainCamera.transform.rotation;

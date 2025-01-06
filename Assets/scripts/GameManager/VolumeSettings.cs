@@ -11,6 +11,7 @@ public class VolumeSettings : MonoBehaviour
 
     private void Start()
     {
+        // Check if a saved volume setting exists; if not, initialize with the default value
         if (PlayerPrefs.HasKey("MasterVolume"))
         {
             LoadVolume();
@@ -20,13 +21,16 @@ public class VolumeSettings : MonoBehaviour
             SetMasterVolume();
         }
     }
+
+    // gets volume value and sets the master volume
     public void SetMasterVolume()
     {
         float volume = volumeSlider.value;  
         mixer.SetFloat("MasterVolume", volume);
-        PlayerPrefs.SetFloat("MasterVolume", volume);
+        PlayerPrefs.SetFloat("MasterVolume", volume); //saves the value
     }
 
+    // Loads and applies saved to the slider and mixer
     private void LoadVolume()
     {
         volumeSlider.value = PlayerPrefs.GetFloat("MasterVolume");
