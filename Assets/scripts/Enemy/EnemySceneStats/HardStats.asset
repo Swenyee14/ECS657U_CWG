@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: HardStats
   m_EditorClassIdentifier: 
   standardHealth: 50
-  fastHealth: 150
-  tankHealth: 900
+  fastHealth: 120
+  tankHealth: 700
   standardSpeed: 1.2
-  fastSpeed: 3
-  tankSpeed: 1
+  fastSpeed: 2.7
+  tankSpeed: 0.8
