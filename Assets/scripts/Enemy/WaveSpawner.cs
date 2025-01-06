@@ -13,6 +13,9 @@ public class WaveSpawner : MonoBehaviour
     public int enemiesPerWave = 5;           // 5 enemies per wave
     public int totalWaves = 15;               // Total number of waves
     public float initialWaveCountDown;
+    public GameObject gameObjectUI;
+    float CTime = 0f;
+    float STime = 10f;
 
     /// <summary>
     /// These numbers above will eventually be changed into global variables that have numbers linked thoughout the gamemaster :D
@@ -32,6 +35,8 @@ public class WaveSpawner : MonoBehaviour
     [System.Obsolete]
     void Start() //method needed to use EnemySpawner.cs code
     {
+        CTime = STime;
+
         if (enemySpawner == null)
         {
             enemySpawner = FindObjectOfType<EnemySpawner>();
@@ -42,6 +47,16 @@ public class WaveSpawner : MonoBehaviour
 
     void Update()
     {
+        
+
+        //CTime -= 1 * Time.deltaTime;
+
+        //if (CTime <= 0)
+        //{
+            //gameObjectUI.SetActive(true);
+
+        //}
+
         // If we have reached the total wave limit, stop spawning
         if (waveNumber >= totalWaves)
         {

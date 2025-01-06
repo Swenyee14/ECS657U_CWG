@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00a3784b2a22dc847be3d172c988791e, type: 3}
   m_Name: HardStats
   m_EditorClassIdentifier: 
-  standardHealth: 65
+  standardHealth: 50
   fastHealth: 250
   tankHealth: 1000
   standardSpeed: 1.2

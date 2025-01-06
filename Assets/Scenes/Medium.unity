@@ -5020,6 +5020,7 @@ MonoBehaviour:
   enemiesPerWave: 5
   totalWaves: 15
   initialWaveCountDown: 0
+  gameObjectUI: {fileID: 0}
   waveNumber: 0
   waveUINum: {fileID: 894614316}
 --- !u!114 &405763192
@@ -12017,15 +12018,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6756639473327959314, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
       propertyPath: m_fontColor.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6756639473327959314, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
       propertyPath: m_fontColor.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6756639473327959314, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
       propertyPath: m_fontColor.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7205353375152022372, guid: ad8a96306b16904419dcd7b379b1791d, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -23621,7 +23622,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
