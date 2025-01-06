@@ -25,10 +25,6 @@ public class showEndUI : MonoBehaviour
         //audioManager.PlaySFX(audioManager.<YOUR SOUND>);
         if (counter == 0)
         {
-            if (TowerSelector.selectedTower != null)
-            {
-                TowerSelector.selectedTower.DeselectTower(); // Hides the menu
-            }
             gameObjectUI.SetActive(true);
             Time.timeScale = 0f;
         }
