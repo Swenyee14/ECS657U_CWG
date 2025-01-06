@@ -3188,7 +3188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentCurrency: {fileID: 1991176567}
-  startCurrency: 2
+  startCurrency: 3
 --- !u!114 &221876715
 MonoBehaviour:
   m_ObjectHideFlags: 0
