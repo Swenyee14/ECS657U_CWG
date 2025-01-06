@@ -21,6 +21,11 @@ public class EnemyMovement : MonoBehaviour
 
     void Start()
     {
+        if (Positions.positions == null || Positions.positions.Length == 0)
+        {
+            Debug.LogError("Positions.positions is not set or contains no waypoints.");
+            return;
+        }
         // reference to the waypoint
         target = Positions.positions[0];
         UIScript = GameObject.FindGameObjectWithTag("Master").GetComponent<showEndUI>();
@@ -78,8 +83,20 @@ public class EnemyMovement : MonoBehaviour
     // Damages enemy
     public void TakeDamage(float damage)
     {
+        if (this == null || gameObject == null)
+        {
+            Debug.LogWarning("TakeDamage called on a destroyed enemy.");
+            return;
+        }
         health -= damage;
-        healthBar.UpdateHealthBar(health, maxhealth);
+        if (healthBar != null)
+        {
+            healthBar.UpdateHealthBar(health, maxhealth);
+        }
+        else
+        {
+            Debug.LogWarning("HealthBar is missing on " + gameObject.name);
+        }
 
         // runs if enemy dies
         if (health <=0)
@@ -91,6 +108,7 @@ public class EnemyMovement : MonoBehaviour
             {
                 currencyManager.AddCurrency(currencyValue);
             }
+            target = null;
             Destroy(gameObject);
             ///UIHHHode.DeletingMethodHHH();
             ///UIHode.DeletingMethodH();
